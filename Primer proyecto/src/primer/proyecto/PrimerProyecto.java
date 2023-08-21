@@ -15,6 +15,7 @@ public class PrimerProyecto {
      */
     public static void main(String[] args) {
         System.out.println("hola mundo");
+        //solo es un rpoyecto de prueba para probar neatbens, github y sourcetree
         // TODO code application logic here
     }
     
