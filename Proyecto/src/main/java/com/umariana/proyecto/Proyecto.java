@@ -219,7 +219,7 @@ public class Proyecto {
                     //Se empleara un try and catch para la generacion del archivo 
                     try {
                             // El archivo se va a almacenar en la carpteta data
-                            File archivo = new File ("./data/reporteEstudiantes" + semestreS + ".txt") ;
+                            File archivo = new File ("./data/reporte" + semestreS + ".txt") ;
                             
                             PrintWriter pluma = new PrintWriter(archivo);
                             pluma.println("Reporte de estudiantes semestre: " + semestreS);

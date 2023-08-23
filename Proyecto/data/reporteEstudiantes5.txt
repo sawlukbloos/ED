@@ -1,0 +1,9 @@
+Reporte de estudiantes semestre: 5
+-----------------------
+Cédula: 15156
+Nombre: lucas
+Apellido: hernandez
+Semestre: 5
+Correo: dckdhbufewa
+Celular: 213212846
+---------------------------
