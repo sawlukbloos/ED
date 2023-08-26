@@ -6,7 +6,7 @@ package Mundo;
 
 /**
  *
- * @author David Noguera
+ * @author Samuel Bolaños
  */
 public class Alumno {
     

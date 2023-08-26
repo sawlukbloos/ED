@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Sistemas (David Noguera y Samuel Bolaños)
+ * @author Sistemas Samuel Bolaños
  */
 public class Proyecto {
 
@@ -28,6 +28,7 @@ public class Proyecto {
         ArrayList<Alumno> misAlumnos = new ArrayList<Alumno>();
 
         do {
+            //Para empezar con el programa vamos a mostrar el menu con las opciones y para esto llamamos al metodo que muestra el menu
             mostrarMenu();
 
             int opcion = lector.nextInt();
@@ -71,14 +72,15 @@ public class Proyecto {
                     break;
 
                 default:
-                    System.out.println("Debe seleccionar una opcion del menu");
+                    System.out.println("Opcion no valida debe seleccionar una opcion del menu");
             }
 
         } while (activo);
     }
     public static void mostrarMenu() {
+        //Este es el metodo que muestra el menu
 
-        System.out.println("--------Menu de opeciones--------");
+        System.out.println("--------Menu de opciones--------");
         System.out.println("1. Insertar alumno");
         System.out.println("2. Eliminar alumno");
         System.out.println("3. Modificar alumno");
@@ -87,7 +89,10 @@ public class Proyecto {
         System.out.println("6. Terminar programa");
         System.out.println("----------------------------------");
     }
+    
     public static void crearNuevoAlumno(ArrayList misAlumnos, Scanner lector) {
+        
+        //Pedimos el registro de los datos del nuevo alumno 
 
         System.out.println("--------Crear Nuevo Alumno--------");
 
@@ -109,7 +114,7 @@ public class Proyecto {
         System.out.println("Introduce el celular del alumno");
         int celular = lector.nextInt();
 
-        //Se crea un objeto para guardar la informacion de cada alumno
+        //Se crea un objeto para guardar los datos de cada alumno
         Alumno a = new Alumno();
 
         a.setCedula(cedula);
@@ -118,7 +123,7 @@ public class Proyecto {
         a.setSemestre(semestre);
         a.setCorreo(correo);
         a.setCelular(celular);
-        // Se agrega los datos del objeto al list array
+        // Se agrega los datos del objeto al Arraylist
 
         misAlumnos.add(a);
 
@@ -139,9 +144,9 @@ public class Proyecto {
         while (iterador.hasNext()) {
             Alumno alumno = iterador.next();
 
-            if (alumno.getCedula() == cedulaE) {
+            if (alumno.getCedula()==cedulaE) {
                 iterador.remove();
-                System.out.println("Se eliminó el alumno con la siguiente cédula: " + cedulaE);
+                System.out.println("Se eliminó el alumno con la cédula: " + cedulaE);
                 buscar = true;
                 break;
             }
@@ -160,6 +165,7 @@ public class Proyecto {
 
     public static void modificarAlumno(ArrayList<Alumno> misAlumnos, Scanner lector) {
         System.out.println("--------Modificar datos de alumno--------");
+        //pedimos la cedula del alumno del cual se desea modificar los datos y con el iterator recorremos los elementos de la lista para encontrar al alumno
 
         System.out.println("Ingrese el número de cédula del alumno que desea modificar");
         int cedulaM = lector.nextInt();
@@ -169,8 +175,9 @@ public class Proyecto {
 
         while (iterador.hasNext()) {
             Alumno alumnoModificado = iterador.next();
-
-            if (alumnoModificado.getCedula() == cedulaM) {
+         
+            if (alumnoModificado.getCedula()==cedulaM) {
+                
                 System.out.println("Seleccione el dato que desea modificar:");
                 System.out.println("1. Nombre");
                 System.out.println("2. Apellido");
@@ -230,12 +237,11 @@ public class Proyecto {
     public static void consultarAlumnos(ArrayList<Alumno> misAlumnos) {
         System.out.println("--------Consultar Alumnos--------");
 
-        // Para consultar los alumnos utilizaremos un ciclo for each
+        // Para consultar los alumnos utilizaremos un ciclo for-each
         // Tambien se adiciona un "if" por si no hay un registro existentes
         if (misAlumnos.isEmpty()) {
             System.out.println("No hay alumnos registrados.");
         } else {
-            // Los datos que "i" recibe son de tipo "Alumno" y el ciclo se repite dependiendo de cuantos elementos hay en el arreglo
 
             for (Alumno alumno : misAlumnos) {
                 System.out.println("Cédula: " + alumno.getCedula());
@@ -252,13 +258,12 @@ public class Proyecto {
     public static void generarReporteSemestre(ArrayList misAlumnos, Scanner lector) {
         // Se generara un archivo el cual contenga el registro de los estudiantes de un determinado semestre
         System.out.println("--------Generar reporte semestre--------");
-        System.out.println("Ingrese el semestre del cual necesite una lista");
+        System.out.println("Ingrese el semestre del cual necesite un reporte");
 
         int semestreS = lector.nextInt();
 
-        //Se empleara un try and catch para la generacion del archivo 
+        //Se usara un try-catch para la generacion del archivo 
         try {
-            // El archivo se va a almacenar en la carpteta data
             File archivo = new File("./data/reporte" + semestreS + ".txt");
 
             PrintWriter pluma = new PrintWriter(archivo);
@@ -288,7 +293,8 @@ public class Proyecto {
 
     public static boolean terminarPrograma(Scanner lector) {
 
-        // Para finalizar el programa emplearemos el boolean (activo) previamente creado
+        //Para finalizar el programa, primero le preguntamos al usuario si desea terminar con el programa
+        //Con un condicional "if" vamos a terminar el programa o a continuar con el dependiendo de la respuesta del usuario
         System.out.println("--------Terminar Programa--------");
         System.out.println("¿Está seguro de querer terminar el programa? (Si/No)");
 
