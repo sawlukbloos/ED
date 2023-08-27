@@ -28,7 +28,7 @@ public class Proyecto {
         Scanner lector = new Scanner(System.in);
         //Bandera para terminar el programa
         boolean activo = true;
-        ArrayList<Alumno> misAlumnos = cargarAlumnos();
+        ArrayList<Alumno> misAlumnos = leerAlumnos();
 
         do {
             //Para empezar con el programa vamos a mostrar el menu con las opciones y para esto llamamos al metodo que muestra el menu
@@ -138,6 +138,9 @@ public class Proyecto {
     }
 
     public static void eliminarAlumno(ArrayList misAlumnos, Scanner lector) {
+        //Metodo que elimina un alumno
+        //Para eliminar un alumno pedimos la cedula del alumno, Hacemos la busqueda con el iterator y eliminamos al alumno del registro
+        
         System.out.println("--------Eliminar Alumno--------");
 
         System.out.println("Ingrese el número de cédula del alumno que desea eliminar");
@@ -170,7 +173,7 @@ public class Proyecto {
 
     public static void modificarAlumno(ArrayList<Alumno> misAlumnos, Scanner lector) {
         System.out.println("--------Modificar datos de alumno--------");
-        //pedimos la cedula del alumno del cual se desea modificar los datos y con el iterator recorremos los elementos de la lista para encontrar al alumno
+        //Pedimos la cedula del alumno del cual se desea modificar los datos y con el iterator recorremos los elementos de la lista para encontrar al alumno.
 
         System.out.println("Ingrese el número de cédula del alumno que desea modificar");
         int cedulaM = lector.nextInt();
@@ -267,7 +270,9 @@ public class Proyecto {
 
         int semestreS = lector.nextInt();
 
-        //Se usara un try-catch para la generacion del archivo 
+        //Se usara un try-catch para la generacion del archivo con la clase File
+        //Usamos la pluma para escribir en el archivo del reporte
+        //Requerimos de las excepciones en caso de algun error en la generacion del reporte
         try {
             File archivo = new File("./data/reporte" + semestreS + ".txt");
 
@@ -317,9 +322,12 @@ public class Proyecto {
         }
     }
     
-    public static ArrayList<Alumno> cargarAlumnos() {
+    public static ArrayList<Alumno> leerAlumnos() {
+        //Lectura de los datos de los alumnos
         ArrayList<Alumno> misAlumnos = new ArrayList<>();
-
+        
+        //En este ciclo try-catch vamos a hacer la lectura del arhivo alumnos.txt
+        //Agregamos las excepciones en caso de errores en la lectura del archivo
         try {
             File archivo = new File("./data/alumnos.txt");
             FileReader fr = new FileReader(archivo);
@@ -360,6 +368,8 @@ public class Proyecto {
     }
     
     public static void guardarAlumnos(ArrayList<Alumno> misAlumnos) {
+        //Metodo que se encarga de la escritura de los datos de los estudiantes en el archivo alumnos.txt
+        //Agregamos las excepciones en caso de errores en la escritura del archivo
         try {
             File archivo = new File("./data/alumnos.txt");
             FileWriter fw = new FileWriter(archivo);
