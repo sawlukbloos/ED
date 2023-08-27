@@ -5,7 +5,10 @@
 package com.umariana.proyecto;
 
 import Mundo.Alumno;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,6 +41,7 @@ public class Proyecto {
                 case 1:
 
                     crearNuevoAlumno(misAlumnos, lector);
+                    guardarAlumnos(misAlumnos);
 
                     break;
 
@@ -65,7 +69,8 @@ public class Proyecto {
                     break;
 
                 case 6:
-
+                    
+                    guardarAlumnos(misAlumnos); 
                     activo = !terminarPrograma(lector);
                     System.out.println("---------------------------");
 
@@ -309,6 +314,73 @@ public class Proyecto {
         } else {
             System.out.println("Respuesta inválida. Continuando");
             return false;
+        }
+    }
+    
+    public static ArrayList<Alumno> cargarAlumnos() {
+        ArrayList<Alumno> misAlumnos = new ArrayList<>();
+
+        try {
+            File archivo = new File("./data/alumnos.txt");
+            FileReader fr = new FileReader(archivo);
+            BufferedReader lector = new BufferedReader(fr);
+
+            String linea = lector.readLine();
+
+            while (linea != null) {
+                String[] datos = linea.split(",");
+                
+                int cedula = Integer.parseInt(datos[0]);
+                String nombre = datos[1];
+                String apellido = datos[2];
+                int semestre = Integer.parseInt(datos[3]);
+                String correo = datos[4];
+                int celular = Integer.parseInt(datos[5]);
+
+                Alumno nuevoAlumno = new Alumno();
+                nuevoAlumno.setCedula(cedula);
+                nuevoAlumno.setNombre(nombre);
+                nuevoAlumno.setApellido(apellido);
+                nuevoAlumno.setSemestre(semestre);
+                nuevoAlumno.setCorreo(correo);
+                nuevoAlumno.setCelular(celular);
+
+                misAlumnos.add(nuevoAlumno);
+
+                linea = lector.readLine();
+            }
+
+                lector.close();
+                fr.close();
+         } catch (IOException e) {
+             System.out.println("Error al cargar los datos de alumnos: " + e.getMessage());
+        } 
+
+        return misAlumnos;
+    }
+    
+    public static void guardarAlumnos(ArrayList<Alumno> misAlumnos) {
+        try {
+            File archivo = new File("./data/alumnos.txt");
+            FileWriter fw = new FileWriter(archivo);
+            BufferedWriter escritor = new BufferedWriter(fw);
+
+            for (Alumno alumno : misAlumnos) {
+                String linea = alumno.getCedula() + "," +
+                               alumno.getNombre() + "," +
+                               alumno.getApellido() + "," +
+                               alumno.getSemestre() + "," +
+                               alumno.getCorreo() + "," +
+                               alumno.getCelular();
+                escritor.write(linea);
+                escritor.newLine();
+            }
+
+            escritor.close();
+            fw.close();
+            System.out.println("Datos de alumnos guardados exitosamente.");
+        } catch (IOException e) {
+            System.out.println("Error al guardar los datos de alumnos: " + e.getMessage());
         }
     }
 }
