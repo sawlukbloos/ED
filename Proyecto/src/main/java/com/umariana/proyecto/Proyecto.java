@@ -28,7 +28,7 @@ public class Proyecto {
         Scanner lector = new Scanner(System.in);
         //Bandera para terminar el programa
         boolean activo = true;
-        ArrayList<Alumno> misAlumnos = new ArrayList<Alumno>();
+        ArrayList<Alumno> misAlumnos = cargarAlumnos();
 
         do {
             //Para empezar con el programa vamos a mostrar el menu con las opciones y para esto llamamos al metodo que muestra el menu
