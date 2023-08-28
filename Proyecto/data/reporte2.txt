@@ -1,0 +1,16 @@
+Reporte de estudiantes semestre: 2
+-----------------------
+Cédula: 121315
+Nombre: camilo
+Apellido: sanchez
+Semestre: 2
+Correo: fwefwedsdsf
+Celular: 321654
+---------------------------
+Cédula: 325456
+Nombre: david
+Apellido: lopez
+Semestre: 2
+Correo: fhirufhierug
+Celular: 321216
+---------------------------

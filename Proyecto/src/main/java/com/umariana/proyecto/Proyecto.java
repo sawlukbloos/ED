@@ -25,7 +25,7 @@ public class Proyecto {
 
         //Funcion que permite leer la opcion del usuario
         Scanner lector = new Scanner(System.in);
-        //Bandera para terminar el programa
+        //Variable tipo booleana para terminar el programa
         boolean activo = true;
         ArrayList<Alumno> misAlumnos = leerAlumnos();
 
@@ -94,6 +94,12 @@ public class Proyecto {
         System.out.println("6. Terminar programa");
         System.out.println("----------------------------------");
     }
+    
+    /**Aqui tenemos las opciones del menu
+     * 
+     * @param misAlumnos Esta es la lista donde se guardará los datos de los alumnos
+     * @param lector este es el lector para la entrada de datos por parte del usuario
+     */
 
     public static void crearNuevoAlumno(ArrayList misAlumnos, Scanner lector) {
 
@@ -320,9 +326,13 @@ public class Proyecto {
             return false;
         }
     }
+    
+    /**Metodo´para la lectura del archivo alumnos.txt
+     * 
+     * @return retorna un Arraylist que se sobreescribe en el mismo Arraylist creado con anterioridad
+     */
 
     public static ArrayList<Alumno> leerAlumnos() {
-        //Lectura de los datos de los alumnos
         ArrayList<Alumno> misAlumnos = new ArrayList<>();
 
         //En este ciclo try-catch vamos a hacer la lectura del arhivo alumnos.txt
@@ -356,6 +366,8 @@ public class Proyecto {
 
                 linea = lector.readLine();
             }
+            
+            //Se cierra el lector y terminamos el metodo con la excepcion y la variable de retorno.
 
             lector.close();
             fr.close();
@@ -365,9 +377,14 @@ public class Proyecto {
 
         return misAlumnos;
     }
+    
+    /**Metodo que realiza la escritura del archivo alumnos.txt recibiendo como parametro el Arraylist
+     * 
+     * 
+     * @param misAlumnos parametro que se creo en el metodo para agregar nuevos alumnos
+     */
 
     public static void guardarAlumnos(ArrayList<Alumno> misAlumnos) {
-        //Metodo que se encarga de la escritura de los datos de los estudiantes en el archivo alumnos.txt
         //Agregamos las excepciones en caso de errores en la escritura del archivo
         try {
             File archivo = new File("./data/alumnos.txt");
@@ -385,6 +402,8 @@ public class Proyecto {
                 escritor.write(linea);
                 escritor.newLine();
             }
+            
+            // Se cierra "escritor" y se lanzan mensajes de exito en el guardado o error
 
             escritor.close();
             fw.close();
