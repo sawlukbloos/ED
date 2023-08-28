@@ -1,7 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package com.umariana.proyecto;
 
 import Mundo.Alumno;
@@ -69,8 +68,8 @@ public class Proyecto {
                     break;
 
                 case 6:
-                    
-                    guardarAlumnos(misAlumnos); 
+
+                    guardarAlumnos(misAlumnos);
                     activo = !terminarPrograma(lector);
                     System.out.println("---------------------------");
 
@@ -82,6 +81,7 @@ public class Proyecto {
 
         } while (activo);
     }
+
     public static void mostrarMenu() {
         //Este es el metodo que muestra el menu
 
@@ -94,11 +94,10 @@ public class Proyecto {
         System.out.println("6. Terminar programa");
         System.out.println("----------------------------------");
     }
-    
-    public static void crearNuevoAlumno(ArrayList misAlumnos, Scanner lector) {
-        
-        //Pedimos el registro de los datos del nuevo alumno 
 
+    public static void crearNuevoAlumno(ArrayList misAlumnos, Scanner lector) {
+
+        //Pedimos el registro de los datos del nuevo alumno 
         System.out.println("--------Crear Nuevo Alumno--------");
 
         System.out.println("Introduce la cedula del alumno");
@@ -140,19 +139,19 @@ public class Proyecto {
     public static void eliminarAlumno(ArrayList misAlumnos, Scanner lector) {
         //Metodo que elimina un alumno
         //Para eliminar un alumno pedimos la cedula del alumno, Hacemos la busqueda con el iterator y eliminamos al alumno del registro
-        
+
         System.out.println("--------Eliminar Alumno--------");
 
         System.out.println("Ingrese el número de cédula del alumno que desea eliminar");
         int cedulaE = lector.nextInt();
-        boolean buscar = false; 
+        boolean buscar = false;
 
         Iterator<Alumno> iterador = misAlumnos.iterator();
 
         while (iterador.hasNext()) {
             Alumno alumno = iterador.next();
 
-            if (alumno.getCedula()==cedulaE) {
+            if (alumno.getCedula() == cedulaE) {
                 iterador.remove();
                 System.out.println("Se eliminó el alumno con la cédula: " + cedulaE);
                 buscar = true;
@@ -183,9 +182,9 @@ public class Proyecto {
 
         while (iterador.hasNext()) {
             Alumno alumnoModificado = iterador.next();
-         
-            if (alumnoModificado.getCedula()==cedulaM) {
-                
+
+            if (alumnoModificado.getCedula() == cedulaM) {
+
                 System.out.println("Seleccione el dato que desea modificar:");
                 System.out.println("1. Nombre");
                 System.out.println("2. Apellido");
@@ -299,7 +298,7 @@ public class Proyecto {
         } catch (IOException e) {
             System.out.println("Error al generar el archivo: " + e.getMessage());
         }
-    }         
+    }
 
     public static boolean terminarPrograma(Scanner lector) {
 
@@ -321,11 +320,11 @@ public class Proyecto {
             return false;
         }
     }
-    
+
     public static ArrayList<Alumno> leerAlumnos() {
         //Lectura de los datos de los alumnos
         ArrayList<Alumno> misAlumnos = new ArrayList<>();
-        
+
         //En este ciclo try-catch vamos a hacer la lectura del arhivo alumnos.txt
         //Agregamos las excepciones en caso de errores en la lectura del archivo
         try {
@@ -337,7 +336,7 @@ public class Proyecto {
 
             while (linea != null) {
                 String[] datos = linea.split(",");
-                
+
                 int cedula = Integer.parseInt(datos[0]);
                 String nombre = datos[1];
                 String apellido = datos[2];
@@ -358,15 +357,15 @@ public class Proyecto {
                 linea = lector.readLine();
             }
 
-                lector.close();
-                fr.close();
-         } catch (IOException e) {
-             System.out.println("Error al cargar los datos de alumnos: " + e.getMessage());
-        } 
+            lector.close();
+            fr.close();
+        } catch (IOException e) {
+            System.out.println("Error al cargar los datos de alumnos: " + e.getMessage());
+        }
 
         return misAlumnos;
     }
-    
+
     public static void guardarAlumnos(ArrayList<Alumno> misAlumnos) {
         //Metodo que se encarga de la escritura de los datos de los estudiantes en el archivo alumnos.txt
         //Agregamos las excepciones en caso de errores en la escritura del archivo
@@ -375,13 +374,14 @@ public class Proyecto {
             FileWriter fw = new FileWriter(archivo);
             BufferedWriter escritor = new BufferedWriter(fw);
 
+            //En la escritura del archivo recorremos el Arraylist con un ciclo for-each y los datos de los alumnos los separamos con comas
             for (Alumno alumno : misAlumnos) {
-                String linea = alumno.getCedula() + "," +
-                               alumno.getNombre() + "," +
-                               alumno.getApellido() + "," +
-                               alumno.getSemestre() + "," +
-                               alumno.getCorreo() + "," +
-                               alumno.getCelular();
+                String linea = alumno.getCedula() + ","
+                        + alumno.getNombre() + ","
+                        + alumno.getApellido() + ","
+                        + alumno.getSemestre() + ","
+                        + alumno.getCorreo() + ","
+                        + alumno.getCelular();
                 escritor.write(linea);
                 escritor.newLine();
             }
