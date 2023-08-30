@@ -24,8 +24,27 @@ public class SvVideo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // aqui vienen los datos por GET
-        String idVideo = request.getParameter("idvideo");
-        System.out.println("idVideo:"+idVideo);
+        String idVideo = request.getParameter("idVideo");
+        System.out.println("idVideo: "+idVideo);
+        
+        String titulo = request.getParameter("titulo");
+        System.out.println("Titulo: " + titulo);
+
+        String autor = request.getParameter("autor");
+        System.out.println("Autor: " + autor);
+
+        String anio = request.getParameter("anio");
+        System.out.println("Año: " + anio);
+
+        String url = request.getParameter("url");
+        System.out.println("URL: " + url);
+
+        String categoria = request.getParameter("categoria");
+        System.out.println("Categoria: " + categoria);
+
+        String letra = request.getParameter("letra");
+        System.out.println("Letra: " + letra);
+                
     }
 
    
