@@ -15,7 +15,7 @@
         <h1>Sistema Reproductor de videos</h1>
         <ul>
             <li><a href="agregarVideo.jsp">Ingresar nuevo video</a></li>
-            <li>second</li>
+            <li><a href="listarVideos.jsp">Listado de videos</a></li>
             <li>third</li>
         </ul>
     </body>

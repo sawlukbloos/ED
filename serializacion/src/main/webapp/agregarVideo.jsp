@@ -15,7 +15,7 @@
         <h1>Sistema Reproductor de videos</h1>
         
         
-        <form action="SvVideo" method="GET">
+        <form action="SvVideo" method="POST">
             
             <label for="idVideo">idvideo:</label>
             <input type="text" name="idVideo"><br>
@@ -36,7 +36,7 @@
             <input type="text" name="categoria"><br>
             
             <label for="letra">Letra:</label>
-            <textarea id="id" name="name" rows="5" cols="10"></textarea>
+            <textarea id="id" name="letra" rows="5" cols="10"></textarea>
             
             <input type="submit" value="Agregar video">
         </form>  

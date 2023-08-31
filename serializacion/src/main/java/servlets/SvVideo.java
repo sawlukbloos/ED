@@ -1,7 +1,9 @@
 
 package servlets;
 
+import com.umariana.mundo.Video;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "SvVideo", urlPatterns = {"/SvVideo"})
 public class SvVideo extends HttpServlet {
-
     
+    ArrayList<Video> misVideos = new ArrayList<>();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -23,7 +25,17 @@ public class SvVideo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // aqui vienen los datos por GET
+        
+        
+                
+    }
+
+   
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // aqui vienen los datos por POST
+        
         String idVideo = request.getParameter("idVideo");
         System.out.println("idVideo: "+idVideo);
         
@@ -44,13 +56,13 @@ public class SvVideo extends HttpServlet {
 
         String letra = request.getParameter("letra");
         System.out.println("Letra: " + letra);
-                
-    }
-
-   
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        
+        Video miVideo = new Video(Integer.parseInt(idVideo), titulo, autor, anio, categoria, url, letra);
+        misVideos.add(miVideo);
+        
+        request.setAttribute("misVideos", misVideos);
+        
+        request.getRequestDispatcher("listarVideos.jsp").forward(request, response);
         
     }
 
