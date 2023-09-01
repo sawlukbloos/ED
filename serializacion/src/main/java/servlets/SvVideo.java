@@ -61,12 +61,15 @@ public class SvVideo extends HttpServlet {
         Video miVideo = new Video(Integer.parseInt(idVideo), titulo, autor, anio, categoria, url, letra);
         misVideos.add(miVideo);
         
+        // Establecer el ArrayList como un atributo de solicitud
         request.setAttribute("misVideos", misVideos);
         
+        // Redirigir a la página JSP que muestra la lista de videos
         request.getRequestDispatcher("listarVideos.jsp").forward(request, response);
         
     }
-
+    
+    
     
     @Override
     public String getServletInfo() {
