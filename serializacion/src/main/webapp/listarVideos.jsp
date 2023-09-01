@@ -17,16 +17,19 @@
         <h1>Listar Videos</h1>
         
         <% 
-        ArrayList<Video> misVideos = (ArrayList<Video>)request.getAttribute("misVideos");        
-        for(Video v:misVideos)
-        {
+        ArrayList<Video> misVideos = (ArrayList<Video>)request.getAttribute("misVideos");
+        if (misVideos != null && !misVideos.isEmpty()) {
+        for(Video v : misVideos){               
         out.println("IdVideo: "+v.getIdVideo()+"<br>");
         out.println("Titulo: "+v.getTitulo()+"<br>");
         out.println("Autor: "+v.getAutor()+"<br>");
         out.println("Anio: "+v.getAnio()+"<br>");
         out.println("Categoria: "+v.getCategoria()+"<br>");
         out.println("Url: "+v.getUrl()+"<br>");
-        out.println("Letra: "+v.getLetra()+"<br>");         
+        out.println("Letra: "+v.getLetra()+"<br>");
+            }
+        } else {
+        out.println("No hay videos disponibles.");
         }                
         %>
     </body>

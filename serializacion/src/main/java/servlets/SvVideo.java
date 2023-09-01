@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SvVideo extends HttpServlet {
     
     ArrayList<Video> misVideos = new ArrayList<>();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
