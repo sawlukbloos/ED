@@ -1,11 +1,13 @@
 
 package com.umariana.mundo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author David Noguera y El Bolaños
  */
-public class Video {
+public class Video implements Serializable {
         
     private int idVideo;
     private String titulo;
