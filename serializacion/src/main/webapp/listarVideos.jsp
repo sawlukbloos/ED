@@ -16,21 +16,29 @@
     <body>
         <h1>Listar Videos</h1>
         
-        <% 
-        ArrayList<Video> misVideos = (ArrayList<Video>)request.getAttribute("misVideos");
-        if (misVideos != null && !misVideos.isEmpty()) {
-        for(Video v : misVideos){               
-        out.println("IdVideo: "+v.getIdVideo()+"<br>");
-        out.println("Titulo: "+v.getTitulo()+"<br>");
-        out.println("Autor: "+v.getAutor()+"<br>");
-        out.println("Anio: "+v.getAnio()+"<br>");
-        out.println("Categoria: "+v.getCategoria()+"<br>");
-        out.println("Url: "+v.getUrl()+"<br>");
-        out.println("Letra: "+v.getLetra()+"<br>");
+        <%
+            
+            // Obtener array list de la solicitud
+            ArrayList<Video> misVideos = (ArrayList<Video>) request.getAttribute("misVideos");
+            // Verificar si misVideos no es nulo antes de iterar sobre él
+            
+                if (misVideos != null) {
+                 System.out.println("Se cargaron " + misVideos.size() + " videos exitosamente.");
+                for (Video v : misVideos) {
+                    out.print("IdVideo:" + v.getIdVideo() + "<br>");
+                    out.print("Titulo:" + v.getTitulo() + "<br>");
+                    out.print("Autor;" + v.getAutor() + "<br>");
+                    out.print("Anio:" + v.getAnio() + "<br>");
+                    out.print("Categoria:" + v.getCategoria() + "<br>");
+                    out.print("Url" + v.getUrl() + "<br>");
+                    out.print("Letra:" + v.getLetra() + "<br>");
+                    out.print("------------------------------------------------------------"+"<br>");
+                }
+            } else {
+                out.print("No hay videos disponibles el servidor tuvo un error interno.");
             }
-        } else {
-        out.println("No hay videos disponibles.");
-        }                
+             
         %>
+        <a href="index.jsp">Volver al inicio</a>
     </body>
 </html>
