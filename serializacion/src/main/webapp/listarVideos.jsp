@@ -4,6 +4,9 @@
     Author     : Acer
 --%>
 
+<%@page import="java.io.ObjectInputStream"%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="java.io.File"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.umariana.mundo.Video"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,12 +21,23 @@
         
         <%
             
-            // Obtener array list de la solicitud
-            ArrayList<Video> misVideos = (ArrayList<Video>) request.getAttribute("misVideos");
-            // Verificar si misVideos no es nulo antes de iterar sobre él
+            ArrayList<Video> misVideos = null;
+            // Obtener la ruta real del archivo de datos
+            String dataPath = application.getRealPath("/data/videos.ser");
             
-                if (misVideos != null) {
-                 System.out.println("Se cargaron " + misVideos.size() + " videos exitosamente.");
+            // Verificar si el archivo existe
+            File archivo = new File(dataPath);
+            if (archivo.exists()) {
+                FileInputStream fis = new FileInputStream(dataPath);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                misVideos  = (ArrayList<Video>) ois.readObject();
+                ois.close();
+                System.out.println("Datos de videos cargados exitosamente desde: " + dataPath);
+            }
+            
+            // Obtener array list de la solicitud
+             if (misVideos != null) {
+                System.out.println("Se cargaron " + misVideos.size() + " videos exitosamente.");
                 for (Video v : misVideos) {
                     out.print("IdVideo:" + v.getIdVideo() + "<br>");
                     out.print("Titulo:" + v.getTitulo() + "<br>");
@@ -35,9 +49,8 @@
                     out.print("------------------------------------------------------------"+"<br>");
                 }
             } else {
-                out.print("No hay videos disponibles el servidor tuvo un error interno.");
+                out.print("No hay videos disponibles.");
             }
-             
         %>
         <a href="index.jsp">Volver al inicio</a>
     </body>
