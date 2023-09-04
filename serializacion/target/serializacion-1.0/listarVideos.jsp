@@ -16,9 +16,10 @@
     <meta charset="UTF-8">
     <title>Listar Videos</title>
     <style>
+        /*Estilos en CSS para la pagina que muestra el listado de los videos */
         body {
             font-family: Arial, sans-serif;
-            background-image: url('Imagen/img.jpg');
+            background-image: url('Imagen/img.jpg');/* imagen de fondo*/
             background-size: cover;
             background-repeat: no-repeat;
             margin: 0;
@@ -77,10 +78,11 @@
     <div class="container">
         <%
             ArrayList<Video> misVideos = null;
-            // Obtener la ruta real del archivo de datos
+            // Obtener el path real del archivo de datos
             String dataPath = application.getRealPath("/data/videos.ser");
 
-            // Verificar si el archivo existe
+            // Verificar si el archivo existe y leerlo
+            //Imprimir los datos del ArrayList
             File archivo = new File(dataPath);
             if (archivo.exists()) {
                 FileInputStream fis = new FileInputStream(dataPath);
@@ -88,6 +90,8 @@
                 misVideos = (ArrayList<Video>) ois.readObject();
                 ois.close();
                 out.println("<div class='video-info'>");
+                //Usamos un ciclo "If" para verificar si el el ArrayList esta vacio
+                //En caso de estar vacio, se imprimen mensajes de aviso
                 if (misVideos != null && !misVideos.isEmpty()) {
                     for (Video v : misVideos) {
                         out.println("<h2>Video #" + v.getIdVideo() + "</h2>");

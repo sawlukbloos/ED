@@ -12,19 +12,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rockola - Reproductor de Videos</title>
     <style>
+            /*Estilos en CSS para la pagina principal del programa */
         body {
             font-family: Arial, sans-serif;
-            background-image: url('Imagen/img.jpg');
+            background-image: url('Imagen/img.jpg');/* imagen de fondo*/
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             margin: 0;
             padding: 0;
-            display: flex; /* Para centrar vertical y horizontalmente */
-            flex-direction: column; /* Para que los elementos se alineen verticalmente */
-            align-items: center; /* Para centrar horizontalmente */
-            justify-content: center; /* Para centrar verticalmente */
-            height: 100vh; /* Asegura que la página ocupe toda la altura del viewport */
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
         }
 
         header {
@@ -64,7 +65,7 @@
             color: #ff6600;
         }
 
-        /* Estilos para los íconos (usando Font Awesome) */
+        
         nav ul li a i {
             margin-right: 5px;
         }
@@ -84,15 +85,11 @@
     <header>
         <h1>Sistema Reproductor de Videos</h1>
     </header>
-    <nav>
+    <nav>       
         <ul>
             <li><a href="agregarVideo.jsp"><i class="fas fa-plus"></i> Ingresar nuevo video</a></li>
-            <li><a href="listarVideos.jsp"><i class="fas fa-list"></i> Listado de videos</a></li>
-            <!-- Agrega más enlaces según sea necesario -->
+            <li><a href="listarVideos.jsp"><i class="fas fa-list"></i> Listado de videos</a></li>            
         </ul>
     </nav>
-    <footer>
-        <!-- No hay texto de derechos reservados aquí -->
-    </footer>
 </body>
 </html></html>

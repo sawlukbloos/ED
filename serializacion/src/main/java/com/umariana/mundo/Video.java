@@ -5,8 +5,10 @@ import java.io.Serializable;
 
 /**
  *
- * @author David Noguera y El Bolaños
+ * @author Samuel Bolaños
  */
+
+//Implementamos la interfaz Serializable para poder serializar esta clase con sus objetos
 public class Video implements Serializable {
         
     private int idVideo;
@@ -85,8 +87,6 @@ public class Video implements Serializable {
     public void setLetra(String letra) {
         this.letra = letra;
     }
-    
-    
-    
+   
 }
 

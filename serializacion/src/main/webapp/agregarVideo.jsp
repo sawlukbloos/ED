@@ -12,9 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rockola - Reproductor de Videos</title>
     <style>
+        /* Estilos en css para mejorar la interfaz de la pagina agregarVideo.jsp */
         body {
-            font-family: Arial, sans-serif;
-            background-image: url('Imagen/img.jpg');
+            font-family: Arial, sans-serif; 
+            background-image: url('Imagen/img.jpg');/* imagen de fondo*/
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -29,7 +30,7 @@
         }
 
         .container {
-            max-width: 400px; /* Ancho máximo ajustado a 400px */
+            max-width: 400px; /* Ancho del recuadro ajustado a 400px */
             margin: 0 auto;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 30px;
@@ -37,8 +38,8 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centrar horizontalmente */
-            justify-content: center; /* Centrar verticalmente */
+            align-items: center; 
+            justify-content: center; 
         }
 
         label {
@@ -48,16 +49,16 @@
             color: #333;
             text-align: center;
             font-size: 14px;
-            width: 100%; /* Ancho del 100% para extenderse al contenedor */
+            width: 100%; 
         }
 
         input[type="text"],
         textarea {
-            width: 95%; /* Un poco más ancho que el 100% para dejar espacio en los lados */
+            width: 95%; 
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            margin: 10px 0; /* Espacio vertical entre los campos */
+            margin: 10px 0; 
         }
 
         input[type="submit"] {
@@ -69,7 +70,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-top: 10px; /* Espacio superior */
+            margin-top: 10px; 
         }
 
         input[type="submit"]:hover {
@@ -96,7 +97,7 @@
 </head>
 <body>
     <h1>Sistema Reproductor de Videos</h1>
-    <div class="container">
+    <div class="container"> 
         <form action="SvVideo" method="POST">
             <label for="idVideo">Id Video:</label>
             <input type="text" name="idVideo">

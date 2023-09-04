@@ -103,7 +103,8 @@ public class SvVideo extends HttpServlet {
                 dataFolder.mkdirs();
             }
 
-            // Crear un archivo para guardar o reescribir la lista de videos serializada
+            // Crear un archivo ".ser" para guardar la lista de videos serializada
+            // Añadimos una excepcion para imprimir aviso en caso de algun error en guardar los datos 
             String filePath = dataPath + File.separator + "videos.ser";
             FileOutputStream fos = new FileOutputStream(filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
