@@ -12,51 +12,102 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Videos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://static.vecteezy.com/system/resources/previews/005/490/647/non_2x/bright-blue-wallpaper-for-website-banner-abstract-geometric-pattern-with-line-connection-and-light-particle-structure-of-energy-or-global-space-free-vector.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+
         h1 {
             text-align: center;
+            margin-top: 20px;
+            color: #fff;
         }
-    </style>                
-    </head>
-    <body>
-        <h1>Listar Videos</h1>
-        
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-info {
+            margin-bottom: 20px;
+        }
+
+        .video-info h2 {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .video-info p {
+            margin: 5px 0;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listar Videos</h1>
+    <div class="container">
         <%
-            
             ArrayList<Video> misVideos = null;
             // Obtener la ruta real del archivo de datos
             String dataPath = application.getRealPath("/data/videos.ser");
-            
+
             // Verificar si el archivo existe
             File archivo = new File(dataPath);
             if (archivo.exists()) {
                 FileInputStream fis = new FileInputStream(dataPath);
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                misVideos  = (ArrayList<Video>) ois.readObject();
+                misVideos = (ArrayList<Video>) ois.readObject();
                 ois.close();
-                System.out.println("Datos de videos cargados exitosamente desde: " + dataPath);
-            }
-            
-            // Obtener array list de la solicitud
-             if (misVideos != null) {
-                System.out.println("Se cargaron " + misVideos.size() + " videos exitosamente.");
-                for (Video v : misVideos) {
-                    out.print("IdVideo:" + v.getIdVideo() + "<br>");
-                    out.print("Titulo:" + v.getTitulo() + "<br>");
-                    out.print("Autor;" + v.getAutor() + "<br>");
-                    out.print("Anio:" + v.getAnio() + "<br>");
-                    out.print("Categoria:" + v.getCategoria() + "<br>");
-                    out.print("Url" + v.getUrl() + "<br>");
-                    out.print("Letra:" + v.getLetra() + "<br>");
-                    out.print("------------------------------------------------------------"+"<br>");
+                out.println("<div class='video-info'>");
+                if (misVideos != null && !misVideos.isEmpty()) {
+                    for (Video v : misVideos) {
+                        out.println("<h2>Video #" + v.getIdVideo() + "</h2>");
+                        out.println("<p><strong>Título:</strong> " + v.getTitulo() + "</p>");
+                        out.println("<p><strong>Autor:</strong> " + v.getAutor() + "</p>");
+                        out.println("<p><strong>Año:</strong> " + v.getAnio() + "</p>");
+                        out.println("<p><strong>Categoría:</strong> " + v.getCategoria() + "</p>");
+                        out.println("<p><strong>URL:</strong> " + v.getUrl() + "</p>");
+                        out.println("<p><strong>Letra:</strong> " + v.getLetra() + "</p>");
+                        out.println("<hr>");
+                    }
+                } else {
+                    out.println("<p>No hay videos disponibles.</p>");
                 }
+                out.println("</div>");
             } else {
-                out.print("No hay videos disponibles.");
+                out.println("<p>No se encontró el archivo de datos.</p>");
             }
         %>
         <a href="index.jsp">Volver al inicio</a>
-    </body>
+    </div>
+</body>
 </html>
