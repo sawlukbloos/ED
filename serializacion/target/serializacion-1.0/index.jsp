@@ -14,12 +14,17 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('https://static.vecteezy.com/system/resources/previews/005/490/647/non_2x/bright-blue-wallpaper-for-website-banner-abstract-geometric-pattern-with-line-connection-and-light-particle-structure-of-energy-or-global-space-free-vector.jpg');
+            background-image: url('Imagen/img.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             margin: 0;
             padding: 0;
+            display: flex; /* Para centrar vertical y horizontalmente */
+            flex-direction: column; /* Para que los elementos se alineen verticalmente */
+            align-items: center; /* Para centrar horizontalmente */
+            justify-content: center; /* Para centrar verticalmente */
+            height: 100vh; /* Asegura que la página ocupe toda la altura del viewport */
         }
 
         header {
@@ -37,11 +42,12 @@
             list-style-type: none;
             padding: 0;
             text-align: center;
+            margin-top: 20px;
         }
 
         nav ul li {
-            display: inline;
-            margin: 0 20px;
+            display: block;
+            margin-bottom: 10px;
         }
 
         nav ul li a {
@@ -50,10 +56,17 @@
             font-weight: bold;
             font-size: 18px;
             transition: color 0.3s;
+            display: block;
+            padding: 10px 0;
         }
 
         nav ul li a:hover {
             color: #ff6600;
+        }
+
+        /* Estilos para los íconos (usando Font Awesome) */
+        nav ul li a i {
+            margin-right: 5px;
         }
 
         footer {
@@ -61,6 +74,9 @@
             color: #fff;
             text-align: center;
             padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
@@ -70,12 +86,13 @@
     </header>
     <nav>
         <ul>
-            <li><a href="agregarVideo.jsp">Ingresar nuevo video</a></li>
-            <li><a href="listarVideos.jsp">Listado de videos</a></li>
+            <li><a href="agregarVideo.jsp"><i class="fas fa-plus"></i> Ingresar nuevo video</a></li>
+            <li><a href="listarVideos.jsp"><i class="fas fa-list"></i> Listado de videos</a></li>
+            <!-- Agrega más enlaces según sea necesario -->
         </ul>
     </nav>
     <footer>
         <!-- No hay texto de derechos reservados aquí -->
     </footer>
 </body>
-</html>
+</html></html>

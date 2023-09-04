@@ -18,7 +18,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('https://static.vecteezy.com/system/resources/previews/005/490/647/non_2x/bright-blue-wallpaper-for-website-banner-abstract-geometric-pattern-with-line-connection-and-light-particle-structure-of-energy-or-global-space-free-vector.jpg');
+            background-image: url('Imagen/img.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             margin: 0;
