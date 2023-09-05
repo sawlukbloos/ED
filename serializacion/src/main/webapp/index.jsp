@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rockola - Reproductor de Videos</title>
     <style>
-            /*Estilos en CSS para la pagina principal del programa */
+            /*Estilos en CSS para la interfaz principal del programa */
         body {
             font-family: Arial, sans-serif;
             background-image: url('Imagen/img.jpg');/* imagen de fondo*/

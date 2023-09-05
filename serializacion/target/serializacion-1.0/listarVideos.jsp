@@ -16,7 +16,7 @@
     <meta charset="UTF-8">
     <title>Listar Videos</title>
     <style>
-        /*Estilos en CSS para la pagina que muestra el listado de los videos */
+        /* Estilos en CSS para la interfaz que muestra el listado de los videos */
         body {
             font-family: Arial, sans-serif;
             background-image: url('Imagen/img.jpg');/* imagen de fondo*/
@@ -82,7 +82,6 @@
             String dataPath = application.getRealPath("/data/videos.ser");
 
             // Verificar si el archivo existe y leerlo
-            //Imprimir los datos del ArrayList
             File archivo = new File(dataPath);
             if (archivo.exists()) {
                 FileInputStream fis = new FileInputStream(dataPath);
@@ -94,6 +93,7 @@
                 //En caso de estar vacio, se imprimen mensajes de aviso
                 if (misVideos != null && !misVideos.isEmpty()) {
                     for (Video v : misVideos) {
+                    //Imprimir los datos del ArrayList con salto de linea
                         out.println("<h2>Video #" + v.getIdVideo() + "</h2>");
                         out.println("<p><strong>Título:</strong> " + v.getTitulo() + "</p>");
                         out.println("<p><strong>Autor:</strong> " + v.getAutor() + "</p>");

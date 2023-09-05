@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rockola - Reproductor de Videos</title>
     <style>
-        /* Estilos en css para mejorar la interfaz de la pagina agregarVideo.jsp */
+        /* Estilos en css para mejorar la interfaz de la pagina */
         body {
             font-family: Arial, sans-serif; 
             background-image: url('Imagen/img.jpg');/* imagen de fondo*/
@@ -30,7 +30,7 @@
         }
 
         .container {
-            max-width: 400px; /* Ancho del recuadro ajustado a 400px */
+            max-width: 400px; 
             margin: 0 auto;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 30px;

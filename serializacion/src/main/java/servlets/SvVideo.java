@@ -21,7 +21,7 @@ public class SvVideo extends HttpServlet {
         // Asegúrate de obtener el ServletContext correctamente
         ServletContext servletContext = getServletContext();
         
-        // Cargar los videos serializados al iniciar la aplicación
+        // Cargar los videos serializados al iniciar el programa
         cargarVideosDesdeArchivo(servletContext);
     }
     
@@ -46,7 +46,7 @@ public class SvVideo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // aqui vienen los datos por POST
+        // Aqui vienen los datos por POST
         
         String idVideo = request.getParameter("idVideo");
         System.out.println("idVideo: "+idVideo);
@@ -71,11 +71,12 @@ public class SvVideo extends HttpServlet {
         
         try {
             int idVideoInt = Integer.parseInt(idVideo);
-            // Ingresar datos al objeto
+            // Ingresar datos al objeto con el constructor
             Video miVideo = new Video(idVideoInt, titulo, autor, anio, categoria, url, letra);
+            // Añadimos el objeto al ArrayList
             misVideos.add(miVideo);
         } catch (NumberFormatException e) {
-            // Manejo de la excepción si idVideo no es un número válido
+            // Añadimos una excepción si idVideo no es un número válido
             e.printStackTrace();
             System.out.println("Error al convertir idVideo a entero: " + e.getMessage());
         }
@@ -123,7 +124,7 @@ public class SvVideo extends HttpServlet {
             // Obtener la ruta real del archivo de datos
             String dataPath = servletContext.getRealPath("/data/videos.ser");
             
-            // Verificar si el archivo existe
+            // Verificar si el archivo existe para leerlo
             File archivo = new File(dataPath);
             if (archivo.exists()) {
                 FileInputStream fis = new FileInputStream(dataPath);

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Samuel Bolaños
  */
 
-//Implementamos la interfaz Serializable para poder serializar esta clase con sus objetos
+// Implementamos la interfaz Serializable para poder serializar esta clase con sus objetos
 public class Video implements Serializable {
         
     private int idVideo;
