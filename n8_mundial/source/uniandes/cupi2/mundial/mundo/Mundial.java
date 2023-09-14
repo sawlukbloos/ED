@@ -1,8 +1,8 @@
 /**
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * $Id: Mundial.java,v 1.10 2007/03/17 15:19:21 jvillalo2 Exp $
- * Universidad de los Andes (Bogotá - Colombia)
- * Departamento de Ingeniería de Sistemas y Computación 
+ * Universidad de los Andes (Bogotï¿½ - Colombia)
+ * Departamento de Ingenierï¿½a de Sistemas y Computaciï¿½n 
  * Licenciado bajo el esquema Academic Free License version 2.1 
  *
  * Proyecto Cupi2 (http://cupi2.uniandes.edu.co)
@@ -17,6 +17,7 @@ package uniandes.cupi2.mundial.mundo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -28,10 +29,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Es la clase para representar el mundial de fútbol <br>
+ * Es la clase para representar el mundial de fï¿½tbol <br>
  * <b>inv: </b> <br>
  * equipos != null <br>
- * No hay dos equipos del mismo país
+ * No hay dos equipos del mismo paï¿½s
  * 
  */
 
@@ -47,12 +48,12 @@ public class Mundial
     private static final String LOG_FILE = "./data/error.log";
 
     /**
-     * Número de datos a leer para un equipo
+     * Nï¿½mero de datos a leer para un equipo
      */
     public static final int DATOS_EQUIPO = 4;
 
     /**
-     * Número de datos a leer para un jugador
+     * Nï¿½mero de datos a leer para un jugador
      */
     public static final int DATOS_JUGADOR = 7;
 
@@ -75,11 +76,11 @@ public class Mundial
     // -----------------------------------------------------------------
 
     /**
-     * Construye un nuevo mundial de fútbol. <br>
-     * Si el archivo indicado no existe, entonces el mundial se crea vacío y su estado se guardará en el archivo indicado.<br>
-     * Si el archivo existe, entonces de él se saca la información de los equipos y jugadores.
+     * Construye un nuevo mundial de fï¿½tbol. <br>
+     * Si el archivo indicado no existe, entonces el mundial se crea vacï¿½o y su estado se guardarï¿½ en el archivo indicado.<br>
+     * Si el archivo existe, entonces de ï¿½l se saca la informaciï¿½n de los equipos y jugadores.
      * @param nombreArchivoMundial Es el nombre del archivo que contiene los datos del mundial
-     * @throws PersistenciaException Se lanza esta excepción si se encuentran problemas cargando los datos del archivo
+     * @throws PersistenciaException Se lanza esta excepciï¿½n si se encuentran problemas cargando los datos del archivo
      */
     public Mundial( String nombreArchivoMundial ) throws PersistenciaException
     {
@@ -87,7 +88,7 @@ public class Mundial
         File archivo = new File( archivoMundial );
         if( archivo.exists( ) )
         {
-            // El archivo existe: se debe recuperar de allí el estado del modelo del mundo
+            // El archivo existe: se debe recuperar de allï¿½ el estado del modelo del mundo
             try
             {
                 ObjectInputStream ois = new ObjectInputStream( new FileInputStream( archivo ) );
@@ -96,7 +97,7 @@ public class Mundial
             }
             catch( Exception e )
             {
-                // Se atrapan en este bloque todos los tipos de excepción
+                // Se atrapan en este bloque todos los tipos de excepciï¿½n
                 registrarError( e );
                 throw new PersistenciaException( "Error fatal: imposible restaurar el estado del programa (" + e.getMessage( ) + ")" );
             }
@@ -110,13 +111,13 @@ public class Mundial
     }
 
     // -----------------------------------------------------------------
-    // Métodos
+    // Mï¿½todos
     // -----------------------------------------------------------------
 
     /**
-     * Retorna un equipo del mundial dado su país.
+     * Retorna un equipo del mundial dado su paï¿½s.
      * @param nombreEquipo el nombre del equipo a buscar - nombreEquipo != null
-     * @return El equipo cuyo nombre es igual al nombre dado. Si no se encontró se retorna null.
+     * @return El equipo cuyo nombre es igual al nombre dado. Si no se encontrï¿½ se retorna null.
      */
     public Equipo darEquipo( String nombreEquipo )
     {
@@ -137,10 +138,10 @@ public class Mundial
 
     /**
      * Agrega un nuevo equipo al mundial
-     * @param pais El nombre del país que representa el equipo - pais != null
-     * @param director El nombre del director técnico del equipo - director != null
-     * @param imagen La imagen con la bandera del país del equipo - imagen != null
-     * @throws ElementoExisteException Esta excepción se lanza si ya existe un equipo con el mismo nombre
+     * @param pais El nombre del paï¿½s que representa el equipo - pais != null
+     * @param director El nombre del director tï¿½cnico del equipo - director != null
+     * @param imagen La imagen con la bandera del paï¿½s del equipo - imagen != null
+     * @throws ElementoExisteException Esta excepciï¿½n se lanza si ya existe un equipo con el mismo nombre
      */
     public void agregarEquipo( String pais, String director, String imagen ) throws ElementoExisteException
     {
@@ -172,13 +173,13 @@ public class Mundial
      * Agrega un nuevo jugador al equipo
      * @param nombreEquipo El nombre del equipo para adicionar el jugador - hay un equipo con ese nombre en el mundial
      * @param nombreJ El nombre del jugador a crear - nombreJ != null
-     * @param edadJ El número de años del jugador - edadJ > 0
-     * @param posicionJ La posición en la que juega el jugador - posicionJ != null
+     * @param edadJ El nï¿½mero de aï¿½os del jugador - edadJ > 0
+     * @param posicionJ La posiciï¿½n en la que juega el jugador - posicionJ != null
      * @param alturaJ La altura en metros del jugador - alturaJ > 0
      * @param pesoJ El peso en kilogramos del jugador - pesoJ > 0
-     * @param salarioJ El salario anual del jugador en millones de dólares - salarioJ > 0
+     * @param salarioJ El salario anual del jugador en millones de dï¿½lares - salarioJ > 0
      * @param imagenJ La ruta de la imagen con la foto del jugador - imagenJ != null
-     * @throws ElementoExisteException Esta excepción se lanza si ya existe otro jugador en el equipo con el mismo nombre
+     * @throws ElementoExisteException Esta excepciï¿½n se lanza si ya existe otro jugador en el equipo con el mismo nombre
      */
     public void agregarJugadorAEquipo( String nombreEquipo, String nombreJ, int edadJ, String posicionJ, double alturaJ, double pesoJ, double salarioJ, String imagenJ ) throws ElementoExisteException
     {
@@ -188,15 +189,15 @@ public class Mundial
     }
 
     /**
-     * Calcula el valor de la nómina de un equipo y genera el reporte correspondiente
-     * @param nombreEquipo El nombre del equipo para el que se va a calcular el valor de la nómina
+     * Calcula el valor de la nï¿½mina de un equipo y genera el reporte correspondiente
+     * @param nombreEquipo El nombre del equipo para el que se va a calcular el valor de la nï¿½mina
      * @param rutaReporte el directorio donde debe generarse el reporte - rutaReporte != null
-     * @return Retorna el nombre del archivo en el que se generó el reporte
-     * @throws IOException Se genera esta excepción si hay problemas salvando el archivo con el reporte
+     * @return Retorna el nombre del archivo en el que se generï¿½ el reporte
+     * @throws IOException Se genera esta excepciï¿½n si hay problemas salvando el archivo con el reporte
      */
     public String calcularValorNomina( String nombreEquipo, String rutaReporte ) throws IOException
     {
-        // Genera el nombre para el archivo con el reporte de la nómina
+        // Genera el nombre para el archivo con el reporte de la nï¿½mina
         String strTiempo = Long.toString( System.currentTimeMillis( ) );
         String nombreArchivo = nombreEquipo + "_" + strTiempo + ".nomina";
 
@@ -208,9 +209,9 @@ public class Mundial
         PrintWriter out = new PrintWriter( archivoReporte );
 
         Date fecha = new Date( );
-        out.println( "Mundial_CUPI2 - Reporte Nómina - Equipo: " + nombreEquipo );
+        out.println( "Mundial_CUPI2 - Reporte Nï¿½mina - Equipo: " + nombreEquipo );
         out.println( "Fecha:            " + fecha.toString( ) );
-        out.println( "Total Nómina:          " + darEquipo( nombreEquipo ).calcularValorNomina( ) + " millones anuales" );
+        out.println( "Total Nï¿½mina:          " + darEquipo( nombreEquipo ).calcularValorNomina( ) + " millones anuales" );
         out.close( );
 
         return nombreArchivo;
@@ -218,13 +219,13 @@ public class Mundial
     }
 
     /**
-     * Actualiza la información de los jugadores a partir de la información contenida en un archivo de texto.<br>
-     * El archivo debe tener una línea en la cual se encuentra el número de jugadores a los que se les va a modificar la información, <br>
-     * y luego debe haber una línea por cada jugador al que se le va a modificar la información. <br>
-     * Cada línea tiene el siguiente formato: <nombre país>;<nombre jugador>;<edad>;<posición>;<altura>;<peso>;<salario>;<imágen>
-     * @param archivo El archivo que tiene la información de los jugadores - archivo!= null
-     * @throws IOException Se lanza esta excepción si hay problemas leyendo el archivo de los jugadores
-     * @throws ArchivoJugadoresException Se lanza esta excepción si el archivo no cumple con el formato esperado
+     * Actualiza la informaciï¿½n de los jugadores a partir de la informaciï¿½n contenida en un archivo de texto.<br>
+     * El archivo debe tener una lï¿½nea en la cual se encuentra el nï¿½mero de jugadores a los que se les va a modificar la informaciï¿½n, <br>
+     * y luego debe haber una lï¿½nea por cada jugador al que se le va a modificar la informaciï¿½n. <br>
+     * Cada lï¿½nea tiene el siguiente formato: <nombre paï¿½s>;<nombre jugador>;<edad>;<posiciï¿½n>;<altura>;<peso>;<salario>;<imï¿½gen>
+     * @param archivo El archivo que tiene la informaciï¿½n de los jugadores - archivo!= null
+     * @throws IOException Se lanza esta excepciï¿½n si hay problemas leyendo el archivo de los jugadores
+     * @throws ArchivoJugadoresException Se lanza esta excepciï¿½n si el archivo no cumple con el formato esperado
      */
     public void modificarInformacionJugadores( File archivo ) throws ArchivoJugadoresException, IOException
     {
@@ -232,10 +233,10 @@ public class Mundial
         String linea = null;
         int numeroJugadores = -1;
 
-        // Abre el archivo con los equipos y jugadores. Si no existe, el constructor del flujo lanza la excepción FileNotFoundException
+        // Abre el archivo con los equipos y jugadores. Si no existe, el constructor del flujo lanza la excepciï¿½n FileNotFoundException
         BufferedReader lector = new BufferedReader( new FileReader( archivo ) );
 
-        // Lee la primera línea del archivo (el número de equipos)
+        // Lee la primera lï¿½nea del archivo (el nï¿½mero de equipos)
         linea = lector.readLine( );
 
         if( linea != null && !linea.equals( "" ) )
@@ -248,8 +249,8 @@ public class Mundial
             }
             catch( NumberFormatException e )
             {
-                // Hubo un error al leer el número de jugadores
-                throw new ArchivoJugadoresException( "El archivo no tiene el formato esperado. Se esperaba el número de jugadores" );
+                // Hubo un error al leer el nï¿½mero de jugadores
+                throw new ArchivoJugadoresException( "El archivo no tiene el formato esperado. Se esperaba el nï¿½mero de jugadores" );
             }
             int cont = 0;
 
@@ -269,15 +270,15 @@ public class Mundial
                 }
                 else if( cont < numeroJugadores )
                 {
-                    throw new ArchivoJugadoresException( "El archivo no tiene el formato esperado. Se esperaba la información de " + numeroJugadores + " jugadores" );
+                    throw new ArchivoJugadoresException( "El archivo no tiene el formato esperado. Se esperaba la informaciï¿½n de " + numeroJugadores + " jugadores" );
                 }
             }
 
         }
         else
         {
-            // Hubo un error al leer el número de jugadores
-            throw new ArchivoJugadoresException( "El archivo no tiene el formato esperado. Se esperaba el número de jugadores" );
+            // Hubo un error al leer el nï¿½mero de jugadores
+            throw new ArchivoJugadoresException( "El archivo no tiene el formato esperado. Se esperaba el nï¿½mero de jugadores" );
         }
 
         lector.close( );
@@ -285,11 +286,11 @@ public class Mundial
     }
 
     /**
-     * Carga un equipo a partir de la información contenida en un archivo
-     * @param br Es el lector de archivo del cual se lee la información del equipo - El lector de archivo ya está listo para leer
-     * @throws ArchivoJugadoresException Se lanza esta excepción si el archivo no tiene el formato esperado
-     * @throws IOException Si hay errores leyendo la siguiente línea del archivo
-     * @throws ArchivoJugadoresException Si la línea del archivo no tiene el formato esperado
+     * Carga un equipo a partir de la informaciï¿½n contenida en un archivo
+     * @param br Es el lector de archivo del cual se lee la informaciï¿½n del equipo - El lector de archivo ya estï¿½ listo para leer
+     * @throws ArchivoJugadoresException Se lanza esta excepciï¿½n si el archivo no tiene el formato esperado
+     * @throws IOException Si hay errores leyendo la siguiente lï¿½nea del archivo
+     * @throws ArchivoJugadoresException Si la lï¿½nea del archivo no tiene el formato esperado
      */
 
     private void modificarJugador( String info ) throws ArchivoJugadoresException, IOException
@@ -315,7 +316,7 @@ public class Mundial
 
                     if( edad < 0 || posicion.equals( "" ) || altura < 0 || peso < 0 || salario < 0 || imagen.equals( "" ) )
                     {
-                        throw new ArchivoJugadoresException( "La datos del jugador " + nombreJugador + " no son válidos" );
+                        throw new ArchivoJugadoresException( "La datos del jugador " + nombreJugador + " no son vï¿½lidos" );
                     }
 
                     equipo.modificarInformacionJugador( nombreJugador, edad, posicion, altura, peso, salario, imagen );
@@ -335,14 +336,46 @@ public class Mundial
             throw new ArchivoJugadoresException( "El archivo no tiene el formato esperado. Se esperaban los ocho datos del jugador" );
         }
     }
-
+    
+    
+    // -----------------------------------------------------------------
+    // Metodo 1
+    // -----------------------------------------------------------------
+         public void loadnewteams() throws FileNotFoundException, IOException 
+         {
+         
+             File archivo = new File("./data/nuevose.txt");
+             FileReader filereader = new FileReader(archivo);
+             BufferedReader reader = new BufferedReader (filereader);
+         
+             
+             String row = reader.readLine();
+             
+            while (row!=null)
+            {
+               String[] data = row.split(";");
+               String name = data [0];
+               String directorName = data [1];
+               String teamImage = data [2];
+               
+               Equipo newteam = new Equipo(name,directorName,teamImage);
+               equipos.add(newteam);
+               row = reader.readLine();
+               
+            }
+            filereader.close();
+            reader.close();
+         }
+    
+    
+    
     // -----------------------------------------------------------------
     // Persistencia
     // -----------------------------------------------------------------
 
     /**
      * Salva el mundial en un archivo binario
-     * @throws PersistenciaException Se lanza esta excepción si hay problemas guardando la información del mundial en el archivo
+     * @throws PersistenciaException Se lanza esta excepciï¿½n si hay problemas guardando la informaciï¿½n del mundial en el archivo
      */
     public void salvarMundial( ) throws PersistenciaException
     {
@@ -360,8 +393,8 @@ public class Mundial
     }
 
     /**
-     * Registra en el archivo de log del programa toda la información referente a una excepción, ocurrida durante el proceso de persistencia
-     * @param excepcion Es la excepción que contiene la información del error
+     * Registra en el archivo de log del programa toda la informaciï¿½n referente a una excepciï¿½n, ocurrida durante el proceso de persistencia
+     * @param excepcion Es la excepciï¿½n que contiene la informaciï¿½n del error
      */
     public void registrarError( Exception excepcion )
     {
@@ -390,16 +423,16 @@ public class Mundial
     /**
      * Verifica el invariante de la clase: <br>
      * equipos != null <br>
-     * No hay dos equipos del mismo país
+     * No hay dos equipos del mismo paï¿½s
      */
     private void verificarInvariante( )
     {
         assert equipos != null : "La lista de equipos es null";
-        assert !buscarEquiposConElMismoNombre( ) : "Hay dos equipos con el mismo país";
+        assert !buscarEquiposConElMismoNombre( ) : "Hay dos equipos con el mismo paï¿½s";
     }
 
     /**
-     * Este método sirve para revisar si hay equipos repetidos dentro del mundial.
+     * Este mï¿½todo sirve para revisar si hay equipos repetidos dentro del mundial.
      * @return Retorna true si hay un equipo que aparece repetido dentro de la lista de equipos. Retorna false en caso contrario.
      */
     private boolean buscarEquiposConElMismoNombre( )
@@ -423,20 +456,34 @@ public class Mundial
     }
 
     // -----------------------------------------------------------------
-    // Puntos de Extensión
+    // Puntos de Extensiï¿½n
     // -----------------------------------------------------------------
 
     /**
-     * Método para la extensión 1
+     * Mï¿½todo para la extensiï¿½n 1
      * @return respuesta1
      */
     public String metodo1( )
     {
-        return "Respuesta 1";
+        String result = null;
+        try
+        {
+        
+         loadnewteams();
+         result = "Se ha cargado los nuevos equipos";
+        }
+        catch(FileNotFoundException e)
+        {
+         result = "No encontramos el archivo";
+        }
+        catch(IOException e){
+          result = "No se leyo el archivo";
+        }
+        return result;
     }
 
     /**
-     * Método para la extensión2
+     * Mï¿½todo para la extensiï¿½n2
      * @return respuesta2
      */
     public String metodo2( )
