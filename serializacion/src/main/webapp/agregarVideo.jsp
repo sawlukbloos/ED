@@ -6,123 +6,76 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rockola - Reproductor de Videos</title>
-    <style>
-        /* Estilos en css para mejorar la interfaz de la pagina */
-        body {
-            font-family: Arial, sans-serif; 
-            background-image: url('Imagen/img.jpg');/* imagen de fondo*/
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            margin: 0;
-            padding: 0;
-        }
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Rockola</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        
+    </head>
+    <body>
+        
+        <div class = "container text-center">  <!-- clase contenedora --> 
+            <h1>Sistema reproductor de videos</h1>
+            <div class = "row"  > <!-- clase division por 4 columnas -->
+                <div class = "col"  >
+                <div class = "card card-body"> <!-- targeta de trabajo -->
+                   <form action="SvVideo" method="POST">         
+            
+                    <label for="idVideo">idVideo:</label>
+                    <input type="text" name="idVideo" class = "form-control"><br>
 
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-            color: #fff;
-        }
+                    <label for="titulo">Titulo:</label>
+                    <input type="text" name="titulo" class = "form-control"><br>
 
-        .container {
-            max-width: 400px; 
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-            justify-content: center; 
-        }
+                    <label for="autor">Autor:</label>
+                    <input type="text" name="autor" class = "form-control"><br>
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-top: 10px;
-            color: #333;
-            text-align: center;
-            font-size: 14px;
-            width: 100%; 
-        }
+                    <label for="anio">Año:</label>
+                    <input type="text" name="anio" class ="form-control"><br>
 
-        input[type="text"],
-        textarea {
-            width: 95%; 
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin: 10px 0; 
-        }
+                    <label for="url">Url:</label>
+                    <input type="text" name="url" class ="form-control"><br>
 
-        input[type="submit"] {
-            background-color: #007BFF;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 10px; 
-        }
+                    <label for="categoria">Categoria:</label>
+                    <input type="text" name="categoria" class ="form-control"><br>
 
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
+                    <label for="letra">Letra:</label>
+                    <textarea id="id" name="letra" rows="5" cols="10" class ="form-control"></textarea>
 
-        a {
-            display: block;
-            text-align: center;
-            text-decoration: none;
-            background-color: #007BFF;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        a:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <h1>Sistema Reproductor de Videos</h1>
-    <div class="container"> 
-        <form action="SvVideo" method="POST">
-            <label for="idVideo">Id Video:</label>
-            <input type="text" name="idVideo">
-
-            <label for="titulo">Título:</label>
-            <input type="text" name="titulo">
-
-            <label for="autor">Autor:</label>
-            <input type="text" name="autor">
-
-            <label for="anio">Año:</label>
-            <input type="text" name="anio">
-
-            <label for="url">URL:</label>
-            <input type="text" name="url">
-
-            <label for="categoria">Categoría:</label>
-            <input type="text" name="categoria">
-
-            <label for="letra">Letra:</label>
-            <textarea id="letra" name="letra" rows="5" cols="10"></textarea>
-
-            <input type="submit" value="Agregar video">
-        </form>
-        <a href="index.jsp">Volver al menú</a>
-    </div>
-</body>
+                    <input type="submit" value="Agregar video" class ="form-control">
+                </form>  
+                <a href="index.jsp">Volver al menu</a> 
+                </div>
+            </div>
+            
+                
+                
+            <div class = "col-md-8"  >
+                <table class="table table-bordered">
+                    <thead><!-- comment -->
+                        <tr><!-- comment -->
+                            <th> id </th>
+                            <th> Titulo </th>
+                            <th> Autor </th>
+                            <th> Acciones </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> 1 </td>
+                            <td> No dejes que </td>
+                            <td> Caifanes </td>
+                            <td> Editar Borrar </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        
+    </body>
 </html>
