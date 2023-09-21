@@ -12,106 +12,88 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Listar Videos</title>
-    <style>
-        /* Estilos en CSS para la interfaz que muestra el listado de los videos */
-        body {
-            font-family: Arial, sans-serif;
-            background-image: url('Imagen/img.jpg');/* imagen de fondo*/
-            background-size: cover;
-            background-repeat: no-repeat;
-            margin: 0;
-            padding: 0;
-        }
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Listar videos</title>
+        <style>
+            /* Estilo para el cuerpo de la página */
+            body {
+                font-family: Arial, sans-serif;
+                background-image: url('https://img.freepik.com/vector-gratis/fondo-geometrico-plano_23-2148967370.jpg'); /* Ruta de la imagen */
+                background-size: cover; /* Escala la imagen para cubrir todo el fondo */
+                background-repeat: no-repeat; /* Evita la repetición de la imagen */
+                background-attachment: fixed;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+            }
 
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-            color: #fff;
-        }
+            /* Estilo para el contenedor principal */
+            .content {
+                background-color: white;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+            /* Estilo para los títulos */
+            h1 {
+                color: #007BFF; /* Color azul */
+            }
 
-        .video-info {
-            margin-bottom: 20px;
-        }
+            /* Estilo para los enlaces */
+            a {
+                color: #007BFF; /* Color azul */
+                text-decoration: none;
+            }
 
-        .video-info h2 {
-            font-size: 18px;
-            margin-top: 10px;
-            color: #333;
-        }
+            /* Estilo para los elementos de video */
+            .video-item {
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                padding: 10px;
+                border-radius: 5px;
+                text-align: left;
+                background-color: white;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            }
 
-        .video-info p {
-            margin: 5px 0;
-        }
+            /* Estilo para separar los elementos de video */
+            .video-item:not(:last-child) {
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <h1>Listar videos</h1>
+            <a href="index.jsp">Volver al inicio</a>
 
-        a {
-            display: block;
-            text-align: center;
-            text-decoration: none;
-            background-color: #007BFF;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
+            <%
+                // Obtener array list de la solicitud utilizando el método cargarVideosDesdeArchivo
+                ArrayList<Video> misVideos = Video.cargarVideosDesdeArchivo(application);
 
-        a:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <h1>Listar Videos</h1>
-    <div class="container">
-        <%
-            ArrayList<Video> misVideos = null;
-            // Obtener el path real del archivo de datos
-            String dataPath = application.getRealPath("/data/videos.ser");
-
-            // Verificar si el archivo existe y leerlo
-            File archivo = new File(dataPath);
-            if (archivo.exists()) {
-                FileInputStream fis = new FileInputStream(dataPath);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                misVideos = (ArrayList<Video>) ois.readObject();
-                ois.close();
-                out.println("<div class='video-info'>");
-                //Usamos un ciclo "If" para verificar si el el ArrayList esta vacio
-                //En caso de estar vacio, se imprimen mensajes de aviso
-                if (misVideos != null && !misVideos.isEmpty()) {
+                if (misVideos != null) {
+                    System.out.println("Se cargaron " + misVideos.size() + " videos exitosamente.");
                     for (Video v : misVideos) {
-                    //Imprimir los datos del ArrayList con salto de linea
-                        out.println("<h2>Video #" + v.getIdVideo() + "</h2>");
-                        out.println("<p><strong>Título:</strong> " + v.getTitulo() + "</p>");
-                        out.println("<p><strong>Autor:</strong> " + v.getAutor() + "</p>");
-                        out.println("<p><strong>Año:</strong> " + v.getAnio() + "</p>");
-                        out.println("<p><strong>Categoría:</strong> " + v.getCategoria() + "</p>");
-                        out.println("<p><strong>URL:</strong> " + v.getUrl() + "</p>");
-                        out.println("<p><strong>Letra:</strong> " + v.getLetra() + "</p>");
-                        out.println("<hr>");
+            %>
+                        <div class="video-item">
+                            <strong>IdVideo:</strong> <%= v.getIdVideo() %><br>
+                            <strong>Titulo:</strong> <%= v.getTitulo() %><br>
+                            <strong>Autor:</strong> <%= v.getAutor() %><br>
+                            <strong>Año:</strong> <%= v.getAnio() %><br>
+                            <strong>Categoria:</strong> <%= v.getCategoria() %><br>
+                            <strong>Url:</strong> <%= v.getUrl() %><br>
+                            <strong>Letra:</strong> <%= v.getLetra() %><br>
+                        </div>
+            <%
                     }
                 } else {
-                    out.println("<p>No hay videos disponibles.</p>");
+                    out.print("No hay videos disponibles.");
                 }
-                out.println("</div>");
-            } else {
-                out.println("<p>No se encontró el archivo de datos.</p>");
-            }
-        %>
-        <a href="index.jsp">Volver al inicio</a>
-    </div>
-</body>
+            %>
+        </div>
+    </body>
 </html>

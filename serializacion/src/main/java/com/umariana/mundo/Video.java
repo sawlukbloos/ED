@@ -1,7 +1,14 @@
 
 package com.umariana.mundo;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -87,6 +94,38 @@ public class Video implements Serializable {
     public void setLetra(String letra) {
         this.letra = letra;
     }
-   
+    
+     // Método para guardar la lista de videos en un archivo videos.ser
+    public static void guardarVideosEnArchivo(ArrayList<Video> listaDeVideos) {
+        try {
+            // Crear un archivo para guardar la lista de videos serializada
+            FileOutputStream fos = new FileOutputStream("videos.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(listaDeVideos);
+            oos.close();
+            System.out.println("Datos de videos guardados exitosamente en: videos.ser");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al guardar los datos de videos: " + e.getMessage());
+        }
+    }
+
+    // Método para cargar los videos desde el archivo deserializándolo
+    public static ArrayList<Video> cargarVideosDesdeArchivo(ServletContext servletContext) {
+        ArrayList<Video> listaDeVideos = new ArrayList<>();
+        try {
+            // Cargar la lista de videos desde el archivo
+            FileInputStream fis = new FileInputStream("videos.ser");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            listaDeVideos = (ArrayList<Video>) ois.readObject();
+            ois.close();
+            System.out.println("Datos de videos cargados exitosamente desde: videos.ser");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar los datos de videos: " + e.getMessage());
+        }
+        return listaDeVideos;
+    }
+    
 }
 
