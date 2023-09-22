@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <%@include file= "templates/header.jsp" %>
 
+<!-- banner para esta pagina -->
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
         <img src="imagenes/banner.jpeg" width="1300" height="180" class="d-inline-block align-top" alt="">    
@@ -16,9 +17,11 @@
 
 <div class="container p-4"> <!-- clase contenedora -->
     <div class="row">
-        <div class="col-md-4">
-            <div class="card card-body"> 
-
+        <div class="col-md-4"> <!-- clase de division por 4 columnas -->
+            <div class="card card-body">
+                
+                <!-- tarjeta de trabajo -->
+                
                 <h3>Insertar nuevo perro</h3>        
 
                 <div class="input-group mb-3">
@@ -35,7 +38,7 @@
                     <span class="input-group-text" for="imagen">Imagen:</span>
                     <input type="text" class="form-control" name="imagen" >
                 </div>
-
+                <!<!-- input para los puntos -->
                 <div class="input-group mb-3">
                     <span class="input-group-text" for="puntos">Puntos:</span>
                     <select class="form-select" name="puntos" >
@@ -58,14 +61,16 @@
                     <input type="text" class="form-control"  name="edad" >
                 </div>
                 </form><br>
-
+                
+                <!<!-- boton para agregar perro -->
+                
                 <button type="button" class="btn btn-success">Agregar perro</button>
                 <a href="index.jsp">Volver al Index</a> 
             </div>    
         </div> 
 
 
-
+        <!<!-- tabla para mostrar los datos registrados de los perros -->
         <div class="col-md-8">
             <table class="table table-bordered">
                 <thead>
