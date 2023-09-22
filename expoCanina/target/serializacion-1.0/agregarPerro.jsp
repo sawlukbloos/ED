@@ -7,63 +7,93 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@include file= "templates/header.jsp" %>
-        
-        <div class = "container text-center">  <!-- clase contenedora --> 
-            <h1>Exposicion Canina</h1>
-            <div class = "row"  > <!-- clase row  -->
-                <div class = "col"  >
-                <div class = "card card-body"> <!-- targeta de trabajo -->
-                   <form action="SvVideo" method="POST">         
-            
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" name="nombre" class = "form-control"><br>
 
-                    <label for="raza">Raza:</label>
-                    <input type="text" name="raza" class = "form-control"><br>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="imagenes/banner.jpeg" width="1300" height="180" class="d-inline-block align-top" alt="">    
+          </a>
+</nav>
 
-                    <label for="imagen">Imagen:</label>
-                    <input type="text" name="imagen" class = "form-control"><br>
-                    
-                    <label for="puntos">Puntos:</label>
-                    <input type="text" name="puntos" class ="form-control"><br>
+<div class="container p-4"> <!-- clase contenedora -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-body"> 
 
-                    <label for="edad">Edad:</label>
-                    <input type="text" name="edad" class ="form-control"><br>
+                <h3>Insertar nuevo perro</h3>        
 
-
-                    <input type="submit" value="Agregar perro" class ="form-control">
-                </form>  
-                <a href="index.jsp">Volver al menu</a> 
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="nombre">Nombre:</span>
+                    <input type="text" class="form-control" name ="nombre" >
+                </div>                                            
+                <!-- Input para la raza-->
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="raza">Raza:</span>
+                    <input type="text" class="form-control" name="raza" >
                 </div>
-            </div>
-            
-                
-                
-            <div class = "col-md-8"  >
-                <table class="table table-bordered">
-                    <thead><!-- comment -->
-                        <tr><!-- comment -->
-                            <th> Nombre </th>
-                            <th> Raza </th>
-                            <th> Imagen </th>
-                            <th> Puntos </th>
-                            <th> Edad </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td> XD </td>
-                            <td> Pequines  </td>
-                            <td> Mas tarde </td>
-                            <td> 5 </td>
-                            <td> 7 </td>
-                            
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <!-- Input para la foto-->
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="imagen">Imagen:</span>
+                    <input type="text" class="form-control" name="imagen" >
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="puntos">Puntos:</span>
+                    <select class="form-select" name="puntos" >
+                        <option selected>Selecione...</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>                          
+                    </select>                  
+                </div>
+                <!-- Input para la edad-->
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="edad">Edad:</span>
+                    <input type="text" class="form-control"  name="edad" >
+                </div>
+                </form><br>
+
+                <button type="button" class="btn btn-success">Agregar perro</button>
+                <a href="index.jsp">Volver al Index</a> 
+            </div>    
+        </div> 
+
+
+
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Raza</th>
+                        <th>Imagen</th>
+                        <th>Puntos</th>
+                        <th>Edad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pistacho </td>
+                        <td>Pequinez</td>
+                        <td>ft</td>
+                        <td>5</td>
+                        <td>20</td>
+                        <td>xd</td>
+                    </tr>
+                </tbody> 
+            </table>
         </div>
-        
-        
-               
- <%@include file= "templates/fooder.jsp" %>
+    </div>  
+</div>    
+</div>
+
+
+
+<%@include file= "templates/fooder.jsp" %>
