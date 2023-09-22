@@ -19,9 +19,9 @@
     <div class="row">
         <div class="col-md-4"> <!-- clase de division por 4 columnas -->
             <div class="card card-body">
-                
+
                 <!-- tarjeta de trabajo -->
-                
+
                 <h3>Insertar nuevo perro</h3>        
 
                 <div class="input-group mb-3">
@@ -38,7 +38,7 @@
                     <span class="input-group-text" for="imagen">Imagen:</span>
                     <input type="text" class="form-control" name="imagen" >
                 </div>
-                <!<!-- input para los puntos -->
+                <!-- input para los puntos -->
                 <div class="input-group mb-3">
                     <span class="input-group-text" for="puntos">Puntos:</span>
                     <select class="form-select" name="puntos" >
@@ -61,16 +61,16 @@
                     <input type="text" class="form-control"  name="edad" >
                 </div>
                 </form><br>
-                
-                <!<!-- boton para agregar perro -->
-                
+
+                <!-- boton para agregar perro -->
+
                 <button type="button" class="btn btn-success">Agregar perro</button>
                 <a href="index.jsp">Volver al Index</a> 
             </div>    
         </div> 
 
 
-        <!<!-- tabla para mostrar los datos registrados de los perros -->
+        <!-- tabla para mostrar los datos registrados de los perros -->
         <div class="col-md-8">
             <table class="table table-bordered">
                 <thead>
