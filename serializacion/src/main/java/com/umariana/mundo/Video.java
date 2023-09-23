@@ -12,11 +12,10 @@ import javax.servlet.ServletContext;
 
 /**
  *
- * @author David Noguera y El Bolaños
- * Se implemento "Serializable" dado a que quermos que los datos o atributos de esta clase
- * puedan serializarse en un futuro
+ * @author Samuel Bolaños
  */
 
+// Implementamos la interfaz Serializable para poder serializar esta clase con sus objetos
 public class Video implements Serializable {
         
     private int idVideo;

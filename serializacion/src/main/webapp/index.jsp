@@ -4,9 +4,6 @@
     Author     : Sistemas
 --%>
 
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.umariana.mundo.Video"%>
-<%@page import="com.umariana.mundo.Video"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -1,4 +1,9 @@
-<%@page import="java.io.IOException"%>
+<%-- 
+    Document   : listarVideos
+    Created on : 31/08/2023, 10:30:45 a. m.
+    Author     : Acer
+--%>
+
 <%@page import="java.io.ObjectInputStream"%>
 <%@page import="java.io.FileInputStream"%>
 <%@page import="java.io.File"%>
@@ -14,7 +19,7 @@
             /* Estilo para el cuerpo de la página */
             body {
                 font-family: Arial, sans-serif;
-                background-image: url('https://img.freepik.com/vector-gratis/fondo-geometrico-plano_23-2148967370.jpg'); /* Ruta de la imagen */
+                background-image: url('https://img.freepik.com/vector-premium/fondos-pantalla-azules-que-haran-que-tu-escritorio-vea-azul-oscuro-fondos-pantalla-fondos-pantalla-iphone_712895-230.jpg'); /* Ruta de la imagen */
                 background-size: cover; /* Escala la imagen para cubrir todo el fondo */
                 background-repeat: no-repeat; /* Evita la repetición de la imagen */
                 background-attachment: fixed;
@@ -92,4 +97,3 @@
         </div>
     </body>
 </html>
-

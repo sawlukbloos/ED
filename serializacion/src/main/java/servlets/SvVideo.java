@@ -1,14 +1,16 @@
+
 package servlets;
 
 import com.umariana.mundo.Video;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletContext;
+
 
 @WebServlet(name = "SvVideo", urlPatterns = {"/SvVideo"})
 public class SvVideo extends HttpServlet {
@@ -65,5 +67,3 @@ public class SvVideo extends HttpServlet {
         return "Short description";
     }
 }
-
-
