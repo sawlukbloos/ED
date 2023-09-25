@@ -22,7 +22,7 @@ public class ExposicionPerros {
     ArrayList<Perro> darPerros = new ArrayList<>();
 
     // Método para guardar la lista de perros en un archivo perros.ser
-    public static void guardarperro(ArrayList<Perro> darPerros) {
+    public static void guardarPerro(ArrayList<Perro> darPerros) {
         try {
             // Crear un archivo para guardar la lista de perros serializada
             FileOutputStream fos = new FileOutputStream("perros.ser");
