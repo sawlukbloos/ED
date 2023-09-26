@@ -15,7 +15,7 @@
 <!-- Empleamos una NavBar de Bootstrap para evitar interferencias de la imagen -->
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
-        <img src="imagenes/banner.jpeg" width="1300" height="180" class="d-inline-block align-top" alt="">    
+        <img src="imagenes/banner.jpeg" class="img-fluid max-height-100" alt="Banner">    
           </a>
 </nav>
 <div class="container p-4"> <!-- clase contenedora -->
