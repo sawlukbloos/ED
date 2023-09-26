@@ -72,7 +72,7 @@
         </div> 
         <!-- Tabla de datos -->
         <div class="col-md-8">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-dark">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -99,8 +99,12 @@
                         <td><%= perro.getImagen()%></td>
                         <td><%= perro.getPuntos()%></td>
                         <td><%= perro.getEdad()%></td>
-                        <td>Editar</td>
-
+                        <td>
+                            <!-- Agrega íconos FontAwesome para vista, editar y borrar -->
+                            <i class="fas fa-eye"></i> <!-- Icono para vista -->
+                            <i class="fas fa-pencil-alt"></i> <!-- Icono para editar -->
+                            <i class="fas fa-trash-alt"></i> <!-- Icono para borrar -->
+                        </td>
                     </tr>
                     <%
                             }
