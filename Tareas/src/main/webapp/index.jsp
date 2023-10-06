@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
-    Created on : 4/10/2023, 8:15:16 p. m.
-    Author     : Samuel Bolaños
+    Created on : 6/10/2023, 4:19:44 p. m.
+    Author     : Acer
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -110,4 +110,3 @@
     });
 </script>
 <%@include file = "templates/footer.jsp" %>
-
