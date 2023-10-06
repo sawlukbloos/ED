@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 4/10/2023, 8:15:16 p. m.
-    Author     : Acer
+    Author     : Samuel Bolaños
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

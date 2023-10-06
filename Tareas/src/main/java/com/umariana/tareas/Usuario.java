@@ -2,33 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.umariana.mundo;
+package com.umariana.tareas;
 
 /**
  *
  * @author Acer
  */
 public class Usuario {
-    
-    String cedula;
+    String Cedula;
     String nombreUsuario;
-    String contraseña;
+    String contrasenia;
 
     public Usuario() {
     }
 
-    public Usuario(String cedula, String nombreUsuario, String contraseña) {
-        this.cedula = cedula;
+    public Usuario(String Cedula, String nombreUsuario, String contrasenia) {
+        this.Cedula = Cedula;
         this.nombreUsuario = nombreUsuario;
-        this.contraseña = contraseña;
+        this.contrasenia = contrasenia;
     }
 
     public String getCedula() {
-        return cedula;
+        return Cedula;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setCedula(String Cedula) {
+        this.Cedula = Cedula;
     }
 
     public String getNombreUsuario() {
@@ -39,12 +38,12 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
     
 }
