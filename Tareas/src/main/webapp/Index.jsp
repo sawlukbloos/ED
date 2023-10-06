@@ -1,13 +1,13 @@
 <%-- 
-    Document   : Index
-    Created on : 6/10/2023, 5:28:00 p. m.
-    Author     : Acer
+    Document   : index
+    Created on : 4/10/2023, 4:51:24 p. m.
+    Author     : Josue
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%@include file= "Templates/Header.jsp" %>
+<%@include file = "templates/header.jsp" %>
  <section class="vh-100" style="background-color: #9A616D;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -45,8 +45,7 @@
                   </div>
 
                   <a class="small text-muted" href="#!">Forgot password?</a>
-                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="#!"
-                      style="color: #393f81;">Register here</a></p>
+                  <p class="mb-5 pb-lg-2" style="color: #393f81;">No está registrado? <a href="#!" style="color: #393f81;" data-bs-toggle="modal" data-bs-target="#exampleModal">Regístrate aquí</a></p>
                   <a href="#!" class="small text-muted">Terms of use.</a>
                   <a href="#!" class="small text-muted">Privacy policy</a>
                 </form>
@@ -106,4 +105,6 @@
         });
     });
 </script>
-<%@include file= "Templates/Footer.jsp" %>
+<%@include file = "templates/footer.jsp" %>
+
+

@@ -1,4 +1,4 @@
-package com.mycompany.tareas.resources;
+package com.umariana.tareas.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
