@@ -71,6 +71,17 @@ public class SvUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //recibimos las variables
+        
+        String Cedula = request.getParameter("Cedula");
+        String Nombre = request.getParameter("Nombre de usuario");
+        String contra = request.getParameter("Contraseña");
+        
+        System.out.println("la cedula que ingreso es: "+Cedula);
+        System.out.println("la cedula que ingreso es: "+Nombre);
+        System.out.println("la cedula que ingreso es: "+contra);
+        
         processRequest(request, response);
     }
 

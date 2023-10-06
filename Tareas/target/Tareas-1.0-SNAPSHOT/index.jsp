@@ -30,6 +30,10 @@
                                     </div>
 
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="form2Example17" class="form-control form-control-lg" />
+                                        <label class="form-label" for="form2Example17">Cedula</label>
+                                    </div>
 
                                     <div class="form-outline mb-4">
                                         <input type="text" id="form2Example17" class="form-control form-control-lg" />
@@ -45,7 +49,8 @@
                                         <button class="btn btn-dark btn-lg btn-block" type="button">Login</button>
                                     </div>
 
-                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">No está registrado? <a href="#!" style="color: #393f81;" data-bs-toggle="modal" data-bs-target="#exampleModal">Regístrate aquí</a></p>
+                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">No está registrado?
+                                    <a href="#!" style="color: #393f81;" data-bs-toggle="modal" data-bs-target="#exampleModal">Regístrate aquí</a></p>
                                     <a href="#!" class="small text-muted">Terms of use.</a>
                                     <a href="#!" class="small text-muted">Privacy policy</a>
                                 </form>
@@ -66,19 +71,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <form action="SvUsuario" method="POST"
                 <div id="usuario-details">
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form2Example27" class="form-control form-control-lg"name="Cedula" />
+                        <label class="form-label" for="form2Example27">Cédula</label>
+                    </div>
 
                     <div class="form-outline mb-4">
-                        <input type="password" id="form2Example27" class="form-control form-control-lg" />
+                        <input type="text" id="form2Example27" class="form-control form-control-lg"name="Nombre de usuario"/>
                         <label class="form-label" for="form2Example27">Nombre de usuario</label>
                     </div>
 
                     <div class="form-outline mb-4">
-                        <input type="password" id="form2Example27" class="form-control form-control-lg" />
+                        <input type="password" id="form2Example27" class="form-control form-control-lg"name="Contraseña"/>
                         <label class="form-label" for="form2Example27">Contraseña</label>
                     </div>
 
-                    <button type="button" class="btn btn-dark btn-lg btn-block" id="btnRegistrar">Registrarse</button>
+                    <button type="submit" class="btn btn-dark btn-lg btn-block" id="btnRegistrar">Registrarse</button>
                     </form>
 
                 </div>
