@@ -4,44 +4,31 @@
  */
 package Servlets;
 
+import com.umariana.mundo.RegistrarUsuarios;
+import com.umariana.mundo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static jdk.jpackage.internal.Arguments.CLIOptions.context;
 
 /**
  *
- * @author Acer
+ * @author Josue
  */
+
 @WebServlet(name = "SvUsuario", urlPatterns = {"/SvUsuario"})
 public class SvUsuario extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SvUsuario</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SvUsuario at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
         }
     }
 
@@ -71,7 +58,25 @@ public class SvUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+        
+        String cedula = request.getParameter("Cedula");
+        String nombre = request.getParameter("NombreUsuario");
+        String contra = request.getParameter("Contrasenia");
+        
+        System.out.println(cedula);
+        System.out.println(nombre);
+        System.out.println(contra);
+        
+        Usuario usuario = new Usuario(cedula, nombre, contra);
+        usuarios.add(usuario);
+        RegistrarUsuarios.guardarUsuario(usuarios, getServletContext());
+        
+        
+        
+        
+        
     }
 
     /**
