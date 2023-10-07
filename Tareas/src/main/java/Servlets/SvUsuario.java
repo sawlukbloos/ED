@@ -59,23 +59,19 @@ public class SvUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        ArrayList<Usuario> usuariosnuevos = new ArrayList<>();
         
-        String cedula = request.getParameter("Cedula");
-        String nombre = request.getParameter("NombreUsuario");
-        String contra = request.getParameter("Contrasenia");
+        String cedulan = request.getParameter("Cedulan");
+        String nombren = request.getParameter("NombreUsuarion");
+        String contran = request.getParameter("Contrasenian");
         
-        System.out.println(cedula);
-        System.out.println(nombre);
-        System.out.println(contra);
+        System.out.println(cedulan);
+        System.out.println(nombren);
+        System.out.println(contran);
         
-        Usuario usuario = new Usuario(cedula, nombre, contra);
-        usuarios.add(usuario);
-        RegistrarUsuarios.guardarUsuario(usuarios, getServletContext());
-        
-        
-        
-        
+        Usuario usuarionuevo = new Usuario(cedulan, nombren, contran);
+        usuariosnuevos.add(usuarionuevo);
+        RegistrarUsuarios.guardarUsuario(usuariosnuevos, getServletContext());
         
     }
 

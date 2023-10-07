@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
-
+         
                 <form>
 
                   <div class="d-flex align-items-center mb-3 pb-1">
@@ -31,17 +31,17 @@
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
                   <div class="form-outline mb-4">
-                    <input type="email" id="form2Example17" class="form-control form-control-lg" />
+                    <input type="text" id="form2Example17" class="form-control form-control-lg"name="Cedula" />
                     <label class="form-label" for="form2Example17">cedula</label>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="form2Example27" class="form-control form-control-lg" />
+                    <input type="text" id="form2Example27" class="form-control form-control-lg"name="NombreUsuario" />
                     <label class="form-label" for="form2Example27">Nombre de usuario</label>
                   </div>
                   
                   <div class="form-outline mb-4">
-                    <input type="password" id="form2Example27" class="form-control form-control-lg" />
+                    <input type="password" id="form2Example27" class="form-control form-control-lg"nombre="contrasenia" />
                     <label class="form-label" for="form2Example27">Contraseña</label>
                   </div>
 
@@ -63,7 +63,7 @@
     </div>
   </div>
 </section>
-    <!-- ventana Modal -->
+    <!-- ventana Modal para registro de nuevos usuarios-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -72,23 +72,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="SvUsuario" method="POST"
+                <form action="SvUsuario" method="POST">
                 <div id="usuario-details">
             <div class="form-group">
                 <label for="Cedula">Cedula</label>
-                <input type="text" id="Cedula" class="form-control form-control-lg" name="Cedula" required>
+                <input type="text" id="Cedulan" class="form-control form-control-lg" name="Cedulan" required>
                 <div class="invalid-feedback">Por favor, ingresa tu cédula.</div>
             </div>
 
             <div class="form-group">
                 <label for="NombreUsuario">Nombre de usuario</label>
-                <input type="text" id="NombreUsuario" class="form-control form-control-lg" name="NombreUsuario" required>
+                <input type="text" id="NombreUsuarion" class="form-control form-control-lg" name="NombreUsuarion" required>
                 <div class="invalid-feedback">Por favor, ingresa tu nombre de usuario.</div>
             </div>
 
             <div class="form-group">
                 <label for="Contrasenia">Contraseña</label>
-                <input type="password" id="Contrasenia" class="form-control form-control-lg" name="Contrasenia" required>
+                <input type="password" id="Contrasenian" class="form-control form-control-lg" name="Contrasenian" required>
                 <div class="invalid-feedback">Por favor, ingresa tu contraseña.</div>
             </div>
 
