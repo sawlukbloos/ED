@@ -82,11 +82,10 @@ public class SvLogin extends HttpServlet {
         // Autenticación exitosa, redirige al usuario a la página de tareas
         response.sendRedirect("Tareas.jsp");
     } else {
-        // Autenticación fallida, redirige al usuario a la página de inicio de sesión
+        // Autenticación fallida, redirige al usuario a la página index
         response.sendRedirect("index.jsp");
     }
 
-        processRequest(request, response);
     }
 
     @Override
