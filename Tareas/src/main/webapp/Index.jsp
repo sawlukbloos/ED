@@ -20,11 +20,11 @@
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
-                <form action="SvLogin" method="POST"onsubmit="return validarFormulario();">
+                <form action="SvLogin" method="POST">
 
                   <div class="d-flex align-items-center mb-3 pb-1">
                     <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                    <span class="h1 fw-bold mb-0">Logo</span>
+                    <span class="h1 fw-bold mb-0">Gestión de Tareas</span>
                   </div>
 
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Iniciar sesion</h5>
@@ -40,12 +40,10 @@
                   </div>
 
                   <div class="pt-1 mb-4">
-                    <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                    <button class="btn btn-dark btn-lg btn-block" type="submit">Ingresar</button>
                   </div>
                   
                   <p class="mb-5 pb-lg-2" style="color: #393f81;">No estás registrado? <a href="#!" style="color: #393f81;" data-bs-toggle="modal" data-bs-target="#exampleModal">Regístrate aquí</a></p>
-                  <a href="#!" class="small text-muted">Terms of use.</a>
-                  <a href="#!" class="small text-muted">Privacy policy</a>
                 </form>
 
               </div>
