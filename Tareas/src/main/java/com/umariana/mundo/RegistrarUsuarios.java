@@ -17,8 +17,6 @@ import javax.servlet.ServletContext;
  * @author Acer
  */
 public class RegistrarUsuarios {
-    
-    public static ArrayList<Usuario> darUsuarios = new ArrayList<>();
 
     
     public static void guardarUsuario(ArrayList<Usuario> usuariosnuevos, ServletContext context) throws IOException {
