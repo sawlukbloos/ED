@@ -67,19 +67,18 @@ public class SvLogin extends HttpServlet {
         String cedula = request.getParameter("Cedula");
         String contrasenia = request.getParameter("contrasenia");
         
-        ArrayList<Usuario> UsuariosR = RegistrarUsuarios.cargarUsuario(getServletContext());
-        
+        ArrayList<Usuario> UsuariosR = RegistrarUsuarios.cargarUsuario(getServletContext());        
         boolean autenticado = false;
     
     for (Usuario usuario : UsuariosR) {
         if (usuario.getCedula().equals(cedula) && usuario.getContrasenia().equals(contrasenia)) {
-            autenticado = true;
+            autenticado = true;            
             break; // Si encontramos una coincidencia, no necesitamos seguir buscando
         }
     }
     
     if (autenticado) {
-        // Autenticación exitosa, redirige al usuario a la página de tareas
+        // Autenticación exitosa, redirige al usuario a la página de tareas        
         response.sendRedirect("Tareas.jsp");
     } else {
         // Autenticación fallida, redirige al usuario a la página index
