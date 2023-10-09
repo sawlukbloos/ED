@@ -8,6 +8,20 @@
 <!DOCTYPE html>
 <%@include file = "templates/header.jsp" %>
 <section class="vh-100" style="background-color: #9A616D;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="index.jsp">Cerrar Sesión</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
     <div class="container p-4"> <!-- clase contenedora -->
         <h1 class="text-center">Tareas</h1>
         <div class="row">

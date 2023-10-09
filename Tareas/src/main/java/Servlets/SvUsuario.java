@@ -58,18 +58,39 @@ public class SvUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        //solicitamos los datos del formulario del registro y los guardamos en variables
         String cedulan = request.getParameter("Cedulan");
         String nombre = request.getParameter("NombreUsuarion");
         String contran = request.getParameter("Contrasenian");
-        //creamos el objeto para un usuario nuevo "usuarionuevo"
-        Usuario usuarionuevo = new Usuario(cedulan,nombre, contran);
+        
         //llamamos al metodo para registrar usuarios que contiene la lista de usuarios registrados y lo guardamos en una variable 
         ArrayList<Usuario> listaUsuarios = RegistrarUsuarios.cargarUsuario(getServletContext());
-        //añadimos el usuario nuevo a la lista y guardamos
+        
+        //Nos aseguramos que la cedula que ingresa el usuario en el registro sea unica 
+        boolean cedulaUnica = true;
+    for (Usuario usuarioslist : listaUsuarios) {
+        if (usuarioslist.getCedula().equals(cedulan)) {
+            cedulaUnica = false;
+            break; // No es necesario continuar verificando, encontramos una cedula registrada
+        }
+    }
+
+    if (cedulaUnica) {
+        // La cédula es única, se puede registrar al usuario
+        //creamos un objeto "usuarionuevo" para un usuario nuevo con el constructor 
+        Usuario usuarionuevo = new Usuario(cedulan, nombre, contran);
+        //añadimos el usuario nuevo a la lista de usuarios registrados
         listaUsuarios.add(usuarionuevo);
+
+        // Guardar la lista actualizada en el contexto
         RegistrarUsuarios.guardarUsuario(listaUsuarios, getServletContext());
+
+        // Redireccionar a la página de inicio
         request.getRequestDispatcher("index.jsp").forward(request, response);
+    } else {
+        // La cédula ya existe en la lista de usuarios registrados
+        response.sendRedirect("index.jsp");
+    }
     }
 
     /**
