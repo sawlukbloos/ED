@@ -67,29 +67,29 @@ public class SvLogin extends HttpServlet {
         //pedimos los datos del formulario del login y los guardamos en variables
         String cedula = request.getParameter("Cedula");
         String contrasenia = request.getParameter("contrasenia");
-        
+
         //llamamos al metodo de registrar usuarios de la clase "registrarUsuarios.java" y lo guardamos en un ArrayList
         ArrayList<Usuario> UsuariosR = RegistrarUsuarios.cargarUsuario(getServletContext());
-        
+
         //Aqui tenemos todo el proceso de validacion del usuario con su cedula y contraseña con una variable booleana        
         boolean autenticado = false;
         String usuarioverificado = null;
-    for (Usuario usuario : UsuariosR) {
-        if (usuario.getCedula().equals(cedula) && usuario.getContrasenia().equals(contrasenia)) {
-            autenticado = true;
-            usuarioverificado = usuario.getNombreUsuario();            
-            break; // Si encontramos una coincidencia, no necesitamos seguir buscando
+        for (Usuario usuario : UsuariosR) {
+            if (usuario.getCedula().equals(cedula) && usuario.getContrasenia().equals(contrasenia)) {
+                autenticado = true;
+                usuarioverificado = usuario.getNombreUsuario();
+                break; // Si encontramos una coincidencia, no necesitamos seguir buscando
+            }
         }
-    }
-    
-    if (autenticado) {
-        //Validacion exitosa, redirige al usuario a la página de tareas
-        request.getSession().setAttribute("usuarioverificado", usuarioverificado);
-        response.sendRedirect("Tareas.jsp");
-    } else {
-        //Validacion fallida, redirige al usuario a la página index con mensaje de erroe
-        response.sendRedirect("index.jsp?alert=error");
-    }
+
+        if (autenticado) {
+            //Validacion exitosa, redirige al usuario a la página de tareas
+            request.getSession().setAttribute("usuarioverificado", usuarioverificado);
+            response.sendRedirect("Tareas.jsp");
+        } else {
+            //Validacion fallida, redirige al usuario a la página index con mensaje de erroe
+            response.sendRedirect("index.jsp?alert=error");
+        }
 
     }
 

@@ -37,7 +37,7 @@
             </div>
         </nav>
 
-    <h1 class="text-center mt-4 mb-4" style="color: white;">Tareas</h1>
+        <h1 class="text-center mt-4 mb-4" style="color: white;">Tareas</h1>
         <div class="row">
             <div class="col-md-4 d-flex justify-content-center align-items-center"> <!-- Agrega las clases d-flex, justify-content-center y align-items-center -->
                 <div class="card card-body text-center" style="background-color: #1A1A1A; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
