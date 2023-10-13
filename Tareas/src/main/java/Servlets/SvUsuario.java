@@ -85,11 +85,12 @@ public class SvUsuario extends HttpServlet {
         // Guardar la lista actualizada en el contexto
         RegistrarUsuarios.guardarUsuario(listaUsuarios, getServletContext());
 
-        // Redireccionar a la página de inicio
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        // Redireccionar a la página de inicio con alerta de exito
+        response.sendRedirect("index.jsp?alert=registro-success");
     } else {
         // La cédula ya existe en la lista de usuarios registrados
-        response.sendRedirect("index.jsp");
+        //Redireccionar a index con alerta de error
+        response.sendRedirect("index.jsp?alert=registro-error");
     }
     }
 
