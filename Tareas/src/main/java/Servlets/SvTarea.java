@@ -4,11 +4,13 @@
  */
 package Servlets;
 
+import com.umariana.mundo.Lista;
 import com.umariana.mundo.Tarea;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import static java.time.LocalDate.MIN;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "SvTarea", urlPatterns = {"/SvTarea"})
 public class SvTarea extends HttpServlet {
-
+     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -65,24 +67,32 @@ public class SvTarea extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Lista lista = new Lista();
+        
         String id = request.getParameter("id");
         String titulo = request.getParameter("titulo");
         String descripcion = request.getParameter("descripcion");
-        String fechav = request.getParameter("fechaV");
+        String fechaV= request.getParameter("fechaV");
         
-        System.out.println(id);
-        System.out.println(titulo);
-        System.out.println(descripcion);
-        System.out.println(fechav);
-        
-        try {
+         try {
         int Id = Integer.parseInt(id);
-        Tarea tarea = new Tarea(Id, titulo, descripcion, MIN);
+        Tarea tarea = new Tarea(Id, titulo, descripcion, fechaV);
+        Lista listaActualizada = lista.leerLista(getServletContext());
+        listaActualizada.agregarTarea(tarea);
+        lista.cargarLista(listaActualizada, getServletContext());
+        
+        request.setAttribute("listaTareas", listaActualizada); // Establece la lista actualizada como un atributo de solicitud
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Tareas.jsp");
+        dispatcher.forward(request, response);
+
     } catch (NumberFormatException e) {
-        e.printStackTrace(); // Esto es solo un ejemplo, puedes cambiarlo según tu lógica de manejo de errores.
-        return; // Puedes detener el flujo del método si ocurre una excepción.
+        e.printStackTrace();
+        return; 
     }
-    }
+}
+      
+      
+    
 
     /**
      * Returns a short description of the servlet.

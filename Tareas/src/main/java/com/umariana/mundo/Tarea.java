@@ -15,12 +15,12 @@ public class Tarea {
     int Id;
     String Titulo;
     String Descripcion;
-    LocalDate fechaVencimiento;
+    String fechaVencimiento;
 
     public Tarea() {
     }
 
-    public Tarea(int Id, String Titulo, String Descripcion, LocalDate fechaVencimiento) {
+    public Tarea(int Id, String Titulo, String Descripcion, String fechaVencimiento) {
         this.Id = Id;
         this.Titulo = Titulo;
         this.Descripcion = Descripcion;
@@ -51,11 +51,11 @@ public class Tarea {
         this.Descripcion = Descripcion;
     }
 
-    public LocalDate getFechaVencimiento() {
+    public String getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(LocalDate fechaVencimiento) {
+    public void setFechaVencimiento(String fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }    
 }

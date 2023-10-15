@@ -4,6 +4,8 @@
     Author     : Acer
 --%>
 
+<%@page import="com.umariana.mundo.ElementoLista"%>
+<%@page import="com.umariana.mundo.Lista"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@include file = "templates/header.jsp" %>
@@ -79,13 +81,25 @@
                             </tr>
                         </thead>
                         <tbody style="background-color: #1a1a1a;">
+                            <%
+            // Obtener la lista de tareas de la solicitud utilizando el método getAttribute
+            Lista listaActualizada = (Lista) request.getAttribute("listaTareas");
+            if(listaActualizada != null) {
+                ElementoLista temp = listaActualizada.inicio;
+                while (temp != null) {
+        %>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                        <td><%= temp.getTarea().getId() %></td>
+                        <td><%= temp.getTarea().getTitulo() %></td>
+                        <td><%= temp.getTarea().getDescripcion() %></td>
+                        <td><%= temp.getTarea().getFechaVencimiento() %></td>
+                        <td></td>
+                    </tr>
+        <%
+                    temp = temp.getSiguiente();
+                }
+            }
+        %>
                         </tbody>
                     </table>
                 </div>
