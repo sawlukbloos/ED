@@ -93,19 +93,49 @@
                         <td><%= temp.getTarea().getTitulo() %></td>
                         <td><%= temp.getTarea().getDescripcion() %></td>
                         <td><%= temp.getTarea().getFechaVencimiento() %></td>
-                        <td></td>
+                        <td> <!-- Agrega íconos FontAwesome para vista, editar y borrar -->
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-nombre="<%= temp.getTarea().getId()%>"><i class="fas fa-eye"></i></a> <!-- Icono para vista -->
+                            <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarModal"
+                               data-nombre="<%= temp.getTarea().getId()%>"
+                               data-raza="<%= temp.getTarea().getTitulo()%>"
+                               data-imagen="<%= temp.getTarea().getDescripcion()%>"
+                               data-puntos="<%= temp.getTarea().getFechaVencimiento()%>">       
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+
+                            <a href="index.jsp" class="btn btn-danger" onclick="confirmarEliminacion('<%= temp.getTarea().getId()%>');"><i class="fas fa-trash-alt"></i></a>
+</td>
                     </tr>
         <%
                     temp = temp.getSiguiente();
                 }
             }
         %>
+        
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalles de la tarea</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="perro-details">
+                    <!-- Aqui se mostraran los detalles del perro -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 </section>
 <%@include file = "templates/footer.jsp" %>
 
