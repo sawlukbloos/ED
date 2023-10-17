@@ -8,9 +8,9 @@ import com.umariana.mundo.Lista;
 import com.umariana.mundo.Tarea;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import static java.time.LocalDate.MIN;
-import javax.servlet.RequestDispatcher;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,7 +53,6 @@ public class SvTarea extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
@@ -67,38 +66,29 @@ public class SvTarea extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Lista lista = new Lista();
-        
+        //recibimos los datos de la tarea ingresados por el usuario
         String id = request.getParameter("id");
         String titulo = request.getParameter("titulo");
         String descripcion = request.getParameter("descripcion");
-        String fechaV= request.getParameter("fechaV");
+        String fecha = request.getParameter("fechaV");
         
-         try {
-        int Id = Integer.parseInt(id);
-        Tarea tarea = new Tarea(Id, titulo, descripcion, fechaV);
-        Lista listaActualizada = lista.leerLista(getServletContext());
-        listaActualizada.agregarTarea(tarea);
-        lista.cargarLista(listaActualizada, getServletContext());
-        
-        request.setAttribute("listaTareas", listaActualizada); // Establece la lista actualizada como un atributo de solicitud
-        RequestDispatcher dispatcher = request.getRequestDispatcher("Tareas.jsp");
-        dispatcher.forward(request, response);
-
-    } catch (NumberFormatException e) {
-        e.printStackTrace();
-        return; 
-    }
+        //Convertimos o casteamos la fecha que es tipo String a Date para poder inicializarla en el constructor
+        Date fechaV = null;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            fechaV = dateFormat.parse(fecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //Creamos un nuevo objeto de tipo tarea e inicializamos los atributos con los datos que ingreso el usuario
+        Tarea nuevaTarea = new Tarea(Integer.parseInt(id), titulo, descripcion, fechaV);
+        //Creamos una nueva lista
+        Lista listaTareas = new Lista();
+        //Agregamos la nueva tarea a la lista creada
+        listaTareas.agregarTarea(nuevaTarea);
+        //Cargamos la lista al archivo de texto
+        listaTareas.cargarLista(listaTareas, getServletContext());
 }
-      
-      
-    
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

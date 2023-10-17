@@ -5,15 +5,15 @@
 package com.umariana.mundo;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletContext;
 
 /**
@@ -39,55 +39,81 @@ public class Lista {
             return false;
         }
     }
-    public void agregarTarea(Tarea tarea){
-        ElementoLista actual;
+    public void agregarTarea(Tarea nuevaTarea){
+        ElementoLista nuevo;
         if(verificarContenido()){
-            actual = new ElementoLista(tarea, null);
-            inicio = actual;
-            fin = actual;
+            nuevo = new ElementoLista(nuevaTarea, null);
+            inicio = nuevo;
+            fin = nuevo;
         }else{
-            actual = new ElementoLista(tarea, null);
-            fin.setSiguiente(actual);
-            fin = actual;                    
+            nuevo = new ElementoLista(nuevaTarea, null);
+            fin.setSiguiente(nuevo);
+            fin = nuevo;                    
         }
     }
-    public void cargarLista(Lista listaActualizada, ServletContext context) {
+    public void cargarLista(Lista listaTareas, ServletContext context) {
+        //Ruta del archivo
         String filePath = context.getRealPath("/data/tareas.txt");
-        File file = new File(filePath);
+        File archivo = new File(filePath);
 
-       try (PrintWriter writer = new PrintWriter(file)) {
-            ElementoLista temp = listaActualizada.inicio;
+        try (PrintWriter writer = new PrintWriter(archivo)) {
+            ElementoLista temp = listaTareas.inicio;
+            
+            DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             while (temp != null) {
                 Tarea tarea = temp.getTarea();
-                writer.println(tarea.getId() + "," + tarea.getTitulo() + "," + tarea.getDescripcion() + "," + tarea.getFechaVencimiento());
+                //Para escribir correctamente la linea, tenemos que corvertir el tipo de dato  de la fecha de Date a String
+                String fechaFormateada = formato.format(tarea.getFechaDeVencimiento());
+                writer.println(tarea.getId() + ","
+                        + tarea.getTitulo() + ","
+                        + tarea.getDescripcion() + "," 
+                        + fechaFormateada);
                 temp = temp.getSiguiente();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
-    public Lista leerLista(ServletContext context) {
-        String filePath = context.getRealPath("/data/tareas.txt");
-        File file = new File(filePath);
-        Lista lista = new Lista();
+    /**
+     * Metodo para leer el archivo de texto
+     * @param context
+     * @return 
+     */
+    public static Lista leerArchivo(ServletContext context) {
+        // Ruta relativa
+        String rutaRelativa = "/data/tareas.txt";
+        // Ruta absoluta
+        String rutaAbsoluta = context.getRealPath(rutaRelativa);
 
+        File file = new File(rutaAbsoluta);
+        Lista listaA = new Lista();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] atributos = line.split(",");
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] atributos = linea.split(",");
                 if (atributos.length == 4) {
                     int id = Integer.parseInt(atributos[0]);
                     String titulo = atributos[1];
                     String descripcion = atributos[2];
                     String fechaVencimiento = atributos[3];
 
-                    Tarea tarea = new Tarea(id, titulo, descripcion, fechaVencimiento);
-                    lista.agregarTarea(tarea);
+                    DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        // Conversión de String a Date
+                        Date fechaConvertida = formato.parse(fechaVencimiento);
+                        // Agregar la tarea con la fecha convertida
+                        Tarea tarea = new Tarea(id, titulo, descripcion, fechaConvertida);
+                        listaA.agregarTarea(tarea);
+                    } catch (ParseException e) {
+                        // Manejo de la excepción de análisis de fecha aquí
+                        e.printStackTrace();
+                    }
                 }
             }
         } catch (IOException e) {
+            // Manejo de la excepción de E/S aquí
             e.printStackTrace();
         }
-        return lista;
+        return listaA;
     }
 }

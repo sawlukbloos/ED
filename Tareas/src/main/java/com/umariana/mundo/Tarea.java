@@ -4,7 +4,7 @@
  */
 package com.umariana.mundo;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  *
@@ -12,19 +12,19 @@ import java.time.LocalDate;
  */
 public class Tarea {
     
-    int Id;
-    String Titulo;
-    String Descripcion;
-    String fechaVencimiento;
+    private int Id;
+    private String titulo;
+    private String descripcion ;
+    private Date fechaDeVencimiento;
 
     public Tarea() {
     }
 
-    public Tarea(int Id, String Titulo, String Descripcion, String fechaVencimiento) {
+    public Tarea(int Id, String titulo, String descripcion, Date fechaDeVencimiento) {
         this.Id = Id;
-        this.Titulo = Titulo;
-        this.Descripcion = Descripcion;
-        this.fechaVencimiento = fechaVencimiento;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.fechaDeVencimiento = fechaDeVencimiento;
     }
 
     public int getId() {
@@ -36,26 +36,26 @@ public class Tarea {
     }
 
     public String getTitulo() {
-        return Titulo;
+        return titulo;
     }
 
-    public void setTitulo(String Titulo) {
-        this.Titulo = Titulo;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
-    public void setDescripcion(String Descripcion) {
-        this.Descripcion = Descripcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public String getFechaVencimiento() {
-        return fechaVencimiento;
+    public Date getFechaDeVencimiento() {
+        return fechaDeVencimiento;
     }
 
-    public void setFechaVencimiento(String fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
+    public void setFechaDeVencimiento(Date fechaDeVencimiento) {
+        this.fechaDeVencimiento = fechaDeVencimiento;
     }    
 }
