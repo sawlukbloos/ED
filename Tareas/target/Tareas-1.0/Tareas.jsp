@@ -45,26 +45,43 @@
                 <div class="card card-body text-center" style="background-color: #1A1A1A; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
                     <h4 class="text-center" style="color: white;">Agrega tareas</h4>
                     <form action="SvTarea" method="POST">
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" for="nombre">Id</label>
-                            <input type="text" name ="id" class="form-control">
-                        </div>                                            
+    <div class="input-group mb-3">
+        <span class="input-group-text" style="width: 100px;">Id</span>
+        <input type="text" name="id" class="form-control">
+    </div>
 
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" for="raza">Titulo</label>
-                            <input type="text" name="titulo" class="form-control">
-                        </div>
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" for="nombre">Descripcion</label>
-                            <input type="text" name ="descripcion" class="form-control">
-                        </div>                                            
+    <div class="input-group mb-3">
+        <span class="input-group-text" style="width: 100px;">Titulo</span>
+        <input type="text" name="titulo" class="form-control">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" style="width: 100px;">Descripcion</span>
+        <input type="text" name="descripcion" class="form-control">
+    </div>
 
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" for="raza">Fecha de vencimiento</label>
-                            <input type="date" name="fechaV" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="background-color: #ff6219; border-color: #ff6219;">Agregar tarea</button>
-                    </form>
+    <div class="input-group mb-3">
+        <span class="input-group-text" style="width: 100px;">Fecha de vencimiento</span>
+        <input type="date" name="fechaV" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary mt-3" style="background-color: #ff6219; border-color: #ff6219;">Agregar tarea</button>
+</form>
+
+<div class="mt-4">
+    <h4 class="text-center" style="color: white;">Estado de la tarea</h4>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="estadoTarea" id="pendiente" value="pendiente" checked>
+        <label class="form-check-label" for="pendiente" style="color: white;">Pendiente</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="estadoTarea" id="enProgreso" value="enProgreso">
+        <label class="form-check-label" for="enProgreso" style="color: white;">En progreso</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="estadoTarea" id="completada" value="completada">
+        <label class="form-check-label" for="completada" style="color: white;">Completada</label>
+    </div>
+</div>
+
                 </div>
             </div>
             <!-- tabla para visualizar las tareas agregadas -->
