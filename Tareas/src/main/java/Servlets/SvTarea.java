@@ -85,7 +85,7 @@ public class SvTarea extends HttpServlet {
         //Creamos una nueva lista
         Lista listaTareas = new Lista();
         //Agregamos la nueva tarea a la lista creada
-        listaTareas.agregarTarea(nuevaTarea);
+        listaTareas.agregarTareaAlInicio(nuevaTarea);
         //Cargamos la lista al archivo de texto
         listaTareas.cargarLista(listaTareas, getServletContext());
 }

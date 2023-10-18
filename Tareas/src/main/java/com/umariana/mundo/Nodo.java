@@ -8,20 +8,20 @@ package com.umariana.mundo;
  *
  * @author Acer
  */
-public class ElementoLista {
+public class Nodo {
     private Tarea tarea;
-    private ElementoLista siguiente;
+    private Nodo siguiente;
 
-    public ElementoLista(Tarea tarea, ElementoLista siguiente) {
+    public Nodo(Tarea tarea, Nodo siguiente) {
         this.tarea = tarea;
         this.siguiente = siguiente;
     }
 
-    public ElementoLista getSiguiente() {
+    public Nodo getSiguiente() {
         return siguiente;
     }
 
-    public void setSiguiente(ElementoLista siguiente) {
+    public void setSiguiente(Nodo siguiente) {
         this.siguiente = siguiente;
     }
 

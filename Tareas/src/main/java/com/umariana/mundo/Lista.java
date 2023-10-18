@@ -21,8 +21,8 @@ import javax.servlet.ServletContext;
  * @author Acer
  */
 public class Lista {
-    public ElementoLista inicio;
-    public ElementoLista fin;
+    public Nodo inicio;
+    public Nodo fin;
 
     public Lista() {
     }
@@ -39,14 +39,14 @@ public class Lista {
             return false;
         }
     }
-    public void agregarTarea(Tarea nuevaTarea){
-        ElementoLista nuevo;
+    public void agregarTareaAlInicio(Tarea nuevaTarea){
+        Nodo nuevo;
         if(verificarContenido()){
-            nuevo = new ElementoLista(nuevaTarea, null);
+            nuevo = new Nodo(nuevaTarea, null);
             inicio = nuevo;
             fin = nuevo;
         }else{
-            nuevo = new ElementoLista(nuevaTarea, null);
+            nuevo = new Nodo(nuevaTarea, null);
             fin.setSiguiente(nuevo);
             fin = nuevo;                    
         }
@@ -57,7 +57,7 @@ public class Lista {
         File archivo = new File(filePath);
 
         try (PrintWriter writer = new PrintWriter(archivo)) {
-            ElementoLista temp = listaTareas.inicio;
+            Nodo temp = listaTareas.inicio;
             
             DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             while (temp != null) {
@@ -74,6 +74,72 @@ public class Lista {
             e.printStackTrace();
         }
     }
+    
+    public void agregarTareaAntesDe(String titulo, Tarea nuevaTarea) {
+    Nodo nodoAnterior = null;
+    Nodo nodoActual = inicio;
+
+    if (inicio == null) {
+        System.out.println("No hay tareas agregadas.");
+    } else {
+        while (nodoActual != null && !nodoActual.getTarea().getTitulo().equals(titulo)) {
+            nodoAnterior = nodoActual;
+            nodoActual = nodoActual.getSiguiente(); 
+        }
+
+        if (nodoActual != null) {
+            Nodo nuevoNodo = new Nodo(nuevaTarea, nodoActual); 
+
+            if (nodoAnterior != null) {
+                nodoAnterior.setSiguiente(nuevoNodo);
+            } else {
+                inicio = nuevoNodo;
+            }
+        } else {
+            System.out.println("La tarea no se encontró en la lista.");
+        }
+    }
+}
+public void agregarTareaDespuesDe(String titulo, Tarea nuevaTarea) {
+    Nodo nodoActual = inicio;
+
+    if (inicio == null) {
+        System.out.println("No hay tareas agregadas.");
+    } else {
+        while (nodoActual != null && !nodoActual.getTarea().getTitulo().equals(titulo)) {
+            nodoActual = nodoActual.getSiguiente(); 
+        }
+
+        if (nodoActual != null) {
+            Nodo nuevoNodo = new Nodo(nuevaTarea, nodoActual.getSiguiente());
+
+            nodoActual.setSiguiente(nuevoNodo);
+        } else {
+            System.out.println("La tarea no se encontró en la lista.");
+        }
+    }
+}
+
+
+
+    
+    public Tarea LocalizarAnteriorTarea(String titulo) {
+    Nodo nodoAnterior = null;
+    Nodo nodoActual = inicio;
+    
+    while (nodoActual != null && !nodoActual.getTarea().getTitulo().equals(titulo)) {
+        nodoAnterior = nodoActual;
+        nodoActual = nodoActual.getSiguiente();
+    }
+    
+    if (nodoAnterior != null) {
+        return nodoAnterior.getTarea();
+    } else {
+        // Manejar el caso en el que no se encuentra la tarea anterior
+        return null;
+    }
+}
+
     /**
      * Metodo para leer el archivo de texto
      * @param context
@@ -103,7 +169,7 @@ public class Lista {
                         Date fechaConvertida = formato.parse(fechaVencimiento);
                         // Agregar la tarea con la fecha convertida
                         Tarea tarea = new Tarea(id, titulo, descripcion, fechaConvertida);
-                        listaA.agregarTarea(tarea);
+                        listaA.agregarTareaAlInicio(tarea);
                     } catch (ParseException e) {
                         // Manejo de la excepción de análisis de fecha aquí
                         e.printStackTrace();
