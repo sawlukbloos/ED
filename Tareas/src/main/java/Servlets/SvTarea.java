@@ -95,6 +95,17 @@ public class SvTarea extends HttpServlet {
             // Guárdala en la sesión
             session.setAttribute("listaTareas", listaTareas);
         }
+        if (listaTareas != null) {
+        Lista.Nodo current = listaTareas.inicio;
+        while (current != null) {
+            if (current.tarea.getId() == Integer.parseInt(id)) {
+                // Manejar el caso de ID duplicado, por ejemplo, redirigir a una página de error o mostrar un mensaje de error
+                response.sendRedirect("Tareas.jsp?alert=error");
+                return;
+            }
+            current = current.siguiente;
+        }
+    }
         if ("ultimo".equals(posicion)) {
             // Agregar la tarea al final de la lista
             listaTareas.agregarTareaAlFinal(nuevaTarea);
@@ -123,7 +134,7 @@ public class SvTarea extends HttpServlet {
         Lista.guardarLista(listaTareas, getServletContext());
 
         // Redirige a la página tareas.jsp
-        response.sendRedirect("tareas.jsp");
+        response.sendRedirect("Tareas.jsp");
    
 }
     @Override

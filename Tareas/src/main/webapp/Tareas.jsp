@@ -45,6 +45,10 @@
             <div class="col-md-4 d-flex justify-content-center align-items-center"> <!-- Agrega las clases d-flex, justify-content-center y align-items-center -->
                 <div class="card card-body text-center" style="background-color: #1A1A1A; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
                     <h4 class="text-center" style="color: white;">Agrega tareas</h4>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;" id="errorAlert">
+                    El id de su tarea debe ser unico para mantener un orden en su lista de tareas
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                     <form action="SvTarea" method="POST">
     <div class="input-group mb-3">
         <span class="input-group-text" style="width: 100px;">Id</span>
@@ -64,7 +68,9 @@
         <span class="input-group-text" style="width: 100px;">Fecha de vencimiento</span>
         <input type="date" name="fechaV" class="form-control">
     </div>
-                        <div class="mb-3 form-check">
+                        <div class="tareas-container">
+    <h6 class="text-center" style="color: white;">Seleccione la posicion en la que quiere agregar la nueva tarea en la lista</h6>
+    <div class="mb-3 form-check">
         <input class="form-check-input" type="radio" name="posicion" id="primeroRadio" value="primero">
         <label class="form-check-label" for="primeroRadio" style="color: white;">
             Primero en la lista
@@ -93,6 +99,7 @@
         </label>
         <input type="text" name="idDespuesDe" id="idDespuesDe" placeholder="ID" class="form-control">
     </div>
+</div>
 
     <button type="submit" class="btn btn-primary mt-3" style="background-color: #ff6219; border-color: #ff6219;">Agregar tarea</button>
 </form>
@@ -152,4 +159,54 @@
 </section>
     
 <%@include file = "templates/footer.jsp" %>
+<%
+    Lista lista = (Lista) session.getAttribute("listaTareas");
+    boolean listaVacia = (lista == null) || lista.verificarContenido();
+%>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var listaVacia = <%= listaVacia %>;
+        var tareasContainer = document.querySelector(".tareas-container");
+
+        if (listaVacia) {
+            tareasContainer.style.display = "none";
+        } else {
+            tareasContainer.style.display = "block";
+        }
+    });
+</script>
+<script>
+    // JavaScript para mostrar la alerta cuando sea necesario
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtén la alerta por su ID
+        const errorAlert = document.getElementById('errorAlert');
+
+        // Verifica si hay un parámetro de alerta en la URL (por ejemplo, '?alert=error')
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('alert') && urlParams.get('alert') === 'error') {
+            // Muestra la alerta si el parámetro de alerta es 'error'
+            errorAlert.style.display = 'block';
+        }
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var antesDeRadio = document.getElementById("antesDeRadio");
+        var despuesDeRadio = document.getElementById("despuesDeRadio");
+        var idAntesDeInput = document.getElementById("idAntesDe");
+        var idDespuesDeInput = document.getElementById("idDespuesDe");
+
+        antesDeRadio.addEventListener("click", function () {
+            idAntesDeInput.disabled = !idAntesDeInput.disabled;
+            idDespuesDeInput.disabled = true;
+        });
+
+        despuesDeRadio.addEventListener("click", function () {
+            idDespuesDeInput.disabled = !idDespuesDeInput.disabled;
+            idAntesDeInput.disabled = true;
+        });
+    });
+</script>
+
+
 
