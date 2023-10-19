@@ -1,1 +1,1 @@
-1,limpiar,limpiar cuarto,2023-10-16
+1;comprar ;comprar ropa;Fri Oct 20 00:00:00 COT 2023

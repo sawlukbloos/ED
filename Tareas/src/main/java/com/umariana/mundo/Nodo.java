@@ -8,30 +8,12 @@ package com.umariana.mundo;
  *
  * @author Acer
  */
-public class Nodo {
-    private Tarea tarea;
-    private Nodo siguiente;
-
-    public Nodo(Tarea tarea, Nodo siguiente) {
-        this.tarea = tarea;
-        this.siguiente = siguiente;
-    }
-
-    public Nodo getSiguiente() {
-        return siguiente;
-    }
-
-    public void setSiguiente(Nodo siguiente) {
-        this.siguiente = siguiente;
-    }
-
-    public Tarea getTarea() {
-        return tarea;
-    }
-
-    public void setTarea(Tarea tarea) {
-        this.tarea = tarea;
-    }
-    
-    
-}
+//public class Nodo {
+//    public Tarea tarea;
+//    public Nodo siguiente;
+//
+//    public Nodo(Tarea tarea) {
+//        this.tarea = tarea;
+//        this.siguiente = null;
+//    }    
+//}

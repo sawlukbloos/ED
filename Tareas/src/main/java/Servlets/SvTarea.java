@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,16 +24,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "SvTarea", urlPatterns = {"/SvTarea"})
 public class SvTarea extends HttpServlet {
+    
+    private Lista listaTareas;
      
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+  @Override
+  public void init() throws ServletException {
+        // Inicializa la lista de tareas al cargar el servlet
+        listaTareas = Lista.leerLista(getServletContext());
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -71,6 +70,9 @@ public class SvTarea extends HttpServlet {
         String titulo = request.getParameter("titulo");
         String descripcion = request.getParameter("descripcion");
         String fecha = request.getParameter("fechaV");
+        String posicion = request.getParameter("posicion");
+        String idAntesDe = request.getParameter("idAntesDe"); 
+        String idDespuesDe = request.getParameter("idDespuesDe");
         
         //Convertimos o casteamos la fecha que es tipo String a Date para poder inicializarla en el constructor
         Date fechaV = null;
@@ -82,12 +84,47 @@ public class SvTarea extends HttpServlet {
         }
         //Creamos un nuevo objeto de tipo tarea e inicializamos los atributos con los datos que ingreso el usuario
         Tarea nuevaTarea = new Tarea(Integer.parseInt(id), titulo, descripcion, fechaV);
+        
         //Creamos una nueva lista
-        Lista listaTareas = new Lista();
-        //Agregamos la nueva tarea a la lista creada
-        listaTareas.agregarTareaAlInicio(nuevaTarea);
-        //Cargamos la lista al archivo de texto
-        listaTareas.cargarLista(listaTareas, getServletContext());
+        
+        HttpSession session = request.getSession();
+        Lista listaTareas = (Lista) session.getAttribute("listaTareas");
+
+        if (listaTareas == null) {
+            listaTareas = new Lista();
+            // Guárdala en la sesión
+            session.setAttribute("listaTareas", listaTareas);
+        }
+        if ("ultimo".equals(posicion)) {
+            // Agregar la tarea al final de la lista
+            listaTareas.agregarTareaAlFinal(nuevaTarea);
+        } else if ("antesDe".equals(posicion)) {
+            if (idAntesDe != null && !idAntesDe.isEmpty()) {
+                // Agregar la tarea antes de la tarea con la ID especificada
+                listaTareas.agregarTareaAntesDe(Integer.parseInt(idAntesDe), nuevaTarea);
+            } else {
+                // Si no se proporciona una ID antes de la cual agregar, agregar al comienzo
+                listaTareas.agregarTareaAlComienzo(nuevaTarea);
+            }
+        } else if ("despuesDe".equals(posicion)) {
+            if (idDespuesDe != null && !idDespuesDe.isEmpty()) {
+                // Agregar la tarea después de la tarea con la ID especificada
+                listaTareas.agregarTareaDespuesDe(Integer.parseInt(idDespuesDe), nuevaTarea);
+            } else {
+                // Si no se proporciona una ID después de la cual agregar, agregar al final
+                listaTareas.agregarTareaAlFinal(nuevaTarea);
+            }
+        } else {
+            // Por defecto o si se selecciona "primero", agregar al comienzo
+            listaTareas.agregarTareaAlComienzo(nuevaTarea);
+        }
+
+        // Guarda la tarea en el archivo
+        Lista.guardarLista(listaTareas, getServletContext());
+
+        // Redirige a la página tareas.jsp
+        response.sendRedirect("tareas.jsp");
+   
 }
     @Override
     public String getServletInfo() {

@@ -4,7 +4,8 @@
     Author     : Acer
 --%>
 
-<%@page import="com.umariana.mundo.ElementoLista"%>
+<%@page import="com.umariana.mundo.Tarea"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.umariana.mundo.Lista"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -63,24 +64,39 @@
         <span class="input-group-text" style="width: 100px;">Fecha de vencimiento</span>
         <input type="date" name="fechaV" class="form-control">
     </div>
+                        <div class="mb-3 form-check">
+        <input class="form-check-input" type="radio" name="posicion" id="primeroRadio" value="primero">
+        <label class="form-check-label" for="primeroRadio" style="color: white;">
+            Primero en la lista
+        </label>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input class="form-check-input" type="radio" name="posicion" id="ultimoRadio" value="ultimo">
+        <label class="form-check-label" for="ultimoRadio" style="color: white;">
+            Último en la lista
+        </label>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input class="form-check-input" type="radio" name="posicion" id="antesDeRadio" value="antesDe">
+        <label class="form-check-label" for="antesDeRadio" style="color: white;">
+            Antes de Tarea con ID:
+        </label>
+        <input type="text" name="idAntesDe" id="idAntesDe" placeholder="ID" class="form-control">
+    </div>
+
+    <div class="mb-3 form-check">
+        <input class="form-check-input" type="radio" name="posicion" id="despuesDeRadio" value="despuesDe">
+        <label class="form-check-label" for="despuesDeRadio" style="color: white;">
+            Después de Tarea con ID:
+        </label>
+        <input type="text" name="idDespuesDe" id="idDespuesDe" placeholder="ID" class="form-control">
+    </div>
+
     <button type="submit" class="btn btn-primary mt-3" style="background-color: #ff6219; border-color: #ff6219;">Agregar tarea</button>
 </form>
 
-<div class="mt-4">
-    <h4 class="text-center" style="color: white;">Estado de la tarea</h4>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="estadoTarea" id="pendiente" value="pendiente" checked>
-        <label class="form-check-label" for="pendiente" style="color: white;">Pendiente</label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="estadoTarea" id="enProgreso" value="enProgreso">
-        <label class="form-check-label" for="enProgreso" style="color: white;">En progreso</label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="estadoTarea" id="completada" value="completada">
-        <label class="form-check-label" for="completada" style="color: white;">Completada</label>
-    </div>
-</div>
 
                 </div>
             </div>
@@ -97,20 +113,43 @@
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody style="background-color: #1a1a1a;">
-                            <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    </tbody>
+                        <tbody>
+    <%
+    Lista listaTareas = (Lista) session.getAttribute("listaTareas");
+
+    if (listaTareas != null) {
+        Lista.Nodo current = listaTareas.inicio;
+        while (current != null) {
+            Tarea tarea = current.tarea;
+    %>
+            <tr>
+                <td><%= tarea.getId() %></td>
+                <td><%= tarea.getTitulo() %></td>
+                <td><%= tarea.getDescripcion() %></td>
+                <td><%= new SimpleDateFormat("yyyy-MM-dd").format(tarea.getFechaDeVencimiento()) %></td>
+                <td>
+                    <button onclick='if (confirm("¿Desea eliminar la tarea?")) {
+                                location.href = "SvCanino?tipo=delete&id=" + <%= tarea.getId() %>;
+                            }' class="btn btn-primary">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+    <%
+            current = current.siguiente;
+        }
+    } else {
+        out.println("No hay tareas disponibles.");
+    }
+    %>
+</tbody>
+
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </section>
+    
 <%@include file = "templates/footer.jsp" %>
 
