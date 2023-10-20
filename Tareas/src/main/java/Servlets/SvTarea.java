@@ -95,6 +95,8 @@ public class SvTarea extends HttpServlet {
             // Guárdala en la sesión
             session.setAttribute("listaTareas", listaTareas);
         }
+        
+        //Un filtro para los id de las tareas, para que sea un dato unico en las tareas ingresadas
         if (listaTareas != null) {
         Lista.Nodo current = listaTareas.inicio;
         while (current != null) {
@@ -106,16 +108,20 @@ public class SvTarea extends HttpServlet {
             current = current.siguiente;
         }
     }
-        if ("ultimo".equals(posicion)) {
-            // Agregar la tarea al final de la lista
+        //funciones de los radio buttons
+        if("primero".equals(posicion)){
+            //Agrega la tarea al inicio de la lista
+            listaTareas.agregarTareaAlInicio(nuevaTarea);
+        } else if ("ultimo".equals(posicion)) {
+            // Agrega la tarea al final de la lista
             listaTareas.agregarTareaAlFinal(nuevaTarea);
         } else if ("antesDe".equals(posicion)) {
             if (idAntesDe != null && !idAntesDe.isEmpty()) {
-                // Agregar la tarea antes de la tarea con la ID especificada
+                // Agrega la tarea antes de la tarea con la ID especificada
                 listaTareas.agregarTareaAntesDe(Integer.parseInt(idAntesDe), nuevaTarea);
             } else {
                 // Si no se proporciona una ID antes de la cual agregar, agregar al comienzo
-                listaTareas.agregarTareaAlComienzo(nuevaTarea);
+                listaTareas.agregarTareaAlInicio(nuevaTarea);
             }
         } else if ("despuesDe".equals(posicion)) {
             if (idDespuesDe != null && !idDespuesDe.isEmpty()) {
@@ -126,14 +132,14 @@ public class SvTarea extends HttpServlet {
                 listaTareas.agregarTareaAlFinal(nuevaTarea);
             }
         } else {
-            // Por defecto o si se selecciona "primero", agregar al comienzo
-            listaTareas.agregarTareaAlComienzo(nuevaTarea);
+            // Si no se selecciona ninguno de los anteriores, la tarea se agregara al final de la lista
+            listaTareas.agregarTareaAlFinal(nuevaTarea);
         }
 
         // Guarda la tarea en el archivo
         Lista.guardarLista(listaTareas, getServletContext());
 
-        // Redirige a la página tareas.jsp
+        // Redirige a la página Tareas.jsp
         response.sendRedirect("Tareas.jsp");
    
 }

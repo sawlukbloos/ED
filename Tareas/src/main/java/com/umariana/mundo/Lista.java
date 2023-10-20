@@ -37,7 +37,7 @@ public class Lista {
     }    
 }
 // Método para agregar una nueva tarea al comienzo de la lista
-    public void agregarTareaAlComienzo(Tarea tarea) {
+    public void agregarTareaAlInicio(Tarea tarea) {
         Nodo nuevoNodo = new Nodo(tarea);
 
         if (inicio == null) {
@@ -200,7 +200,7 @@ public class Lista {
                     Date fechaV = dateFormat.parse(fechaVStr);
 
                     Tarea tarea = new Tarea(id, titulo, descripcion, fechaV);
-                    lista.agregarTareaAlComienzo(tarea);
+                    lista.agregarTareaAlInicio(tarea);
                 }
             }
         } catch (IOException | ParseException e) {

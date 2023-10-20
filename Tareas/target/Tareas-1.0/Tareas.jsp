@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-md-4 d-flex justify-content-center align-items-center"> <!-- Agrega las clases d-flex, justify-content-center y align-items-center -->
                 <div class="card card-body text-center" style="background-color: #1A1A1A; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
-                    <h4 class="text-center" style="color: white;">Agrega tareas</h4>
+                    <h4 class="text-center" style="color: tomato;">Agrega tareas</h4>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;" id="errorAlert">
                     El id de su tarea debe ser unico para mantener un orden en su lista de tareas
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -68,8 +68,9 @@
         <span class="input-group-text" style="width: 100px;">Fecha de vencimiento</span>
         <input type="date" name="fechaV" class="form-control">
     </div>
+                        <!-- Radio buttons para seleccionar la posicion de la nueva tarea en la lista -->
                         <div class="tareas-container">
-    <h6 class="text-center" style="color: white;">Seleccione la posicion en la que quiere agregar la nueva tarea en la lista</h6>
+    <h6 class="text-center" style="color: white;">Seleccione la posición en la que quiere agregar la nueva tarea en la lista</h6>
     <div class="mb-3 form-check">
         <input class="form-check-input" type="radio" name="posicion" id="primeroRadio" value="primero">
         <label class="form-check-label" for="primeroRadio" style="color: white;">
@@ -163,6 +164,9 @@
     Lista lista = (Lista) session.getAttribute("listaTareas");
     boolean listaVacia = (lista == null) || lista.verificarContenido();
 %>
+<!-- JavaScript para verificar si la lista de tareas esta vacia o no para mantener visibles los radio buttons
+en el formulario o en el caso de que no hayan tareas añadidas los botones dejan de estar disponibles y se reduce 
+el tamaño del contenedor del formulario  -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var listaVacia = <%= listaVacia %>;
@@ -175,6 +179,7 @@
         }
     });
 </script>
+<!-- JavaScript para lanzar una alerta de error de id duplicada -->
 <script>
     // JavaScript para mostrar la alerta cuando sea necesario
     document.addEventListener("DOMContentLoaded", function () {
@@ -189,24 +194,44 @@
         }
     });
 </script>
+<!-- JavaScript para mejorar la funcionalidad de los radio buttons si se selecciona o se desactiva -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var antesDeRadio = document.getElementById("antesDeRadio");
         var despuesDeRadio = document.getElementById("despuesDeRadio");
         var idAntesDeInput = document.getElementById("idAntesDe");
         var idDespuesDeInput = document.getElementById("idDespuesDe");
+        var primeroRadio = document.getElementById("primeroRadio");
+        var ultimoRadio = document.getElementById("ultimoRadio");
+
+        idAntesDeInput.disabled = true;
+        idDespuesDeInput.disabled = true;
 
         antesDeRadio.addEventListener("click", function () {
-            idAntesDeInput.disabled = !idAntesDeInput.disabled;
+            idAntesDeInput.disabled = !antesDeRadio.checked;
             idDespuesDeInput.disabled = true;
         });
 
         despuesDeRadio.addEventListener("click", function () {
-            idDespuesDeInput.disabled = !idDespuesDeInput.disabled;
+            idDespuesDeInput.disabled = !despuesDeRadio.checked;
             idAntesDeInput.disabled = true;
+        });
+
+        primeroRadio.addEventListener("click", function () {
+            idAntesDeInput.disabled = true;
+            idDespuesDeInput.disabled = true;
+        });
+
+        ultimoRadio.addEventListener("click", function () {
+            idAntesDeInput.disabled = true;
+            idDespuesDeInput.disabled = true;
         });
     });
 </script>
+
+
+
+
 
 
 
