@@ -136,12 +136,16 @@
                 <td><%= tarea.getDescripcion() %></td>
                 <td><%= new SimpleDateFormat("yyyy-MM-dd").format(tarea.getFechaDeVencimiento()) %></td>
                 <td>
-                    <button onclick='if (confirm("¿Desea eliminar la tarea?")) {
-                                location.href = "SvCanino?tipo=delete&id=" + <%= tarea.getId() %>;
-                            }' class="btn btn-primary">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </td>
+                    <button onclick="mostrarDetalle(<%= tarea.getId() %>)" class="btn btn-info" style="padding: 5px 10px;" data-toggle="modal" data-target="#modalDetalle">
+        <i class="fa fa-eye" style="color: white;"></i>
+    </button>
+                    <button onclick="editarTarea(<%= tarea.getId() %>)" class="btn btn-warning" style="padding: 5px 10px;">
+        <i class="fa fa-edit" style="color: white;"></i>
+    </button>
+    <button onclick="eliminarTarea(<%= tarea.getId() %>)" class="btn btn-danger" style="background-color: red; border: none; padding: 5px 10px;">
+        <i class="fa fa-trash" style="color: white;"></i>
+    </button>
+</td>
             </tr>
     <%
             current = current.siguiente;
@@ -228,8 +232,38 @@ el tamaño del contenedor del formulario  -->
         });
     });
 </script>
-
-
+<script>
+    function eliminarTarea(id) {
+        if (confirm("¿Desea eliminar esta tarea?")) {
+            // Aquí puedes realizar una llamada a tu servidor para eliminar la tarea usando AJAX o Fetch
+            // Ejemplo con Fetch:
+            fetch(`SvCanino?tipo=delete&id=${id}`, {
+                method: 'POST'
+            }).then(response => {
+                // Aquí puedes manejar la respuesta del servidor si es necesario
+                // Por ejemplo, puedes recargar la página para reflejar los cambios
+                location.reload();
+            }).catch(error => {
+                console.error('Se produjo un error al eliminar la tarea:', error);
+            });
+        }
+    }
+</script>
+<script>
+    function editarTarea(id) {
+        // Aquí puedes redirigir a la página de edición pasando el ID como parámetro
+        location.href = `pagina_de_edicion.jsp?id=${id}`;
+    }
+</script>
+<script>
+    function mostrarDetalle(id) {
+        // Aquí puedes obtener los detalles de la tarea del servidor y mostrarlos en la ventana modal
+        // Puedes utilizar AJAX o Fetch para obtener los datos del servidor y luego actualizar el contenido de #detallesTarea
+        var detallesTareaElement = document.getElementById("detallesTarea");
+        // Ejemplo de cómo actualizar el contenido de la ventana modal con los detalles de la tarea
+        detallesTareaElement.innerHTML = `<p>Detalles de la tarea con ID ${id}</p>`;
+    }
+</script>
 
 
 
