@@ -86,8 +86,7 @@ public class SvEditarTarea extends HttpServlet {
         }
 
         // Redirige a la página de tareas (o la página que desees)
-        response.sendRedirect("Tareas.jsp");
-        processRequest(request, response);
+        response.sendRedirect("Tareas.jsp?alert=edit");
     }
 
     /**

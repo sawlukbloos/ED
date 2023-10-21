@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 4/10/2023, 4:51:24 p. m.
-    Author     : Josue
+    Author     : Samuel Bolaños
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -157,7 +157,7 @@
     });
 </script>
 
-<!-- JavaScript para mostrar la alerta de registro exitoso cuando sea necesario -->
+<!-- JavaScript para mostrar la alerta de registro exitoso -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Obtén la alerta por su ID

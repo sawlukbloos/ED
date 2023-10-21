@@ -14,11 +14,10 @@ import javax.servlet.ServletContext;
 
 /**
  *
- * @author Acer
+ * @author Samuel Bolaños
  */
 public class RegistrarUsuarios {
 
-    
     public static void guardarUsuario(ArrayList<Usuario> usuariosnuevos, ServletContext context) throws IOException {
         String relativePath = "/data/usuarios.txt";
         String absPath = context.getRealPath(relativePath);
@@ -37,7 +36,7 @@ public class RegistrarUsuarios {
             System.out.println("Error al guardar los datos de usuarios: " + e.getMessage());
         }
     }
-    
+
     public static ArrayList<Usuario> cargarUsuario(ServletContext context) throws IOException {
         ArrayList<Usuario> listaDeUsuarios = new ArrayList<>();
         String relativePath = "/data/usuarios.txt";

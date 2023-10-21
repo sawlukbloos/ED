@@ -4,13 +4,12 @@
  */
 package com.umariana.mundo;
 
-
 /**
  *
- * @author Acer
+ * @author Samuel Bolaños
  */
 public class Usuario {
-    
+
     String cedula;
     String nombreUsuario;
     String contrasenia;

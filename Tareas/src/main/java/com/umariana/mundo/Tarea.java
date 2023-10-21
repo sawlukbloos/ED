@@ -8,13 +8,13 @@ import java.util.Date;
 
 /**
  *
- * @author Acer
+ * @author Samuel Bolaños
  */
 public class Tarea {
-    
+
     private int Id;
     private String titulo;
-    private String descripcion ;
+    private String descripcion;
     private Date fechaDeVencimiento;
 
     public Tarea() {
@@ -57,5 +57,5 @@ public class Tarea {
 
     public void setFechaDeVencimiento(Date fechaDeVencimiento) {
         this.fechaDeVencimiento = fechaDeVencimiento;
-    }    
+    }
 }

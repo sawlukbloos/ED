@@ -1,7 +1,7 @@
 <%-- 
     Document   : Tareas
     Created on : 7/10/2023, 12:47:58 p. m.
-    Author     : Acer
+    Author     : Samuel Bolaños
 --%>
 
 <%@page import="com.umariana.mundo.Tarea"%>
@@ -16,94 +16,105 @@
     <div class="container p-4"> <!-- clase contenedora -->
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #1A1A1A;">
             <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center" href="#" style="color: white;">
+                <p class="navbar-brand d-flex align-items-center" href="#" style="color: white;">
                     <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                     <span style="line-height: 1.2;">Organizando tu mundo</span>
-                </a>
+                </p>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#" style="color: white;">Inicio</a>
+                            <p class="nav-link" href="#" style="color: white;">Inicio</p>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" style="color: white;">Tareas</a>
+                            <p class="nav-link" href="#" style="color: white;">Tareas</>
                         </li>
                     </ul>
                     <div class="navbar-text text-center" style="color: white;">
-                        Bienvenido, <%= usuarioVerificado%>!
+                        Bienvenido, <%= usuarioVerificado%>
                     </div>
                     <a href="index.jsp" class="btn btn-warning" style="background-color: #ff6219; border-color: #ff6219; color: white;">Cerrar Sesión</a>
                 </div>
             </div>
         </nav>
+        <!-- Alertas de notificacion(tarea agregada y tarea eliminada -->          
+        <div class="alert alert-success text-center" role="alert" style="display: none;" id="successAlert">
+            <strong> Tarea agregada a la lista</strong>
+        </div>
+        <div class="alert alert-success text-center" role="alert" style="display: none;" id="successAlertEliminada">
+            <strong>Tarea eliminada</strong>    
+        </div>
+        <div class="alert alert-success text-center" role="alert" style="display: none;" id="editAlert">
+            <strong>Tarea editada</strong> 
+        </div>
 
         <h1 class="text-center mt-4 mb-4" style="color: white;">Tareas</h1>
         <div class="row">
             <div class="col-md-4 d-flex justify-content-center align-items-center"> <!-- Agrega las clases d-flex, justify-content-center y align-items-center -->
                 <div class="card card-body text-center" style="background-color: #1A1A1A; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
                     <h4 class="text-center" style="color: tomato;">Agrega tareas</h4>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;font-size: 15px;" id="errorAlert">
-                    Ya hay una tarea agregada en la lista con el mismo Id, porfavor intentalo otra vez 
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 15px;" id="errorAlert">
+                        Ya hay una tarea agregada en la lista con el mismo Id, por favor inténtalo de nuevo
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                    <!-- Formulario para agregar tareas nuevas -->
                     <form action="SvTarea" method="POST">
-    <div class="input-group mb-3">
-        <span class="input-group-text" style="width: 100px;">Id</span>
-        <input type="text" name="id" class="form-control">
-    </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width: 100px;">Id</span>
+                            <input type="text" name="id" class="form-control">
+                        </div>
 
-    <div class="input-group mb-3">
-        <span class="input-group-text" style="width: 100px;">Titulo</span>
-        <input type="text" name="titulo" class="form-control">
-    </div>
-    <div class="input-group mb-3">
-        <span class="input-group-text" style="width: 100px;">Descripcion</span>
-        <input type="text" name="descripcion" class="form-control">
-    </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width: 100px;">Titulo</span>
+                            <input type="text" name="titulo" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width: 100px;">Descripcion</span>
+                            <input type="text" name="descripcion" class="form-control">
+                        </div>
 
-    <div class="input-group mb-3">
-        <span class="input-group-text" style="width: 100px;">Fecha de vencimiento</span>
-        <input type="date" name="fechaV" class="form-control">
-    </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width: 100px;">Fecha de vencimiento</span>
+                            <input type="date" name="fechaV" class="form-control">
+                        </div>
                         <!-- Radio buttons para seleccionar la posicion de la nueva tarea en la lista -->
                         <div class="tareas-container"style="display: none;">
-    <h6 class="text-center" style="color: tomato;">Seleccione la posición en la que quiere agregar la nueva tarea en la lista:</h6>
-    <div class="mb-3 form-check">
-        <input class="form-check-input" type="radio" name="posicion" id="primeroRadio" value="primero">
-        <label class="form-check-label" for="primeroRadio" style="color: white;">
-            Primero en la lista
-        </label>
-    </div>
+                            <h6 class="text-center" style="color: tomato;">Seleccione la posición en la que quiere agregar la nueva tarea en la lista:</h6>
+                            <div class="mb-3 form-check">
+                                <input class="form-check-input" type="radio" name="posicion" id="primeroRadio" value="primero">
+                                <label class="form-check-label" for="primeroRadio" style="color: white;">
+                                    Primero en la lista
+                                </label>
+                            </div>
 
-    <div class="mb-3 form-check">
-        <input class="form-check-input" type="radio" name="posicion" id="ultimoRadio" value="ultimo">
-        <label class="form-check-label" for="ultimoRadio" style="color: white;">
-            Último en la lista
-        </label>
-    </div>
+                            <div class="mb-3 form-check">
+                                <input class="form-check-input" type="radio" name="posicion" id="ultimoRadio" value="ultimo">
+                                <label class="form-check-label" for="ultimoRadio" style="color: white;">
+                                    Último en la lista
+                                </label>
+                            </div>
 
-    <div class="mb-3 form-check">
-        <input class="form-check-input" type="radio" name="posicion" id="antesDeRadio" value="antesDe">
-        <label class="form-check-label" for="antesDeRadio" style="color: white;">
-            Antes de Tarea con ID:
-        </label>
-        <input type="text" name="idAntesDe" id="idAntesDe" placeholder="ID" class="form-control">
-    </div>
+                            <div class="mb-3 form-check">
+                                <input class="form-check-input" type="radio" name="posicion" id="antesDeRadio" value="antesDe">
+                                <label class="form-check-label" for="antesDeRadio" style="color: white;">
+                                    Antes de Tarea con ID:
+                                </label>
+                                <input type="text" name="idAntesDe" id="idAntesDe" placeholder="ID" class="form-control">
+                            </div>
 
-    <div class="mb-3 form-check">
-        <input class="form-check-input" type="radio" name="posicion" id="despuesDeRadio" value="despuesDe">
-        <label class="form-check-label" for="despuesDeRadio" style="color: white;">
-            Después de Tarea con ID:
-        </label>
-        <input type="text" name="idDespuesDe" id="idDespuesDe" placeholder="ID" class="form-control">
-    </div>
-</div>
+                            <div class="mb-3 form-check">
+                                <input class="form-check-input" type="radio" name="posicion" id="despuesDeRadio" value="despuesDe">
+                                <label class="form-check-label" for="despuesDeRadio" style="color: white;">
+                                    Después de Tarea con ID:
+                                </label>
+                                <input type="text" name="idDespuesDe" id="idDespuesDe" placeholder="ID" class="form-control">
+                            </div>
+                        </div>
 
-    <button type="submit" class="btn btn-primary mt-3" style="background-color: #ff6219; border-color: #ff6219;">Agregar tarea</button>
-</form>
+                        <button type="submit" class="btn btn-primary mt-3" style="background-color: #ff6219; border-color: #ff6219;">Agregar tarea</button>
+                    </form>
                 </div>
             </div>
             <!-- tabla para visualizar las tareas agregadas -->
@@ -112,7 +123,7 @@
                     <table class="table table-bordered" style="background-color: #1a1a1a; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);color: white;">
                         <thead class="thead-dark">
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">Id</th>
                                 <th scope="col">Titulo</th>
                                 <th scope="col">Descripción</th>
                                 <th scope="col">Fecha de vencimiento</th>
@@ -120,65 +131,64 @@
                             </tr>
                         </thead>
                         <tbody>
-    <%
-    Lista listaTareas = (Lista) session.getAttribute("listaTareas");
+                            <%
+                                Lista listaTareas = (Lista) session.getAttribute("listaTareas");
 
-    if (listaTareas != null) {
-        Lista.Nodo nodoActual = listaTareas.inicio;
-        while (nodoActual != null) {
-            Tarea tarea = nodoActual.tarea;
-    %>
-            <tr>
-                <td><%= tarea.getId() %></td>
-                <td><%= tarea.getTitulo() %></td>
-                <td><%= tarea.getDescripcion() %></td>
-                <td><%= new SimpleDateFormat("yyyy-MM-dd").format(tarea.getFechaDeVencimiento()) %></td>
-                <td>
-                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tareaModal"
-       onclick="showTareaDetails(<%= tarea.getId()%>, '<%= tarea.getTitulo()%>', '<%= tarea.getDescripcion()%>', '<%= new SimpleDateFormat("yyyy-MM-dd").format(tarea.getFechaDeVencimiento())%>')"
-       title="Ver Detalles" data-bs-toggle="tooltip" data-bs-placement="top">
-        <i class="fas fa-eye"></i>
-    </a>
-                    <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarModal"
-       data-id="<%= tarea.getId()%>"
-       data-titulo="<%= tarea.getTitulo()%>"
-       data-descripcion="<%= tarea.getDescripcion()%>"
-       data-fecha="<%= new SimpleDateFormat("yyyy-MM-dd").format(tarea.getFechaDeVencimiento())%>"
-       title="Editar Tarea" data-bs-toggle="tooltip" data-bs-placement="top">
-        <i class="fas fa-pencil-alt"></i>
-    </a>
-                     <a onclick="eliminarTarea(<%= tarea.getId()%>)" class="btn btn-danger" title="Eliminar Tarea" data-bs-toggle="tooltip" data-bs-placement="top">
-        <i class="fas fa-trash-alt"></i>
-    </a>
-</td>
-            </tr>
-    <%
-            nodoActual = nodoActual.siguiente;
-        }
-    } else {
-        out.println("No hay tareas disponibles.");
-    }
-    %>
-</tbody>
-
+                                if (listaTareas != null) {
+                                    Lista.Nodo nodoActual = listaTareas.inicio;
+                                    while (nodoActual != null) {
+                                        Tarea tarea = nodoActual.tarea;
+                            %>
+                            <tr>
+                                <td><%= tarea.getId()%></td>
+                                <td><%= tarea.getTitulo()%></td>
+                                <td><%= tarea.getDescripcion()%></td>
+                                <td><%= new SimpleDateFormat("yyyy-MM-dd").format(tarea.getFechaDeVencimiento())%></td>
+                                <td>
+                                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tareaModal"
+                                       onclick="showTareaDetails(<%= tarea.getId()%>, '<%= tarea.getTitulo()%>', '<%= tarea.getDescripcion()%>', '<%= new SimpleDateFormat("yyyy-MM-dd").format(tarea.getFechaDeVencimiento())%>')"
+                                       title="Ver detalles" data-bs-toggle="tooltip" data-bs-placement="top">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarModal"
+                                       data-id="<%= tarea.getId()%>"
+                                       data-titulo="<%= tarea.getTitulo()%>"
+                                       data-descripcion="<%= tarea.getDescripcion()%>"
+                                       data-fecha="<%= new SimpleDateFormat("yyyy-MM-dd").format(tarea.getFechaDeVencimiento())%>"
+                                       title="Editar tarea" data-bs-toggle="tooltip" data-bs-placement="top">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a onclick="eliminarTarea(<%= tarea.getId()%>)" class="btn btn-danger" title="Eliminar tarea" data-bs-toggle="tooltip" data-bs-placement="top">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <%
+                                        nodoActual = nodoActual.siguiente;
+                                    }
+                                } else {
+                                    out.println("No hay tareas agregadas.");
+                                }
+                            %>
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-</section>
-    
+</section>    
 <%@include file = "templates/footer.jsp" %>
+
+<!-- Verificamos si la lista esta vacia -->
 <%
     Lista lista = (Lista) session.getAttribute("listaTareas");
     boolean listaVacia = (lista == null) || lista.verificarContenido();
 %>
-<!-- JavaScript para verificar si la lista de tareas esta vacia o no para mantener visibles los radio buttons
-en el formulario o en el caso de que no hayan tareas añadidas los botones dejan de estar disponibles y se reduce 
-el tamaño del contenedor del formulario  -->
+<!-- JavaScript para verificar si la lista de tareas esta vacia o no,
+inicialmente si no hay tareas agregadas en la lista, los radio buttons no seran visibles en la pagina, de lo contrario seran visibles -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        var listaVacia = <%= listaVacia %>;
+        var listaVacia = <%= listaVacia%>;
         var tareasContainer = document.querySelector(".tareas-container");
 
         if (listaVacia) {
@@ -188,12 +198,13 @@ el tamaño del contenedor del formulario  -->
         }
     });
 </script>
+
 <!-- JavaScript para lanzar una alerta de error de id duplicada -->
 <script>
-    // JavaScript para mostrar la alerta cuando sea necesario
+    // JavaScript para mostrar la alerta de error
     document.addEventListener("DOMContentLoaded", function () {
-        // Obtén la alerta por su ID
         const errorAlert = document.getElementById('errorAlert');
+        errorAlert.style.display = 'none';
 
         // Verifica si hay un parámetro de alerta en la URL (por ejemplo, '?alert=error')
         const urlParams = new URLSearchParams(window.location.search);
@@ -203,6 +214,7 @@ el tamaño del contenedor del formulario  -->
         }
     });
 </script>
+
 <!-- JavaScript para mejorar la funcionalidad de los radio buttons si se selecciona o se desactiva -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -237,13 +249,16 @@ el tamaño del contenedor del formulario  -->
         });
     });
 </script>
+
+<!-- JavaScript para confirmar eliminacion de una tarea -->
 <script>
     function eliminarTarea(id) {
-        if (confirm("¿Desea eliminar la tarea?")) {
+        if (confirm("¿Esta seguro de eliminar la tarea?")) {
             location.href = "SvTarea?tipo=delete&id=" + id;
         }
     }
 </script>
+
 <!-- Ventana Modal para Editar Tarea -->
 <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -282,9 +297,6 @@ el tamaño del contenedor del formulario  -->
     </div>
 </div>
 
-
-
-
 <!-- Script para prellenar los campos de edición -->
 <script>
     $('#editarModal').on('show.bs.modal', function (event) {
@@ -301,7 +313,8 @@ el tamaño del contenedor del formulario  -->
         $('#editar-tarea-fecha').val(fecha);
     });
 </script>
-<!-- Ventana Modal Informacion Tareas -->
+
+<!-- Ventana Modal con la Informacion de la Tareas -->
 <div class="modal fade" id="tareaModal" tabindex="-1" aria-labelledby="tareaModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content border" style="background-color: #1A1A1A; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
@@ -334,13 +347,62 @@ el tamaño del contenedor del formulario  -->
         modal.find('#tarea-fecha').text(fecha);
     }
 </script>
+
+<!-- Nombres de los botones de la tabla con tooltip -->
 <script>
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
 </script>
 
+<!-- Funcion para activar la alerta de exito cuando se agrega una tarea -->
+<script>
+    // JavaScript para mostrar la alerta de éxito cuando sea necesario
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtén la alerta por su ID
+        const successAlert = document.getElementById('successAlert');
 
+        // Verifica si hay un parámetro de alerta en la URL (por ejemplo, '?alert=success')
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('alert') && urlParams.get('alert') === 'success') {
+            // Muestra la alerta si el parámetro de alerta es 'success'
+            successAlert.style.display = 'block';
+            // Oculta la alerta después de 2.5 segundos (2500 milisegundos)
+            setTimeout(function () {
+                successAlert.style.display = 'none';
+            }, 2500);
+        }
+    });
+</script>
 
+<!-- JavaScript para activar la alerta que indica que una tarea fue eliminada -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('eliminada') && urlParams.get('eliminada') === 'success') {
+            const successAlertEliminada = document.getElementById('successAlertEliminada');
+            successAlertEliminada.style.display = 'block';
+            setTimeout(function () {
+                successAlertEliminada.style.display = 'none';
+            }, 2500); // Tiempo de visualización de la alerta en milisegundos (2.5 segundos en este caso)
+        }
+    });
+</script>
 
+<!-- JavaScript para activar la alerta que indica que una tarea fue editada -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const alertType = urlParams.get('alert');
+
+        if (alertType === 'edit') {
+            const editAlert = document.getElementById('editAlert');
+            editAlert.style.display = 'block';
+
+            setTimeout(function () {
+                editAlert.style.display = 'none';
+            }, 2500); // 2500 milisegundos equivalen a 2.5 segundos
+        }
+    });
+</script>
