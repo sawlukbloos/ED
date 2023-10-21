@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +52,28 @@ public class SvTarea extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String tipo = request.getParameter("tipo");
+        if (tipo != null && tipo.equals("delete")) {
+            String idToDelete = request.getParameter("id");
+            if (idToDelete != null && !idToDelete.isEmpty()) {
+                HttpSession session = request.getSession();
+                Lista listaTareas = (Lista) session.getAttribute("listaTareas");
+
+                if (listaTareas != null) {
+                    try {
+                        int id = Integer.parseInt(idToDelete);
+                        listaTareas.eliminarTarea(id);
+                        // Guarda la lista actualizada en el archivo
+                        Lista.guardarLista(listaTareas, getServletContext());
+                    } catch (NumberFormatException e) {
+                        // Maneja la excepción si no se proporciona un ID válido
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        // Redirige de regreso a la página de tareas después de borrar
+        response.sendRedirect("Tareas.jsp");
     }
 
     /**
@@ -106,9 +127,6 @@ public class SvTarea extends HttpServlet {
             nodoActual = nodoActual.siguiente;
         }
     }
-
-        // Redirige a la página Tareas.jsp
-        response.sendRedirect("Tareas.jsp");
         //funciones de los radio buttons
         if("primero".equals(posicion)){
             //Agrega la tarea al inicio de la lista
@@ -137,6 +155,10 @@ public class SvTarea extends HttpServlet {
             listaTareas.agregarTareaAlFinal(nuevaTarea);
         }
         // Obtén el ID de la tarea a eliminar
+
+        // Redirige a la página Tareas.jsp
+        response.sendRedirect("Tareas.jsp");
+        
     
         
 

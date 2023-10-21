@@ -45,8 +45,8 @@
             <div class="col-md-4 d-flex justify-content-center align-items-center"> <!-- Agrega las clases d-flex, justify-content-center y align-items-center -->
                 <div class="card card-body text-center" style="background-color: #1A1A1A; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
                     <h4 class="text-center" style="color: tomato;">Agrega tareas</h4>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;" id="errorAlert">
-                    El id de su tarea debe ser unico para mantener un orden en su lista de tareas
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;font-size: 15px;" id="errorAlert">
+                    Ya hay una tarea agregada en la lista con el mismo Id, porfavor intentalo otra vez 
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <form action="SvTarea" method="POST">
@@ -69,7 +69,7 @@
         <input type="date" name="fechaV" class="form-control">
     </div>
                         <!-- Radio buttons para seleccionar la posicion de la nueva tarea en la lista -->
-                        <div class="tareas-container">
+                        <div class="tareas-container"style="display: none;">
     <h6 class="text-center" style="color: tomato;">Seleccione la posición en la que quiere agregar la nueva tarea en la lista:</h6>
     <div class="mb-3 form-check">
         <input class="form-check-input" type="radio" name="posicion" id="primeroRadio" value="primero">
@@ -104,8 +104,6 @@
 
     <button type="submit" class="btn btn-primary mt-3" style="background-color: #ff6219; border-color: #ff6219;">Agregar tarea</button>
 </form>
-
-
                 </div>
             </div>
             <!-- tabla para visualizar las tareas agregadas -->
@@ -136,15 +134,22 @@
                 <td><%= tarea.getDescripcion() %></td>
                 <td><%= new SimpleDateFormat("yyyy-MM-dd").format(tarea.getFechaDeVencimiento()) %></td>
                 <td>
-                    <button onclick="mostrarDetalle(<%= tarea.getId() %>)" class="btn btn-info" style="padding: 5px 10px;" data-toggle="modal" data-target="#modalDetalle">
-        <i class="fa fa-eye" style="color: white;"></i>
-    </button>
-                    <button onclick="editarTarea(<%= tarea.getId() %>)" class="btn btn-warning" style="padding: 5px 10px;">
-        <i class="fa fa-edit" style="color: white;"></i>
-    </button>
-    <button onclick="eliminarTarea(<%= tarea.getId() %>)" class="btn btn-danger" style="background-color: red; border: none; padding: 5px 10px;">
-        <i class="fa fa-trash" style="color: white;"></i>
-    </button>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tareaModal"
+       onclick="showTareaDetails(<%= tarea.getId()%>, '<%= tarea.getTitulo()%>', '<%= tarea.getDescripcion()%>', '<%= new SimpleDateFormat("yyyy-MM-dd").format(tarea.getFechaDeVencimiento())%>')"
+       title="Ver Detalles" data-bs-toggle="tooltip" data-bs-placement="top">
+        <i class="fas fa-eye"></i>
+    </a>
+                    <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarModal"
+       data-id="<%= tarea.getId()%>"
+       data-titulo="<%= tarea.getTitulo()%>"
+       data-descripcion="<%= tarea.getDescripcion()%>"
+       data-fecha="<%= new SimpleDateFormat("yyyy-MM-dd").format(tarea.getFechaDeVencimiento())%>"
+       title="Editar Tarea" data-bs-toggle="tooltip" data-bs-placement="top">
+        <i class="fas fa-pencil-alt"></i>
+    </a>
+                     <a onclick="eliminarTarea(<%= tarea.getId()%>)" class="btn btn-danger" title="Eliminar Tarea" data-bs-toggle="tooltip" data-bs-placement="top">
+        <i class="fas fa-trash-alt"></i>
+    </a>
 </td>
             </tr>
     <%
@@ -234,35 +239,106 @@ el tamaño del contenedor del formulario  -->
 </script>
 <script>
     function eliminarTarea(id) {
-        if (confirm("¿Desea eliminar esta tarea?")) {
-            // Aquí puedes realizar una llamada a tu servidor para eliminar la tarea usando AJAX o Fetch
-            // Ejemplo con Fetch:
-            fetch(`SvTarea?id=${id}`, {
-                method: 'POST'
-            }).then(response => {
-                // Aquí puedes manejar la respuesta del servidor si es necesario
-                // Por ejemplo, puedes recargar la página para reflejar los cambios
-                location.reload();
-            }).catch(error => {
-                console.error('Se produjo un error al eliminar la tarea:', error);
-            });
+        if (confirm("¿Desea eliminar la tarea?")) {
+            location.href = "SvTarea?tipo=delete&id=" + id;
         }
     }
 </script>
+<!-- Ventana Modal para Editar Tarea -->
+<div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border" style="background-color: #1A1A1A; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
+            <div class="modal-header" style="background-color: #1A1A1A;">
+                <h5 class="modal-title" id="editarModalLabel" style="color: tomato;">Editar Tarea</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="SvEditarTarea" method="POST">
+                    <!-- Campo oculto para almacenar el ID de la tarea -->
+                    <input type="hidden" name="id" id="editar-tarea-id" value="">
+                    <!-- Input para editar el título -->
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label" style="color: white;">Título</label>
+                        <input type="text" class="form-control" id="editar-tarea-titulo" name="titulo">
+                    </div>
+                    <!-- Input para editar la descripción -->
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label" style="color: white;">Descripción</label>
+                        <textarea class="form-control" id="editar-tarea-descripcion" name="descripcion"></textarea>
+                    </div>
+                    <!-- Input para editar la fecha -->
+                    <div class="mb-3">
+                        <label for="fecha" class="form-label" style="color: white;">Fecha de vencimiento</label>
+                        <input type="date" class="form-control" id="editar-tarea-fecha" name="fecha">
+                    </div>
+                    <!-- Botón para guardar cambios -->
+                    <button type="submit" class="btn btn-primary" style="background-color: #ff6219; border-color: #ff6219;">Guardar Cambios</button>
+                </form>
+            </div>
+            <div class="modal-footer" style="background-color: #1A1A1A;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="color: white;">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Script para prellenar los campos de edición -->
 <script>
-    function editarTarea(id) {
-        // Aquí puedes redirigir a la página de edición pasando el ID como parámetro
-        location.href = `pagina_de_edicion.jsp?id=${id}`;
+    $('#editarModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que desencadenó el evento
+        var id = button.data('id'); // Obtén el ID de la tarea
+        var titulo = button.data('titulo'); // Obtén el título de la tarea
+        var descripcion = button.data('descripcion'); // Obtén la descripción de la tarea
+        var fecha = button.data('fecha'); // Obtén la fecha de la tarea
+
+        // Rellena los campos del formulario de edición con los datos de la tarea
+        $('#editar-tarea-id').val(id);
+        $('#editar-tarea-titulo').val(titulo);
+        $('#editar-tarea-descripcion').val(descripcion);
+        $('#editar-tarea-fecha').val(fecha);
+    });
+</script>
+<!-- Ventana Modal Informacion Tareas -->
+<div class="modal fade" id="tareaModal" tabindex="-1" aria-labelledby="tareaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border" style="background-color: #1A1A1A; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
+            <div class="modal-header" style="background-color: #1A1A1A;">
+                <h5 class="modal-title" id="tareaModalLabel"style="color: tomato;">Detalles de la Tarea</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="tarea-details">
+                    <p style="color: white;"><strong>ID:</strong> <span id="tarea-id"></span></p>
+                    <p style="color: white;"><strong>Título:</strong> <span id="tarea-titulo"></span></p>
+                    <p style="color: white;"><strong>Descripción:</strong> <span id="tarea-descripcion"></span></p>
+                    <p style="color: white;"><strong>Fecha:</strong> <span id="tarea-fecha"></span></p>
+                </div>
+            </div>
+            <div class="modal-footer" style="background-color: #1A1A1A;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="color: white;">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Funcion para visualizar infromacion actual de la tareas -->
+<script>
+    function showTareaDetails(id, titulo, descripcion, fecha) {
+        var modal = $('#tareaModal');
+        modal.find('#tarea-id').text(id);
+        modal.find('#tarea-titulo').text(titulo);
+        modal.find('#tarea-descripcion').text(descripcion);
+        modal.find('#tarea-fecha').text(fecha);
     }
 </script>
 <script>
-    function mostrarDetalle(id) {
-        // Aquí puedes obtener los detalles de la tarea del servidor y mostrarlos en la ventana modal
-        // Puedes utilizar AJAX o Fetch para obtener los datos del servidor y luego actualizar el contenido de #detallesTarea
-        var detallesTareaElement = document.getElementById("detallesTarea");
-        // Ejemplo de cómo actualizar el contenido de la ventana modal con los detalles de la tarea
-        detallesTareaElement.innerHTML = `<p>Detalles de la tarea con ID ${id}</p>`;
-    }
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
 </script>
 
 

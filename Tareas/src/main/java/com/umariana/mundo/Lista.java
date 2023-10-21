@@ -41,7 +41,7 @@ public class Lista {
         Nodo nuevoNodo = new Nodo(tarea);
 
         if (inicio == null) {
-            // Si la lista está vacía, el nuevo nodo es tanto el inicio como el fin
+            // Si la lista está vacía, el nuevo nodo es el inicio y fin de la lista
             inicio = nuevoNodo;
             fin = nuevoNodo;
         } else {
@@ -56,7 +56,7 @@ public class Lista {
         Nodo nuevoNodo = new Nodo(tarea);
 
         if (inicio == null) {
-            // Si la lista está vacía, el nuevo nodo es tanto el inicio como el fin
+            // Si la lista está vacía, el nuevo nodo es el inico y fin de la lista
             inicio = nuevoNodo;
             fin = nuevoNodo;
         } else {
@@ -146,6 +146,45 @@ public class Lista {
 
         return (actual != null) ? anterior : null;
     }
+    //Elimina una tarea
+    public void eliminarTarea(int id) {
+        if (inicio == null) {
+            System.out.println("La lista de tareas está vacía, no se pudo eliminar la tarea con id: " + id);
+            return;
+        }
+
+        if (id == inicio.tarea.getId()) {
+            // La tarea es la primera de la lista
+            inicio = inicio.siguiente;
+        } else {
+            // La tarea es un elemento intermedio de la lista
+            Nodo anterior = localizarAnteriorPorId(id);
+            if (anterior == null) {
+                System.out.println("No se encontró una tarea con id: " + id + " para eliminar.");
+                return;
+            }
+            anterior.siguiente = anterior.siguiente.siguiente; // Desconectar la tarea
+        }
+
+    }
+    public void editarTarea(int id, String nuevoTitulo, String nuevaDescripcion, String nuevaFechadeV) {
+        Nodo tareaExistente = localizarPorId(id);
+
+        if (tareaExistente != null) {
+            // Actualiza los atributos de la tarea
+            tareaExistente.tarea.setTitulo(nuevoTitulo);
+            tareaExistente.tarea.setDescripcion(nuevaDescripcion);
+
+            // Convierte la cadena de fecha en un objeto Date
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date nuevaFecha = dateFormat.parse(nuevaFechadeV);
+                tareaExistente.tarea.setFechaDeVencimiento(nuevaFecha);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     /**
      * Metodo para leer el archivo de texto
@@ -211,4 +250,6 @@ public class Lista {
         }
         return lista;
     }
+    
+
 }
