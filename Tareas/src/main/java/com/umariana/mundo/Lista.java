@@ -163,12 +163,15 @@ public class Lista {
         File file = new File(rutaAbsoluta);
 
         try (PrintWriter writer = new PrintWriter(file)) {
-            Nodo temp = listaActualizada.inicio;
-            while (temp != null) {
-                Tarea tarea = temp.tarea;
-                // Guarda los atributos de la tarea en el archivo separados por un punto y coma
-                writer.println(tarea.getId() + ";" + tarea.getTitulo() + ";" + tarea.getDescripcion() + ";" + tarea.getFechaDeVencimiento());
-                temp = temp.siguiente;
+            Nodo actual = listaActualizada.inicio;
+            while (actual != null) {
+                Tarea tarea = actual.tarea;
+                // Guarda los atributos de la tarea en el archivo separados por coma
+                writer.println(tarea.getId() + ";" 
+                        + tarea.getTitulo() + ";" 
+                        + tarea.getDescripcion() + ";" 
+                        + tarea.getFechaDeVencimiento());
+                actual = actual.siguiente;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -186,9 +189,9 @@ public class Lista {
         Lista lista = new Lista();
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] atributos = line.split(";");
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] atributos = linea.split(";");
                 if (atributos.length == 4) {
                     int id = Integer.parseInt(atributos[0]);
                     String titulo = atributos[1];

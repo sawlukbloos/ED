@@ -70,7 +70,7 @@
     </div>
                         <!-- Radio buttons para seleccionar la posicion de la nueva tarea en la lista -->
                         <div class="tareas-container">
-    <h6 class="text-center" style="color: white;">Seleccione la posición en la que quiere agregar la nueva tarea en la lista</h6>
+    <h6 class="text-center" style="color: tomato;">Seleccione la posición en la que quiere agregar la nueva tarea en la lista:</h6>
     <div class="mb-3 form-check">
         <input class="form-check-input" type="radio" name="posicion" id="primeroRadio" value="primero">
         <label class="form-check-label" for="primeroRadio" style="color: white;">
@@ -126,9 +126,9 @@
     Lista listaTareas = (Lista) session.getAttribute("listaTareas");
 
     if (listaTareas != null) {
-        Lista.Nodo current = listaTareas.inicio;
-        while (current != null) {
-            Tarea tarea = current.tarea;
+        Lista.Nodo nodoActual = listaTareas.inicio;
+        while (nodoActual != null) {
+            Tarea tarea = nodoActual.tarea;
     %>
             <tr>
                 <td><%= tarea.getId() %></td>
@@ -148,7 +148,7 @@
 </td>
             </tr>
     <%
-            current = current.siguiente;
+            nodoActual = nodoActual.siguiente;
         }
     } else {
         out.println("No hay tareas disponibles.");
@@ -237,7 +237,7 @@ el tamaño del contenedor del formulario  -->
         if (confirm("¿Desea eliminar esta tarea?")) {
             // Aquí puedes realizar una llamada a tu servidor para eliminar la tarea usando AJAX o Fetch
             // Ejemplo con Fetch:
-            fetch(`SvCanino?tipo=delete&id=${id}`, {
+            fetch(`SvTarea?id=${id}`, {
                 method: 'POST'
             }).then(response => {
                 // Aquí puedes manejar la respuesta del servidor si es necesario
@@ -264,7 +264,6 @@ el tamaño del contenedor del formulario  -->
         detallesTareaElement.innerHTML = `<p>Detalles de la tarea con ID ${id}</p>`;
     }
 </script>
-
 
 
 

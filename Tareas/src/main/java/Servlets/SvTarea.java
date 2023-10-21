@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -84,9 +85,6 @@ public class SvTarea extends HttpServlet {
         }
         //Creamos un nuevo objeto de tipo tarea e inicializamos los atributos con los datos que ingreso el usuario
         Tarea nuevaTarea = new Tarea(Integer.parseInt(id), titulo, descripcion, fechaV);
-        
-        //Creamos una nueva lista
-        
         HttpSession session = request.getSession();
         Lista listaTareas = (Lista) session.getAttribute("listaTareas");
 
@@ -98,16 +96,19 @@ public class SvTarea extends HttpServlet {
         
         //Un filtro para los id de las tareas, para que sea un dato unico en las tareas ingresadas
         if (listaTareas != null) {
-        Lista.Nodo current = listaTareas.inicio;
-        while (current != null) {
-            if (current.tarea.getId() == Integer.parseInt(id)) {
+        Lista.Nodo nodoActual = listaTareas.inicio;
+        while (nodoActual != null) {
+            if (nodoActual.tarea.getId() == Integer.parseInt(id)) {
                 // Manejar el caso de ID duplicado, por ejemplo, redirigir a una página de error o mostrar un mensaje de error
                 response.sendRedirect("Tareas.jsp?alert=error");
                 return;
             }
-            current = current.siguiente;
+            nodoActual = nodoActual.siguiente;
         }
     }
+
+        // Redirige a la página Tareas.jsp
+        response.sendRedirect("Tareas.jsp");
         //funciones de los radio buttons
         if("primero".equals(posicion)){
             //Agrega la tarea al inicio de la lista
@@ -135,13 +136,11 @@ public class SvTarea extends HttpServlet {
             // Si no se selecciona ninguno de los anteriores, la tarea se agregara al final de la lista
             listaTareas.agregarTareaAlFinal(nuevaTarea);
         }
+        // Obtén el ID de la tarea a eliminar
+    
+        
 
-        // Guarda la tarea en el archivo
-        Lista.guardarLista(listaTareas, getServletContext());
-
-        // Redirige a la página Tareas.jsp
-        response.sendRedirect("Tareas.jsp");
-   
+        
 }
     @Override
     public String getServletInfo() {
