@@ -41,7 +41,7 @@
         </nav>
         <!-- Alertas de notificacion(tarea agregada y tarea eliminada -->          
         <div class="alert alert-success text-center" role="alert" style="display: none;" id="successAlert">
-            <strong> Tarea agregada a la lista</strong>
+            <strong>Tarea agregada</strong>
         </div>
         <div class="alert alert-success text-center" role="alert" style="display: none;" id="successAlertEliminada">
             <strong>Tarea eliminada</strong>    
@@ -79,6 +79,7 @@
                             <span class="input-group-text" style="width: 100px;">Fecha de vencimiento</span>
                             <input type="date" name="fechaV" class="form-control">
                         </div>
+                        
                         <!-- Radio buttons para seleccionar la posicion de la nueva tarea en la lista -->
                         <div class="tareas-container"style="display: none;">
                             <h6 class="text-center" style="color: tomato;">Seleccione la posición en la que quiere agregar la nueva tarea en la lista:</h6>
@@ -287,7 +288,7 @@ inicialmente si no hay tareas agregadas en la lista, los radio buttons no seran 
                         <input type="date" class="form-control" id="editar-tarea-fecha" name="fecha">
                     </div>
                     <!-- Botón para guardar cambios -->
-                    <button type="submit" class="btn btn-primary" style="background-color: #ff6219; border-color: #ff6219;">Guardar Cambios</button>
+                    <button type="submit" class="btn btn-primary d-grid" style="background-color: #ff6219; border-color: #ff6219;">Guardar Cambios</button>
                 </form>
             </div>
             <div class="modal-footer" style="background-color: #1A1A1A;">

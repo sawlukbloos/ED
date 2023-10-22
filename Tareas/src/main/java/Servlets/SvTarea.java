@@ -55,6 +55,7 @@ public class SvTarea extends HttpServlet {
             throws ServletException, IOException {
         String tipo = request.getParameter("tipo");
         if (tipo != null && tipo.equals("delete")) {
+            // Obtén el ID de la tarea a eliminar
             String idEliminar = request.getParameter("id");
             if (idEliminar != null && !idEliminar.isEmpty()) {
                 HttpSession session = request.getSession();
@@ -143,7 +144,7 @@ public class SvTarea extends HttpServlet {
                 //Agrega la tarea antes de la tarea con la ID especificada
                 listaTareas.agregarTareaAntesDe(Integer.parseInt(idAntesDe), nuevaTarea);
             } else {
-                //Si no se proporciona una ID antes de la cual agregar, agregar al comienzo
+                //Si no se encuentra una tarea con la Id especificada, la tarea se  agregara al comienzo
                 listaTareas.agregarTareaAlInicio(nuevaTarea);
             }
         } else if ("despuesDe".equals(posicion)) {
@@ -151,15 +152,15 @@ public class SvTarea extends HttpServlet {
                 // Agregar la tarea después de la tarea con la ID especificada
                 listaTareas.agregarTareaDespuesDe(Integer.parseInt(idDespuesDe), nuevaTarea);
             } else {
-                // Si no se proporciona una ID después de la cual agregar, agregar al final
+                //Si no se proporciona una ID después de la cual agregar, agregar al final
                 listaTareas.agregarTareaAlFinal(nuevaTarea);
             }
         } else {
-            // Si no se selecciona ninguno de los anteriores, la tarea se agregara al final de la lista
+            //Si no se selecciona ninguno de los anteriores, la tarea se agregara al final de la lista
             listaTareas.agregarTareaAlFinal(nuevaTarea);
         }
-        // Obtén el ID de la tarea a eliminar
-
+        
+        Lista.guardarLista(listaTareas, getServletContext());
         // Redirige a la página Tareas.jsp con una alerta de exito
         response.sendRedirect("Tareas.jsp?alert=success");
 

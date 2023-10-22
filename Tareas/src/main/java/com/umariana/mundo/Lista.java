@@ -4,7 +4,6 @@
  */
 package com.umariana.mundo;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,26 +16,35 @@ import java.util.Date;
 import javax.servlet.ServletContext;
 
 /**
+ * Clase de la lista enlazada
  *
- * @author Acer
+ * @author Samuel Bolaños
  */
 public class Lista {
+
     public Nodo inicio = null;
     public Nodo fin = null;
-    
+
     public boolean verificarContenido() {
         return inicio == null;
     }
-    public class Nodo {
-    public Tarea tarea;
-    public Nodo siguiente;
 
-    public Nodo(Tarea tarea) {
-        this.tarea = tarea;
-        this.siguiente = null;
-    }    
-}
-// Método para agregar una nueva tarea al comienzo de la lista
+    public class Nodo {
+
+        public Tarea tarea;
+        public Nodo siguiente;
+
+        public Nodo(Tarea tarea) {
+            this.tarea = tarea;
+            this.siguiente = null;
+        }
+    }
+
+    /**
+     * Metodo para agregar una tarea al inicio de la lista
+     *
+     * @param tarea
+     */
     public void agregarTareaAlInicio(Tarea tarea) {
         Nodo nuevoNodo = new Nodo(tarea);
 
@@ -51,7 +59,11 @@ public class Lista {
         }
     }
 
-    // Método para agregar una nueva tarea al final de la lista
+    /**
+     * Metodo para agregar una tarea al final de la lista
+     *
+     * @param tarea
+     */
     public void agregarTareaAlFinal(Tarea tarea) {
         Nodo nuevoNodo = new Nodo(tarea);
 
@@ -67,9 +79,11 @@ public class Lista {
     }
 
     /**
-     * Adiciona una tarea a la lista de tareas antes de la tarea con el id especificado.
+     * Adiciona una tarea a la lista de tareas antes de la tarea con el id
+     * especificado.
      *
-     * @param id El id de la tarea antes de la cual se va a insertar la nueva tarea.
+     * @param id El id de la tarea antes de la cual se va a insertar la nueva
+     * tarea.
      * @param tarea La tarea que se va a agregar.
      */
     public void agregarTareaAntesDe(int id, Tarea tarea) {
@@ -94,11 +108,12 @@ public class Lista {
         }
     }
 
-    
     /**
-     * Adiciona una tarea a la lista de tareas después de la tarea con el id especificado.
+     * Adiciona una tarea a la lista de tareas después de la tarea con el id
+     * especificado.
      *
-     * @param id El id de la tarea después de la cual se va a insertar la nueva tarea.
+     * @param id El id de la tarea después de la cual se va a insertar la nueva
+     * tarea.
      * @param tarea La tarea que se va a agregar.
      */
     public void agregarTareaDespuesDe(int id, Tarea tarea) {
@@ -119,7 +134,8 @@ public class Lista {
      * Busca la tarea con el id dado en la lista de tareas.
      *
      * @param id El id de la tarea que se va a buscar.
-     * @return La tarea con el id especificado. Si la tarea no existe, se retorna null.
+     * @return La tarea con el id especificado. Si la tarea no existe, se
+     * retorna null.
      */
     public Nodo localizarPorId(int id) {
         Nodo actual = inicio;
@@ -132,8 +148,10 @@ public class Lista {
     /**
      * Busca la tarea anterior a la tarea con el id especificado.
      *
-     * @param id El id de la tarea de la cual se desea encontrar la tarea anterior.
-     * @return La tarea anterior a la tarea con el id dado. Se retorna null si la tarea con el id dado no existe o si es la primera de la lista.
+     * @param id El id de la tarea de la cual se desea encontrar la tarea
+     * anterior.
+     * @return La tarea anterior a la tarea con el id dado. Se retorna null si
+     * la tarea con el id dado no existe o si es la primera de la lista.
      */
     public Nodo localizarAnteriorPorId(int id) {
         Nodo anterior = null;
@@ -146,7 +164,12 @@ public class Lista {
 
         return (actual != null) ? anterior : null;
     }
-    //Elimina una tarea
+
+    /**
+     * Metodo para eliminar una tarea de la lista con id especificado
+     *
+     * @param id
+     */
     public void eliminarTarea(int id) {
         if (inicio == null) {
             System.out.println("La lista de tareas está vacía, no se pudo eliminar la tarea con id: " + id);
@@ -167,15 +190,26 @@ public class Lista {
         }
 
     }
+
+    /**
+     * Metodo para editar una tarea de la lista Solo se puede editar 3
+     * parametros el titulo, la descripcion y la fecha de vencimiento de la
+     * tarea
+     *
+     * @param id
+     * @param nuevoTitulo
+     * @param nuevaDescripcion
+     * @param nuevaFechadeV
+     */
     public void editarTarea(int id, String nuevoTitulo, String nuevaDescripcion, String nuevaFechadeV) {
         Nodo tareaExistente = localizarPorId(id);
 
         if (tareaExistente != null) {
-            // Actualiza los atributos de la tarea
+            //Edita los atributos de la tarea
             tareaExistente.tarea.setTitulo(nuevoTitulo);
             tareaExistente.tarea.setDescripcion(nuevaDescripcion);
 
-            // Convierte la cadena de fecha en un objeto Date
+            //Convierte la cadena de fecha en un objeto Date
             try {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date nuevaFecha = dateFormat.parse(nuevaFechadeV);
@@ -188,17 +222,15 @@ public class Lista {
 
     /**
      * Metodo para leer el archivo de texto
+     *
+     * @param listaActualizada
      * @param context
-     * @return 
      */
-    // Método para guardar la lista en un archivo de texto
     public static void guardarLista(Lista listaActualizada, ServletContext context) {
         // Ruta relativa
         String rutaRelativa = "/data/tareas.txt";
-
         // Ruta absoluta
         String rutaAbsoluta = context.getRealPath(rutaRelativa);
-
         File file = new File(rutaAbsoluta);
 
         try (PrintWriter writer = new PrintWriter(file)) {
@@ -206,9 +238,9 @@ public class Lista {
             while (actual != null) {
                 Tarea tarea = actual.tarea;
                 // Guarda los atributos de la tarea en el archivo separados por coma
-                writer.println(tarea.getId() + ";" 
-                        + tarea.getTitulo() + ";" 
-                        + tarea.getDescripcion() + ";" 
+                writer.println(tarea.getId() + ","
+                        + tarea.getTitulo() + ","
+                        + tarea.getDescripcion() + ","
                         + tarea.getFechaDeVencimiento());
                 actual = actual.siguiente;
             }
@@ -216,11 +248,16 @@ public class Lista {
             e.printStackTrace();
         }
     }
-    // Método para leer una lista desde un archivo de texto
+
+    /**
+     * Metodo para leer el archivo de texto
+     *
+     * @param context
+     * @return lista
+     */
     public static Lista leerLista(ServletContext context) {
         // Ruta relativa
         String rutaRelativa = "/data/tareas.txt";
-
         // Ruta absoluta
         String rutaAbsoluta = context.getRealPath(rutaRelativa);
 
@@ -230,7 +267,7 @@ public class Lista {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                String[] atributos = linea.split(";");
+                String[] atributos = linea.split(",");
                 if (atributos.length == 4) {
                     int id = Integer.parseInt(atributos[0]);
                     String titulo = atributos[1];
@@ -250,6 +287,5 @@ public class Lista {
         }
         return lista;
     }
-    
 
 }
