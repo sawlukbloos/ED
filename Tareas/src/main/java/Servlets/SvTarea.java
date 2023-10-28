@@ -27,12 +27,6 @@ public class SvTarea extends HttpServlet {
 
     private Lista listaTareas;
 
-    @Override
-    public void init() throws ServletException {
-        // Inicializa la lista de tareas al cargar el servlet
-        listaTareas = Lista.leerLista(getServletContext());
-    }
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -110,9 +104,10 @@ public class SvTarea extends HttpServlet {
         }
         //Creamos un nuevo objeto de tipo tarea e inicializamos los atributos con los datos que ingreso el usuario
         Tarea nuevaTarea = new Tarea(Integer.parseInt(id), titulo, descripcion, fechaV);
+        
+// Cargar la lista de tareas desde el archivo
         HttpSession session = request.getSession();
-        //conseguimos la lista de la session
-        Lista listaTareas = (Lista) session.getAttribute("listaTareas");
+        Lista listaTareas = Lista.leerLista(getServletContext());
 
         if (listaTareas == null) {
             listaTareas = new Lista();
@@ -159,6 +154,12 @@ public class SvTarea extends HttpServlet {
             //Si no se selecciona ninguno de los anteriores, la tarea se agregara al final de la lista
             listaTareas.agregarTareaAlFinal(nuevaTarea);
         }
+        
+        // Guardar la tarea en el archivo
+        Lista.guardarLista(listaTareas, getServletContext());
+
+        boolean listaVacia = listaTareas == null || listaTareas.verificarContenido();
+        request.setAttribute("listaVacia", listaVacia);
         
         Lista.guardarLista(listaTareas, getServletContext());
         // Redirige a la página Tareas.jsp con una alerta de exito

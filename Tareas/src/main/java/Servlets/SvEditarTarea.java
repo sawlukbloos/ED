@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -62,6 +63,8 @@ public class SvEditarTarea extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Obtén la sesión
+        HttpSession session = request.getSession();
         // Obtén los parámetros enviados desde el formulario de edición
         int id = Integer.parseInt(request.getParameter("id"));
         String nuevoTitulo = request.getParameter("titulo");
@@ -69,7 +72,7 @@ public class SvEditarTarea extends HttpServlet {
         String nuevaFechaStr = request.getParameter("fecha");
 
         // Obtén la lista de tareas desde la sesión
-        Lista listaTareas = (Lista) request.getSession().getAttribute("listaTareas");
+        Lista listaTareas = Lista.leerLista(getServletContext());
 
         if (listaTareas != null) {
             // Realiza validaciones, por ejemplo, verifica si la tarea con el ID proporcionado existe
@@ -79,6 +82,9 @@ public class SvEditarTarea extends HttpServlet {
 
                 // Guarda la lista actualizada en el archivo de texto
                 Lista.guardarLista(listaTareas, getServletContext());
+                
+                // Después de editar la tarea exitosamente en tu servlet
+                session.setAttribute("tareaEditadaExitosamente", true);
             } else {
                 // Maneja el caso en el que la tarea no existe
                 // Puedes mostrar un mensaje de error o redirigir a una página de error

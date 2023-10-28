@@ -12,28 +12,28 @@
 <%@include file = "templates/header.jsp" %>
 <% String usuarioVerificado = (String) session.getAttribute("usuarioverificado");%>
 
-<section class="vh-100" style="background: linear-gradient(to top right, #007f00, #000000);">
+<section class="vh-100" style="background: linear-gradient(to top right, #007f00, #000000); min-height: 100vh;">
     <div class="container p-4"> <!-- clase contenedora -->
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #1A1A1A;">
             <div class="container-fluid">
-                <p class="navbar-brand d-flex align-items-center" href="#" style="color: white;">
+                <a class="navbar-brand d-flex align-items-center" href="#" style="color: white;">
                     <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                     <span style="line-height: 1.2;">Organizando tu mundo</span>
-                </p>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <p class="nav-link" href="#" style="color: white;">Inicio</p>
+                            <a class="nav-link" href="#" style="color: white;">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <p class="nav-link" href="#" style="color: white;">Tareas</>
+                            <a class="nav-link" href="#" style="color: white;">Tareas</a>
                         </li>
                     </ul>
                     <div class="navbar-text text-center" style="color: white;">
-                        Bienvenido, <%= usuarioVerificado%>
+                        Bienvenido, <%= usuarioVerificado%>!
                     </div>
                     <a href="index.jsp" class="btn btn-warning" style="background-color: #ff6219; border-color: #ff6219; color: white;">Cerrar Sesión</a>
                 </div>
@@ -49,18 +49,17 @@
         <div class="alert alert-success text-center" role="alert" style="display: none;" id="editAlert">
             <strong>Tarea editada</strong> 
         </div>
-
+        <%-- formulario para agregar tareas --%>
         <h1 class="text-center mt-4 mb-4" style="color: white;">Tareas</h1>
         <div class="row">
-            <div class="col-md-4 d-flex justify-content-center align-items-center"> <!-- Agrega las clases d-flex, justify-content-center y align-items-center -->
+            <div class="col-md-4 d-flex justify-content-center align-items-center" style="margin-top: -90px;"> <!-- Agrega las clases d-flex, justify-content-center y align-items-center -->
                 <div class="card card-body text-center" style="background-color: #1A1A1A; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
-                    <h4 class="text-center" style="color: tomato;">Agrega tareas</h4>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 15px;" id="errorAlert">
+                    <h4 class="text-center" style="color: #ff6219;">Agrega tareas</h4>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;" id="errorAlert">
                         Ya hay una tarea agregada en la lista con el mismo Id, por favor inténtalo de nuevo
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <!-- Formulario para agregar tareas nuevas -->
-                    <form action="SvTarea" method="POST">
+                    <form action="SvTarea" method="POST" style="height: 50%; overflow: hidden;">
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="width: 100px;">Id</span>
                             <input type="text" name="id" class="form-control"required>
@@ -79,10 +78,9 @@
                             <span class="input-group-text" style="width: 100px;">Fecha de vencimiento</span>
                             <input type="date" name="fechaV" class="form-control"required>
                         </div>
-                        
                         <!-- Radio buttons para seleccionar la posicion de la nueva tarea en la lista -->
                         <div class="tareas-container"style="display: none;">
-                            <h6 class="text-center" style="color: tomato;">Seleccione la posición en la que quiere agregar la nueva tarea en la lista:</h6>
+                            <h6 class="text-center" style="color: white;">Seleccione la posición en la que quiere agregar la nueva tarea en la lista:</h6>
                             <div class="mb-3 form-check">
                                 <input class="form-check-input" type="radio" name="posicion" id="primeroRadio" value="primero">
                                 <label class="form-check-label" for="primeroRadio" style="color: white;">
@@ -118,21 +116,23 @@
                     </form>
                 </div>
             </div>
-            <!-- tabla para visualizar las tareas agregadas -->
+
+            <%-- tabla para visualizar las tareas agregadas --%>
             <div class="col-md-8">
                 <div>
-                    <table class="table table-bordered" style="background-color: #1a1a1a; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);color: white;">
-                        <thead class="thead-dark">
+                    <table class="table table-striped table-dark">
+                        <thead
                             <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Titulo</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Fecha de vencimiento</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col"">Descripción</th>
+                        <th scope="col">Fecha de vencimiento</th>
+                        <th scope="col">Acciones</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <%
+                            <%  
+                                ServletContext context = request.getServletContext();
                                 Lista listaTareas = (Lista) session.getAttribute("listaTareas");
 
                                 if (listaTareas != null) {
@@ -168,13 +168,16 @@
                                         nodoActual = nodoActual.siguiente;
                                     }
                                 } else {
-                                    out.println("No hay tareas agregadas.");
+                                    out.println("<div style='color: white;'>No hay tareas agregadas.</div>");
+
                                 }
                             %>
                         </tbody>
                     </table>
                 </div>
             </div>
+
+
         </div>
     </div>
 </section>    

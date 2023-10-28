@@ -4,13 +4,14 @@
  */
 package com.umariana.mundo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author Samuel Bolaños
  */
-public class Tarea {
+public class Tarea{
 
     private int Id;
     private String titulo;
