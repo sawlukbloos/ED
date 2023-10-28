@@ -4,7 +4,7 @@
  */
 package com.umariana.mundo;
 
-import java.io.Serializable;
+
 import java.util.Date;
 
 /**
