@@ -83,7 +83,7 @@ public class SvEditarTarea extends HttpServlet {
                 // Guarda la lista actualizada en el archivo de texto
                 Lista.guardarLista(listaTareas, getServletContext());
                 
-                // Después de editar la tarea exitosamente en tu servlet
+                // Después de editar la tarea exitosamente en el servlet
                 session.setAttribute("tareaEditadaExitosamente", true);
             } else {
                 // Maneja el caso en el que la tarea no existe

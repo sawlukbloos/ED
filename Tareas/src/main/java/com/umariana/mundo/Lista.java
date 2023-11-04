@@ -103,8 +103,8 @@ public class Lista {
                 return;
             }
             Nodo nuevoNodo = new Nodo(tarea);
-            nuevoNodo.siguiente = anterior.siguiente;
-            anterior.siguiente = nuevoNodo;
+            nuevoNodo.siguiente = anterior.siguiente;//el nodo siguiente al nuevo nodo sera el mismo del anterior nodo
+            anterior.siguiente = nuevoNodo;//El anterior nodo apunta al nuevo nodo que se añadió
         }
     }
 
@@ -162,7 +162,7 @@ public class Lista {
             actual = actual.siguiente;
         }
 
-        return (actual != null) ? anterior : null;
+        return (actual != null) ? anterior : null;//retorna el anterior nodo
     }
 
     /**
@@ -186,7 +186,7 @@ public class Lista {
                 System.out.println("No se encontró una tarea con id: " + id + " para eliminar.");
                 return;
             }
-            anterior.siguiente = anterior.siguiente.siguiente; // Desconectar la tarea de la lista
+            anterior.siguiente = anterior.siguiente.siguiente;// Desconectar la tarea de la lista
         }
 
     }
