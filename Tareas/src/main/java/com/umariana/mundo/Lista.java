@@ -21,22 +21,22 @@ import javax.servlet.ServletContext;
  * @author Samuel Bolaños
  */
 public class Lista {
-
+    //Punteros o flechas para los nodos en la lista
     public Nodo inicio = null;
     public Nodo fin = null;
 
     public boolean verificarContenido() {
         return inicio == null;
     }
-
+    //Constructor del nodo
     public class Nodo {
 
         public Tarea tarea;
-        public Nodo siguiente;
+        public Nodo siguiente;//Enlace, puntero o flecha
 
         public Nodo(Tarea tarea) {
             this.tarea = tarea;
-            this.siguiente = null;
+            this.siguiente = null;//siguiente apunta a null
         }
     }
 
@@ -55,7 +55,7 @@ public class Lista {
         } else {
             // Si no está vacía, el nuevo nodo se agrega al comienzo y se actualiza el inicio
             nuevoNodo.siguiente = inicio;
-            inicio = nuevoNodo;
+            inicio = nuevoNodo;//Se actualiza el inicio apuntando al nuevo nodo
         }
     }
 
@@ -74,7 +74,7 @@ public class Lista {
         } else {
             // Si no está vacía, el nuevo nodo se agrega al final y se actualiza el fin
             fin.siguiente = nuevoNodo;
-            fin = nuevoNodo;
+            fin = nuevoNodo;//se actualiza el fin apuntado al nuevo nodo
         }
     }
 
