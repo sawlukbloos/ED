@@ -21,12 +21,12 @@ import javax.servlet.ServletContext;
  * @author Samuel Bolaños
  */
 public class Lista {
-
+    //Punteros, flechas o enlaces para acceder al inicio o final de la lista, inicialmente ambos apuntan a null
     public Nodo inicio = null;
     public Nodo fin = null;
 
     public boolean verificarContenido() {
-        return inicio == null;
+        return inicio == null;//Retorna true si la lista esta vacia
     }
 
     public class Nodo {
@@ -36,7 +36,7 @@ public class Lista {
 
         public Nodo(Tarea tarea) {
             this.tarea = tarea;
-            this.siguiente = null;
+            this.siguiente = null;//En este caso siguiente apunta a null
         }
     }
 
@@ -74,7 +74,7 @@ public class Lista {
         } else {
             // Si no está vacía, el nuevo nodo se agrega al final y se actualiza el fin
             fin.siguiente = nuevoNodo;
-            fin = nuevoNodo;
+            fin = nuevoNodo;//Se actualiza el fin apuntandolo al nuevo nodo
         }
     }
 
@@ -125,8 +125,8 @@ public class Lista {
             return;
         } else {
             Nodo nuevoNodo = new Nodo(tarea);
-            nuevoNodo.siguiente = anterior.siguiente;
-            anterior.siguiente = nuevoNodo;
+            nuevoNodo.siguiente = anterior.siguiente;//el nodo siguiente al nuevo nodo sera el mismo del anterior nodo
+            anterior.siguiente = nuevoNodo;//conectamos el anterior con el nuevo con el enlace "siguiente"
         }
     }
 
@@ -142,7 +142,7 @@ public class Lista {
         while (actual != null && actual.tarea.getId() != id) {
             actual = actual.siguiente;
         }
-        return actual;
+        return actual;//retorna el nodo que contiene la tarea con el id solicitado
     }
 
     /**
@@ -186,7 +186,7 @@ public class Lista {
                 System.out.println("No se encontró una tarea con id: " + id + " para eliminar.");
                 return;
             }
-            anterior.siguiente = anterior.siguiente.siguiente; // Desconectar la tarea
+            anterior.siguiente = anterior.siguiente.siguiente; // Desconectar la tarea de la lista
         }
 
     }
@@ -202,14 +202,14 @@ public class Lista {
      * @param nuevaFechadeV
      */
     public void editarTarea(int id, String nuevoTitulo, String nuevaDescripcion, String nuevaFechadeV) {
-        Nodo tareaExistente = localizarPorId(id);
+        Nodo tareaExistente = localizarPorId(id);//llamamos al mentodo que localiza la tarea por el id
 
         if (tareaExistente != null) {
-            //Edita los atributos de la tarea
+            //Edita los atributos de la tarea anteriores con los nuevos
             tareaExistente.tarea.setTitulo(nuevoTitulo);
             tareaExistente.tarea.setDescripcion(nuevaDescripcion);
 
-            //Convierte la cadena de fecha en un objeto Date
+            //Convierte la cadena de fecha en un objeto Date para poder editarla en la tarea
             try {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date nuevaFecha = dateFormat.parse(nuevaFechadeV);
@@ -232,7 +232,7 @@ public class Lista {
         // Ruta absoluta
         String rutaAbsoluta = context.getRealPath(rutaRelativa);
         File file = new File(rutaAbsoluta);
-
+        //Ciclo try-catch para la escritura del archivo con PrintWriter
         try (PrintWriter writer = new PrintWriter(file)) {
             Nodo actual = listaActualizada.inicio;
             while (actual != null) {
